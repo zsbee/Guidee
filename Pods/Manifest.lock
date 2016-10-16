@@ -39,12 +39,14 @@ PODS:
     - PINCache (>= 3.0.0-beta)
   - PINRemoteImage/iOS (3.0.0-beta.3):
     - PINRemoteImage/Core
+  - pop (1.0.9)
 
 DEPENDENCIES:
   - AsyncDisplayKit
   - Firebase (>= 2.5.1)
   - FirebaseAuth
   - FirebaseDatabase
+  - pop
 
 SPEC CHECKSUMS:
   AsyncDisplayKit: 926ded3ca3fb7026565e0e81f0e132fea4d3a6eb
@@ -60,7 +62,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 8bbc733218aad26306f9d4a253823986110e3358
   PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
   PINRemoteImage: 308731aa6534500e58fc211b9cc2bb7252df25ba
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
 
-PODFILE CHECKSUM: 6d733cf8b2289796988f42842a4a665f6c490726
+PODFILE CHECKSUM: 9aa4b0ee9d5832246b94b42c3b2e05968d4a83ef
 
 COCOAPODS: 1.0.1

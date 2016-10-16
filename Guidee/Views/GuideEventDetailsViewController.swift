@@ -26,4 +26,8 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
         self.dismiss(animated: true, completion: nil)
     }
     
+    func header_heartButtonTapped() {
+        
+    }
+    
 }

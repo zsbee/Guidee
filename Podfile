@@ -7,7 +7,8 @@ target ‘Guidee’ do
     pod 'Firebase', '>= 2.5.1'
     pod 'FirebaseAuth'
     pod 'FirebaseDatabase'
-    pod ‘AsyncDisplayKit’
+    pod 'AsyncDisplayKit'
+    pod 'pop'
 end
 
 target 'GuideeTests’ do
