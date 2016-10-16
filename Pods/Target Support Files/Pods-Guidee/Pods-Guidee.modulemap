@@ -1,0 +1,6 @@
+framework module Pods_Guidee {
+  umbrella header "Pods-Guidee-umbrella.h"
+
+  export *
+  module * { export * }
+}
