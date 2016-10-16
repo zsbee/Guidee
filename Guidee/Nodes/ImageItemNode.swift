@@ -12,8 +12,10 @@ class ImageItemNode: ASCellNode {
         super.init()
         
         self.mainImage.preferredFrameSize = CGSize(width: 162, height: 162)
+        
         self.cornerClipImage.preferredFrameSize = CGSize(width: 162, height: 162)
-                
+        //self.cornerClipImage.image = UIImage(named:"cornerClip")
+        
         self.addSubnode(mainImage)
         self.addSubnode(cornerClipImage)
     }
@@ -33,6 +35,8 @@ class ImageItemNode: ASCellNode {
     
     override func didLoad() {
         super.didLoad()
+        self.mainImage.layer.cornerRadius = 10
+        self.mainImage.layer.masksToBounds = true
     }
     
 }

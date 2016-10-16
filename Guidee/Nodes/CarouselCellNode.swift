@@ -3,7 +3,7 @@ import UIKit
 import AsyncDisplayKit
 
 
-class CarouselCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource {
+class CarouselCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource, UICollectionViewDelegateFlowLayout {
 
     let models: [CarouselItemModel]
     let collectionNode: ASCollectionNode
@@ -25,7 +25,6 @@ class CarouselCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        //let mainStack: ASStackLayoutSpec = ASStackLayoutSpec(direction: ASStackLayoutDirection.Vertical, spacing: 10.0, justifyContent: ASStackLayoutJustifyContent.Start, alignItems: ASStackLayoutAlignItems.Stretch, children: [priceRatingSpec, collectionNode, self.ctaButton])
         collectionNode.preferredFrameSize = CGSize(width: constrainedSize.min.width, height: 162)
         return ASInsetLayoutSpec.init(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: collectionNode)
     }
@@ -38,7 +37,7 @@ class CarouselCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, 16, 0, 0)
+        return UIEdgeInsetsMake(0, 16, 0, 16)
     }
     
     public func collectionView(_ collectionView: ASCollectionView, nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
@@ -51,6 +50,6 @@ class CarouselCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource
     
     override func didLoad() {
         super.didLoad()
-        self.collectionNode.view.contentOffset = CGPoint(x: 16, y: 0)
+        self.collectionNode.view.showsHorizontalScrollIndicator = false
     }
 }

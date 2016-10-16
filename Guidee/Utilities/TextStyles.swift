@@ -11,11 +11,18 @@ class TextStyles: AnyObject {
     internal static func getHeaderFontAttributes() -> [String:NSObject] {
         var attrs = [String: NSObject]()
         attrs[NSForegroundColorAttributeName] = UIColor.black
-        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 24, weight: UIFontWeightHeavy)
+        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 40, weight: UIFontWeightHeavy)
         
         return attrs
     }
     
+    internal static func getAdvertFontAttributes() -> [String:NSObject] {
+        var attrs = [String: NSObject]()
+        attrs[NSForegroundColorAttributeName] = UIColor.black
+        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 24, weight: UIFontWeightHeavy)
+        
+        return attrs
+    }
     
     internal static func getSummaryTextFontAttributes() -> [String:NSObject] {
         var attrs = [String: NSObject]()

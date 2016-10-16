@@ -5,10 +5,12 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
 
     let headerView: GuideEventHeaderView = GuideEventHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var collectionNode: ASCollectionNode!
-    private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 32, 0)
-    private let sectionHeaderInset: UIEdgeInsets = UIEdgeInsetsMake(32, 0, 0, 0)
+    var faderImage: UIImageView!
+    
+    private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 16, 0)
+    private let sectionHeaderInset: UIEdgeInsets = UIEdgeInsetsMake(16, 0, 0, 0)
     private let sectionContentInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 0, 0)
-    private let sectionLastCellInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 32, 0)
+    private let sectionLastCellInset: UIEdgeInsets = UIEdgeInsetsMake(16, 0, 32, 0)
 
     // Node map
     private let sectionIndexSummaryHeader: Int = 0
@@ -20,6 +22,7 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.faderImage = UIImageView(image: UIImage(named: "fader"))
         
         self.collectionNode = ASCollectionNode(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
         self.collectionNode.delegate = self
@@ -30,7 +33,8 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
         
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(headerView)
-        self.view.addSubnode(collectionNode)        
+        self.view.addSubnode(collectionNode)
+        self.view.addSubview(self.faderImage)
     }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -84,7 +88,7 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
                     let node = GuideEventSummaryTextNode(attributedText: NSAttributedString(string: self.getMockedSummaryText(), attributes: TextStyles.getSummaryTextFontAttributes()))
                     return node
                 case self.sectionIndexAdvert:
-                    let node = SectionHeaderNode(attributedText: NSAttributedString(string: "advert will be here", attributes: TextStyles.getHeaderFontAttributes()))
+                    let node = SectionHeaderNode(attributedText: NSAttributedString(string: "{Google Native Ad}", attributes: TextStyles.getAdvertFontAttributes()))
                     return node
                 case self.sectionIndexCarouselHeader:
                     let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Images", attributes: TextStyles.getHeaderFontAttributes()))
@@ -101,6 +105,7 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     override func viewDidLayoutSubviews() {
         self.headerView.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: 82)
         self.collectionNode.frame = CGRect(x: 0, y: 82, width: self.view.frame.width, height: self.view.frame.height-82)
+        self.faderImage.frame = CGRect(x: 0, y: 82, width: self.view.frame.width, height: 20)
     }
     
     override func didReceiveMemoryWarning() {
