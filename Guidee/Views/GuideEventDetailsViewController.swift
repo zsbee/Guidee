@@ -5,7 +5,8 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
 
     let headerView: GuideEventHeaderView = GuideEventHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var collectionNode: ASCollectionNode!
-    private let sectionInset: UIEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+    private let sectionHeaderInset: UIEdgeInsets = UIEdgeInsetsMake(32, 0, 0, 0)
+    private let sectionContentInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 0, 0)
 
     // Node map
     private let sectionIndexSummaryHeader: Int = 0
@@ -27,7 +28,7 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
         
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(headerView)
-        self.view.addSubnode(collectionNode)
+        self.view.addSubnode(collectionNode)        
     }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -46,6 +47,17 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
         return 5
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        switch section {
+            case self.sectionIndexSummaryHeader:
+                return self.sectionHeaderInset
+            case self.sectionIndexCarouselHeader:
+                return self.sectionHeaderInset
+            default:
+                return self.sectionContentInset
+        }
+    }
+    
     public func collectionView(_ collectionView: ASCollectionView, constrainedSizeForNodeAt indexPath: IndexPath) -> ASSizeRange {
         let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right;
         
@@ -59,7 +71,23 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     public func collectionView(_ collectionView: ASCollectionView, nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
         return {
             () -> ASCellNode in
-            return ASCellNode()
+            switch indexPath.section {
+                case self.sectionIndexSummaryHeader:
+                    let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Summary", attributes: TextStyles.getHeaderFontAttributes()))
+                    return node
+                case self.sectionIndexSummary:
+                    let node = GuideEventSummaryTextNode(attributedText: NSAttributedString(string: self.getMockedSummaryText(), attributes: TextStyles.getSummaryTextFontAttributes()))
+                    return node
+                case self.sectionIndexAdvert:
+                    let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Images", attributes: TextStyles.getHeaderFontAttributes()))
+                    return node
+                case self.sectionIndexCarouselHeader:
+                    return ASCellNode()
+                case self.sectionIndexCarousel:
+                    return ASCellNode()
+                default:
+                    return ASCellNode()
+            }
         }
     }
     
@@ -79,6 +107,11 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     
     func header_heartButtonTapped() {
         
+    }
+    
+    // Mocked data
+    private func getMockedSummaryText() -> String {
+        return "South from Érd, a loess wall forms a natural border between Százhalombatta (B/6) and Érd. The huge chimneys of Dunamenti Power Plant and the tanks, pipes and burning gas torches of the oil refi nery may not seem particularly attractive for tourists, but you would regret not visiting the city of the “hundred piles”. The history of the city (named after the 100 ancient piles from the times of the Hallstatt culture) is presented in the Matrica Museum, whose name in turn refers to the Roman name of the settlement."
     }
     
 }

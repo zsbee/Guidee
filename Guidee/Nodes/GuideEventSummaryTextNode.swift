@@ -1,7 +1,8 @@
+import Foundation
 import UIKit
 import AsyncDisplayKit
 
-class SectionHeaderNode: ASCellNode {
+class GuideEventSummaryTextNode: ASCellNode {
     let textNode: ASTextNode = ASTextNode()
     
     init(attributedText: NSAttributedString) {

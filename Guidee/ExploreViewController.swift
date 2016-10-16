@@ -11,7 +11,7 @@ class ExploreViewController: UIViewController {
         testBtn.frame = CGRect(x: 16, y: 100, width: 100, height: 100)
         
         testBtn.addTarget(self, action: #selector(ExploreViewController.selected), for: .touchUpInside)
-        self.view.addSubview(testBtn)
+        self.view.addSubview(testBtn)        
     }
     
     public func selected(sender: UIButton!) {        

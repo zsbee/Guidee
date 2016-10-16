@@ -47,6 +47,8 @@ class GuideEventHeaderView: UIView {
         self.addSubview(heartCounter)
         self.addSubview(eventName)
         self.addSubview(closeButton)
+        
+        self.backgroundColor = UIColor.clear
     }
     
     required init?(coder aDecoder: NSCoder) {
