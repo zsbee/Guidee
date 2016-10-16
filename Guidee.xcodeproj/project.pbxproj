@@ -15,6 +15,8 @@
 		1BE287E01DB3A84D005A0C59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BE287DF1DB3A84D005A0C59 /* Assets.xcassets */; };
 		1BE287E31DB3A84D005A0C59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BE287E11DB3A84D005A0C59 /* LaunchScreen.storyboard */; };
 		1BE287EE1DB3A84D005A0C59 /* GuideeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287ED1DB3A84D005A0C59 /* GuideeTests.swift */; };
+		1BE287FB1DB3B000005A0C59 /* GuideEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287FA1DB3B000005A0C59 /* GuideEventDetailsViewController.swift */; };
+		1BE287FD1DB3B7E0005A0C59 /* GuideEventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287FC1DB3B7E0005A0C59 /* GuideEventHeaderView.swift */; };
 		F3DE0D7BFB89F40498CC2137 /* Pods_GuideeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED61F040C8E3E8084E208ED5 /* Pods_GuideeTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		1BE287E91DB3A84D005A0C59 /* GuideeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuideeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE287ED1DB3A84D005A0C59 /* GuideeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideeTests.swift; sourceTree = "<group>"; };
 		1BE287EF1DB3A84D005A0C59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BE287FA1DB3B000005A0C59 /* GuideEventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideEventDetailsViewController.swift; path = Views/GuideEventDetailsViewController.swift; sourceTree = "<group>"; };
+		1BE287FC1DB3B7E0005A0C59 /* GuideEventHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideEventHeaderView.swift; path = Views/GuideEventHeaderView.swift; sourceTree = "<group>"; };
 		94BCA687B6C197C62506D1DE /* Pods-Guidee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Guidee.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Guidee/Pods-Guidee.debug.xcconfig"; sourceTree = "<group>"; };
 		D6B92959C20F898448EA6153 /* Pods_Guidee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Guidee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E461466E6692B01729CB0B36 /* Pods-GuideeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GuideeTests/Pods-GuideeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -91,9 +95,9 @@
 		1BE287D51DB3A84D005A0C59 /* Guidee */ = {
 			isa = PBXGroup;
 			children = (
+				1BE287F91DB3AFCC005A0C59 /* Views */,
+				1BE287F81DB3AFBF005A0C59 /* ViewControllers */,
 				1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */,
-				1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */,
-				1BE287DA1DB3A84D005A0C59 /* ProfileViewController.swift */,
 				1BE287DC1DB3A84D005A0C59 /* Main.storyboard */,
 				1BE287DF1DB3A84D005A0C59 /* Assets.xcassets */,
 				1BE287E11DB3A84D005A0C59 /* LaunchScreen.storyboard */,
@@ -109,6 +113,24 @@
 				1BE287EF1DB3A84D005A0C59 /* Info.plist */,
 			);
 			path = GuideeTests;
+			sourceTree = "<group>";
+		};
+		1BE287F81DB3AFBF005A0C59 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */,
+				1BE287FA1DB3B000005A0C59 /* GuideEventDetailsViewController.swift */,
+				1BE287DA1DB3A84D005A0C59 /* ProfileViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1BE287F91DB3AFCC005A0C59 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1BE287FC1DB3B7E0005A0C59 /* GuideEventHeaderView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		842CCF347779F0E5879A32AB /* Frameworks */ = {
@@ -335,9 +357,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BE287FB1DB3B000005A0C59 /* GuideEventDetailsViewController.swift in Sources */,
 				1BE287DB1DB3A84D005A0C59 /* ProfileViewController.swift in Sources */,
 				1BE287D71DB3A84D005A0C59 /* AppDelegate.swift in Sources */,
 				1BE287D91DB3A84D005A0C59 /* ExploreViewController.swift in Sources */,
+				1BE287FD1DB3B7E0005A0C59 /* GuideEventHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
