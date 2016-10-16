@@ -28,6 +28,7 @@ class GuideEventHeaderView: UIView {
 
         // Configure views
         self.heartIconButton.setImage(UIImage(named: "Heart"), for: .normal)
+        self.heartIconButton.setImage(UIImage(named: "HeartHighlighted"), for: .highlighted)
         self.heartIconButton.addTarget(self, action: #selector(GuideEventHeaderView.heartTapped), for: .touchUpInside)
 
         self.closeButton.setImage(UIImage(named: "BackdownArrow"), for: .normal)
@@ -39,7 +40,7 @@ class GuideEventHeaderView: UIView {
         
         self.eventName.textColor = UIColor.black
         self.eventName.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightHeavy)
-        self.eventName.text = "Instant"
+        self.eventName.text = "Kürtőskalácsozó"
         self.eventName.textAlignment = .center;
 
         self.addSubview(heartIconButton)
@@ -55,7 +56,7 @@ class GuideEventHeaderView: UIView {
     override func layoutSubviews() {
         self.heartIconButton.frame = CGRect(x: self.frame.width - 40 - 16, y: 10, width: 40, height: 26)
         self.heartCounter.frame = CGRect(x: self.frame.width - 40 - 4, y: 10+26, width: 40, height: 26)
-        self.eventName.frame = CGRect(x: self.frame.width/2-75.0, y: 10, width: 150, height: 26)
+        self.eventName.frame = CGRect(x: self.frame.width/2-110.0, y: 10, width: 220, height: 26)
         self.closeButton.frame = CGRect(x: 16, y: 10, width: 40, height: 26)
         
         if(!self.isLoved) {
@@ -75,9 +76,11 @@ class GuideEventHeaderView: UIView {
         
         let springAnimation = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
         if(self.isLoved) {
+            self.heartCounter.text = "12"
             springAnimation!.toValue = NSValue(cgPoint: CGPoint(x: 0.75, y: 0.75))
         } else {
             springAnimation!.toValue = NSValue(cgPoint: CGPoint(x: 1.0, y: 1.0))
+            self.heartCounter.text = "13"
         }
         
         self.isLoved = !isLoved
