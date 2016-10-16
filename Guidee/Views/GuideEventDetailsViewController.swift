@@ -5,8 +5,10 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
 
     let headerView: GuideEventHeaderView = GuideEventHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var collectionNode: ASCollectionNode!
+    private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 32, 0)
     private let sectionHeaderInset: UIEdgeInsets = UIEdgeInsetsMake(32, 0, 0, 0)
     private let sectionContentInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 0, 0)
+    private let sectionLastCellInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 32, 0)
 
     // Node map
     private let sectionIndexSummaryHeader: Int = 0
@@ -50,9 +52,11 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         switch section {
             case self.sectionIndexSummaryHeader:
-                return self.sectionHeaderInset
+                return self.sectionFirstCellInset
             case self.sectionIndexCarouselHeader:
                 return self.sectionHeaderInset
+            case self.sectionIndexCarousel:
+                return self.sectionLastCellInset
             default:
                 return self.sectionContentInset
         }
@@ -60,14 +64,15 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     
     public func collectionView(_ collectionView: ASCollectionView, constrainedSizeForNodeAt indexPath: IndexPath) -> ASSizeRange {
         let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right;
-        
+        if (indexPath.section == sectionIndexCarouselHeader) {
+            return ASSizeRangeMake(CGSize(width: width, height:0), CGSize(width: width, height: 162))
+        }
+        if (indexPath.section == sectionIndexCarousel) {
+            return ASSizeRangeMake(CGSize(width: collectionView.bounds.width - collectionView.contentInset.left, height:162), CGSize(width: CGFloat.greatestFiniteMagnitude, height: 162))
+        }
         return ASSizeRangeMake(CGSize(width: width, height:0), CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
     }
 
-    public func collectionView(_ collectionView: ASCollectionView, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
-        return ASCellNode()
-    }
-    
     public func collectionView(_ collectionView: ASCollectionView, nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
         return {
             () -> ASCellNode in
@@ -79,12 +84,14 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
                     let node = GuideEventSummaryTextNode(attributedText: NSAttributedString(string: self.getMockedSummaryText(), attributes: TextStyles.getSummaryTextFontAttributes()))
                     return node
                 case self.sectionIndexAdvert:
-                    let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Images", attributes: TextStyles.getHeaderFontAttributes()))
+                    let node = SectionHeaderNode(attributedText: NSAttributedString(string: "advert will be here", attributes: TextStyles.getHeaderFontAttributes()))
                     return node
                 case self.sectionIndexCarouselHeader:
-                    return ASCellNode()
+                    let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Images", attributes: TextStyles.getHeaderFontAttributes()))
+                    return node
                 case self.sectionIndexCarousel:
-                    return ASCellNode()
+                    let node = CarouselCellNode(models: self.getMockedCarouselModels())
+                    return node
                 default:
                     return ASCellNode()
             }
@@ -92,8 +99,8 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     }
     
     override func viewDidLayoutSubviews() {
-        self.headerView.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: 40)
-        self.collectionNode.frame = CGRect(x: 0, y: 60, width: self.view.frame.width, height: self.view.frame.height-60)
+        self.headerView.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: 82)
+        self.collectionNode.frame = CGRect(x: 0, y: 82, width: self.view.frame.width, height: self.view.frame.height-82)
     }
     
     override func didReceiveMemoryWarning() {
@@ -112,6 +119,21 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     // Mocked data
     private func getMockedSummaryText() -> String {
         return "South from Érd, a loess wall forms a natural border between Százhalombatta (B/6) and Érd. The huge chimneys of Dunamenti Power Plant and the tanks, pipes and burning gas torches of the oil refi nery may not seem particularly attractive for tourists, but you would regret not visiting the city of the “hundred piles”. The history of the city (named after the 100 ancient piles from the times of the Hallstatt culture) is presented in the Matrica Museum, whose name in turn refers to the Roman name of the settlement."
+    }
+    
+    private func getMockedCarouselModels() -> [CarouselItemModel] {
+        var models = [CarouselItemModel]()
+        
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acbfb7037.jpg"))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc54103f.jpg"))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc6abc9d.jpg"))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc77d68b.jpg"))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acca50fe4.jpg"))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3accb4d595.jpg"))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc88e552.jpg"))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc95de51.jpg"))
+        
+        return models
     }
     
 }
