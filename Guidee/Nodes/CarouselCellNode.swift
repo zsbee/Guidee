@@ -29,6 +29,7 @@ class CarouselCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource
         return ASInsetLayoutSpec.init(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: collectionNode)
     }
     
+    // CollectionView
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.models.count
     }

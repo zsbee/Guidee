@@ -8,15 +8,18 @@ class ExploreViewController: UIViewController {
         super.viewDidLoad()
         
         testBtn.setTitle("Open Event", for: .normal)
-        testBtn.frame = CGRect(x: 16, y: 100, width: 100, height: 100)
+        testBtn.titleLabel?.textAlignment = .center
+        testBtn.frame = CGRect(x: self.view.frame.width/2 - 50, y: self.view.frame.height - 200, width: 100, height: 100)
         
         testBtn.addTarget(self, action: #selector(ExploreViewController.selected), for: .touchUpInside)
         self.view.addSubview(testBtn)        
     }
     
-    public func selected(sender: UIButton!) {        
-        self.present(GuideEventDetailsViewController(), animated: true, completion:nil)
-
+    public func selected(sender: UIButton!) {
+        let vc = GuideHomeViewController()
+        // vc.modalTransitionStyle = .crossDissolve
+        
+        self.present(vc, animated: true, completion:nil)
     }
 
     override func didReceiveMemoryWarning() {
