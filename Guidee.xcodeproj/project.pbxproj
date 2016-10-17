@@ -23,6 +23,7 @@
 		1BE288071DB3DB60005A0C59 /* CarouselCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE288061DB3DB60005A0C59 /* CarouselCellNode.swift */; };
 		1BE2880A1DB3DBA1005A0C59 /* CarouselItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE288091DB3DBA1005A0C59 /* CarouselItemModel.swift */; };
 		1BE2880C1DB3E039005A0C59 /* ImageItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2880B1DB3E039005A0C59 /* ImageItemNode.swift */; };
+		1BE2880E1DB41A96005A0C59 /* AdvertNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2880D1DB41A96005A0C59 /* AdvertNode.swift */; };
 		F3DE0D7BFB89F40498CC2137 /* Pods_GuideeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED61F040C8E3E8084E208ED5 /* Pods_GuideeTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		1BE288061DB3DB60005A0C59 /* CarouselCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CarouselCellNode.swift; path = Nodes/CarouselCellNode.swift; sourceTree = "<group>"; };
 		1BE288091DB3DBA1005A0C59 /* CarouselItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CarouselItemModel.swift; path = Models/CarouselItemModel.swift; sourceTree = "<group>"; };
 		1BE2880B1DB3E039005A0C59 /* ImageItemNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageItemNode.swift; path = Nodes/ImageItemNode.swift; sourceTree = "<group>"; };
+		1BE2880D1DB41A96005A0C59 /* AdvertNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdvertNode.swift; path = Nodes/AdvertNode.swift; sourceTree = "<group>"; };
 		94BCA687B6C197C62506D1DE /* Pods-Guidee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Guidee.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Guidee/Pods-Guidee.debug.xcconfig"; sourceTree = "<group>"; };
 		D6B92959C20F898448EA6153 /* Pods_Guidee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Guidee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E461466E6692B01729CB0B36 /* Pods-GuideeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GuideeTests/Pods-GuideeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				1BE288041DB3D8BD005A0C59 /* GuideEventSummaryTextNode.swift */,
 				1BE288061DB3DB60005A0C59 /* CarouselCellNode.swift */,
 				1BE2880B1DB3E039005A0C59 /* ImageItemNode.swift */,
+				1BE2880D1DB41A96005A0C59 /* AdvertNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				1BE288051DB3D8BD005A0C59 /* GuideEventSummaryTextNode.swift in Sources */,
 				1BE2880A1DB3DBA1005A0C59 /* CarouselItemModel.swift in Sources */,
 				1BE288031DB3D60D005A0C59 /* TextStyles.swift in Sources */,
+				1BE2880E1DB41A96005A0C59 /* AdvertNode.swift in Sources */,
 				1BE288071DB3DB60005A0C59 /* CarouselCellNode.swift in Sources */,
 				1BE287D91DB3A84D005A0C59 /* ExploreViewController.swift in Sources */,
 				1BE288001DB3CE2C005A0C59 /* SectionHeaderNode.swift in Sources */,

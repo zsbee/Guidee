@@ -74,6 +74,9 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
         if (indexPath.section == sectionIndexCarousel) {
             return ASSizeRangeMake(CGSize(width: collectionView.bounds.width - collectionView.contentInset.left, height:162), CGSize(width: CGFloat.greatestFiniteMagnitude, height: 162))
         }
+        if (indexPath.section == sectionIndexAdvert) {
+            return ASSizeRangeMake(CGSize(width: collectionView.bounds.width, height:250), CGSize(width: collectionView.bounds.width, height:250))
+        }
         return ASSizeRangeMake(CGSize(width: width, height:0), CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
     }
 
@@ -88,7 +91,8 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
                     let node = GuideEventSummaryTextNode(attributedText: NSAttributedString(string: self.getMockedSummaryText(), attributes: TextStyles.getSummaryTextFontAttributes()))
                     return node
                 case self.sectionIndexAdvert:
-                    let node = SectionHeaderNode(attributedText: NSAttributedString(string: "{Google Native Ad}", attributes: TextStyles.getAdvertFontAttributes()))
+                    let node = AdvertNode()
+                    node.preferredFrameSize = CGSize(width: 375, height: 250)
                     return node
                 case self.sectionIndexCarouselHeader:
                     let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Images", attributes: TextStyles.getHeaderFontAttributes()))
