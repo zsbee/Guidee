@@ -1,7 +1,7 @@
 import UIKit
 import MapKit
 
-class ExploreViewController: UIViewController {
+class ExploreViewController: UIViewController, MKMapViewDelegate {
 
     let testBtn = UIButton(type: .system)
     let mapView = MKMapView()
@@ -19,9 +19,9 @@ class ExploreViewController: UIViewController {
         annotations = self.mockedAnnotations()
         
         self.view.addSubview(self.mapView)
-        self.view.addSubview(testBtn)
+//        self.view.addSubview(testBtn)
         
-        
+        mapView.delegate = self
         mapView.addAnnotations(annotations)
     }
     
@@ -39,7 +39,7 @@ class ExploreViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.width)
+        self.mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
     }
 
     // navigation
@@ -56,6 +56,34 @@ class ExploreViewController: UIViewController {
         return annots
     }
 
+    
+    // MKMapKitDelegate
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? GuideAnnotation {
+            let identifier = "pin"
+            var view: MKPinAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
+                dequeuedView.annotation = annotation
+                view = dequeuedView
+            } else {
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                view.canShowCallout = true
+                let chevronBtn = UIButton(type: .detailDisclosure)
+                chevronBtn.tintColor = UIColor(red:1.00, green:0.40, blue:0.40, alpha:1.00)
+                chevronBtn.setImage(UIImage(named: "RightArrow"), for: .normal)
+                view.rightCalloutAccessoryView = chevronBtn
+            }
+            return view
+        }
+        return nil
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let vc = GuideHomeViewController()
+        // vc.modalTransitionStyle = .crossDissolve
+        
+        self.present(vc, animated: true, completion:nil)
+    }
     
 }
 
