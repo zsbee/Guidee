@@ -108,6 +108,7 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     
     // Layout
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         self.headerView.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: 82)
         self.collectionNode.frame = CGRect(x: 0, y: 82, width: self.view.frame.width, height: self.view.frame.height-82)
         self.faderImage.frame = CGRect(x: 0, y: 82, width: self.view.frame.width, height: 20)

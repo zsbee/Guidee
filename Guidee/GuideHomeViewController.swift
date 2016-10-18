@@ -26,7 +26,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         
         self.headerView.delegate = self
         
-        eventNodeSize = CGSize(width: self.view.frame.width, height: 125)
+        eventNodeSize = CGSize(width: self.view.frame.width, height: 92)
         
         self.view.backgroundColor = UIColor.white
         self.view.addSubnode(collectionNode)
@@ -75,7 +75,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
             () -> ASCellNode in
             switch indexPath.section {
             case self.sectionIndexHeader:
-                let node = GuideHeaderCellNode(coverImageUrl: "https://i.imgsafe.org/545a735254.jpg", attributedText: NSAttributedString(string: "Coast visits in Mallorca", attributes: TextStyles.getCenteredTitleAttirbutes()))
+                let node = GuideHeaderCellNode(coverImageUrl: "https://i.imgsafe.org/545a735254.jpg", attributedText: NSAttributedString(string: "Coast visits in Mallorca", attributes: TextStyles.getCenteredTitleAttirbutes()), avatarUrl: "https://s9.postimg.org/dcvk1ggy7/avatar2.jpg")
                 return node
             case self.sectionIndexSummaryHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Summary", attributes: TextStyles.getHeaderFontAttributes()))
@@ -84,7 +84,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
                 let node = GuideSummaryTextNode(attributedText: NSAttributedString(string: self.getMockedSummaryText() , attributes: TextStyles.getSummaryTextFontAttributes()))
                 return node
             case self.sectionIndexDetailsHeader:
-                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Details", attributes: TextStyles.getHeaderFontAttributes()))
+                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Places", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexDetails:
                 return EventCellNode(models: self.getMockedModels(),delegate: self, detailCellSize: self.eventNodeSize)
@@ -108,6 +108,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     
     // Layout
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         self.headerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 60)
         self.collectionNode.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
     }
