@@ -46,8 +46,8 @@ class CircleAnnotationView: MKAnnotationView {
         self.calloutView.frame = CGRect(x: 30, y: -125+30, width: 205, height: 125)
         (self.annotation as! GuideAnnotation).calloutView = self.calloutView
         
-        self.addSubview(self.circleView)
         self.addSubview(self.calloutView)
+        self.addSubview(self.circleView)
     }
     
     override func layoutSubviews() {
@@ -65,6 +65,7 @@ class CircleAnnotationView: MKAnnotationView {
             let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
             alphaAnimation!.toValue = 1
             self.calloutView.pop_add(alphaAnimation, forKey: "alpha")
+            //self.calloutView.layer.zPosition = 1000
         }
         else{
             let springAnimation = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
@@ -76,6 +77,7 @@ class CircleAnnotationView: MKAnnotationView {
             let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
             alphaAnimation!.toValue = 0
             self.calloutView.pop_add(alphaAnimation, forKey: "alpha")
+            //self.calloutView.layer.zPosition = 1000
         }
     }
     

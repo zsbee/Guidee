@@ -67,4 +67,13 @@ class TextStyles: AnyObject {
         return attrs
     }
     
+    
+    internal static func getHeartCounterAttributes() -> [String:NSObject] {
+        var attrs = [String: NSObject]()
+        attrs[NSForegroundColorAttributeName] = UIColor.black
+        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 16, weight: UIFontWeightRegular)
+        
+        return attrs
+    }
+    
 }

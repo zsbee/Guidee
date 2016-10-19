@@ -1,7 +1,7 @@
 import UIKit
 import MapKit
 
-class CustomMapView: MKMapView {    
+class CustomMapView: MKMapView {
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         for annotation in self.selectedAnnotations {
             if let annotation = annotation as? GuideAnnotation {
