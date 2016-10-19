@@ -7,6 +7,8 @@ class GuideAnnotation: NSObject, MKAnnotation {
     let coordinate: CLLocationCoordinate2D
     let imageUrl: String
     
+    public var calloutView: PinCalloutView?
+    
     init(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D, imageUrl: String) {
         if let title = title {
             self.title = title

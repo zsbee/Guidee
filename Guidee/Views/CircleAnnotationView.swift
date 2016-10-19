@@ -8,7 +8,7 @@ class CircleAnnotationView: MKAnnotationView {
     let circleView: UIImageView
     let smallSize: CGFloat = 40
     let bigSize: CGFloat = 60
-    lazy var calloutView: PinCalloutView = PinCalloutView(frame: CGRect(x: 0, y: 0, width: 205, height: 125))
+    public lazy var calloutView: PinCalloutView = PinCalloutView(frame: CGRect(x: 0, y: 0, width: 205, height: 125))
 
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         self.circleView = UIImageView()
@@ -44,6 +44,7 @@ class CircleAnnotationView: MKAnnotationView {
         
         self.calloutView.alpha = 0
         self.calloutView.frame = CGRect(x: 30, y: -125+30, width: 205, height: 125)
+        (self.annotation as! GuideAnnotation).calloutView = self.calloutView
         
         self.addSubview(self.circleView)
         self.addSubview(self.calloutView)

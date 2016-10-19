@@ -4,7 +4,7 @@ import MapKit
 class ExploreViewController: UIViewController, MKMapViewDelegate {
 
     let testBtn = UIButton(type: .system)
-    let mapView = MKMapView()
+    let mapView = CustomMapView()
     var annotations: [GuideAnnotation]! = [GuideAnnotation]()
     
     override func viewDidLoad() {
