@@ -36,8 +36,6 @@ class GuideHeaderView: UIView {
         self.addSubview(blurEffectView)
         self.addSubview(heartIconButton)
         self.addSubview(closeButton)
-        
-        self.backgroundColor = UIColor.clear
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -70,6 +68,5 @@ class GuideHeaderView: UIView {
         springAnimation!.springBounciness = 25
         self.heartIconButton.pop_add(springAnimation, forKey: "bounce")
     }
-    
     
 }

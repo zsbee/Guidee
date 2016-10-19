@@ -20,7 +20,6 @@ class ExploreViewController: UIViewController, MKMapViewDelegate {
         
         self.view.addSubview(self.mapView)
 //        self.view.addSubview(testBtn)
-        
         mapView.delegate = self
         mapView.addAnnotations(annotations)
     }
@@ -51,7 +50,15 @@ class ExploreViewController: UIViewController, MKMapViewDelegate {
     func mockedAnnotations() -> [GuideAnnotation] {
         var annots = [GuideAnnotation]()
         
-        annots.append(GuideAnnotation(title: "Cala Varques", subtitle: "Hidden Gem", coordinate: CLLocationCoordinate2D(latitude: 39.49, longitude: 3.28)))
+        annots.append(GuideAnnotation(title: "Cala Varques",
+                                      subtitle: "Hidden Gem",
+                                      coordinate: CLLocationCoordinate2D(latitude: 39.49, longitude: 3.28),
+                                      imageUrl:"https://i.imgsafe.org/7d5ce651e5.jpg"))
+        
+        annots.append(GuideAnnotation(title: "Szabadsághíd",
+                                      subtitle: "Woohoo...",
+                                      coordinate: CLLocationCoordinate2D(latitude: 47.4856, longitude: 19.0546),
+                                      imageUrl:"https://i.imgsafe.org/7d5ce651e5.jpg"))
         
         return annots
     }
@@ -60,13 +67,13 @@ class ExploreViewController: UIViewController, MKMapViewDelegate {
     // MKMapKitDelegate
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? GuideAnnotation {
-            let identifier = "pin"
-            var view: MKPinAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
+            let identifier = "circlePin"
+            var view: CircleAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? CircleAnnotationView {
                 dequeuedView.annotation = annotation
                 view = dequeuedView
             } else {
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                view = CircleAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 view.canShowCallout = true
                 let chevronBtn = UIButton(type: .detailDisclosure)
                 chevronBtn.tintColor = UIColor(red:1.00, green:0.40, blue:0.40, alpha:1.00)
@@ -83,6 +90,14 @@ class ExploreViewController: UIViewController, MKMapViewDelegate {
         // vc.modalTransitionStyle = .crossDissolve
         
         self.present(vc, animated: true, completion:nil)
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("Tap on Pin")
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        print("Deselect pin")
     }
     
 }

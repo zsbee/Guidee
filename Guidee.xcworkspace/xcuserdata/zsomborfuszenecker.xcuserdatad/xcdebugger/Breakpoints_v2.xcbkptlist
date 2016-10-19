@@ -45,5 +45,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/PINRemoteImage/Pod/Classes/PINRemoteImageCategoryManager.m"
+            timestampString = "498599626.756703"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "+setImageOnView:fromURLs:placeholderImage:processorKey:processor:completion:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__108+[PINRemoteImageCategoryManager setImageOnView:fromURLs:placeholderImage:processorKey:processor:completion:]_block_invoke.48"
+                  moduleName = "PINRemoteImage"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zsomborfuszenecker/dev/Guidee/Guidee/Pods/PINRemoteImage/Pod/Classes/PINRemoteImageCategoryManager.m"
+                  timestampString = "498602181.769652"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__108+[PINRemoteImageCategoryManager setImageOnView:fromURLs:placeholderImage:processorKey:processor:completion:]_block_invoke_2"
+                  moduleName = "PINRemoteImage"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zsomborfuszenecker/dev/Guidee/Guidee/Pods/PINRemoteImage/Pod/Classes/PINRemoteImageCategoryManager.m"
+                  timestampString = "498602181.77281"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

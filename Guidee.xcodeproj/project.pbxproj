@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1063E2E6E74A2CCA144E8C1E /* Pods_Guidee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B92959C20F898448EA6153 /* Pods_Guidee.framework */; };
 		1BBAF9DA1DB6BFFE00379004 /* GuideAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */; };
+		1BBAF9E31DB7FF7D00379004 /* CircleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */; };
 		1BE287D71DB3A84D005A0C59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */; };
 		1BE287D91DB3A84D005A0C59 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */; };
 		1BE287DB1DB3A84D005A0C59 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287DA1DB3A84D005A0C59 /* ProfileViewController.swift */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		0890909C25DA96DB5120F155 /* Pods-GuideeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GuideeTests/Pods-GuideeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideAnnotation.swift; path = Views/GuideAnnotation.swift; sourceTree = "<group>"; };
+		1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleAnnotationView.swift; path = Views/CircleAnnotationView.swift; sourceTree = "<group>"; };
 		1BE287D31DB3A84D005A0C59 /* Guidee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guidee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			children = (
 				1BE287FC1DB3B7E0005A0C59 /* GuideEventHeaderView.swift */,
 				1BE288151DB5739F005A0C59 /* GuideHeaderView.swift */,
+				1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				1BE2880C1DB3E039005A0C59 /* ImageItemNode.swift in Sources */,
 				1BE288181DB57955005A0C59 /* GuideSummaryNode.swift in Sources */,
 				1BE2881E1DB5853A005A0C59 /* EventSubCellNode.swift in Sources */,
+				1BBAF9E31DB7FF7D00379004 /* CircleAnnotationView.swift in Sources */,
 				1BE288161DB5739F005A0C59 /* GuideHeaderView.swift in Sources */,
 				1BE287DB1DB3A84D005A0C59 /* ProfileViewController.swift in Sources */,
 				1BE288141DB570FE005A0C59 /* GuideEventDetailModel.swift in Sources */,

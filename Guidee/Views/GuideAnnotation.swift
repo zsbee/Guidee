@@ -5,8 +5,9 @@ class GuideAnnotation: NSObject, MKAnnotation {
     var title: String?
     var subtitle: String?
     let coordinate: CLLocationCoordinate2D
+    let imageUrl: String
     
-    init(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D) {
+    init(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D, imageUrl: String) {
         if let title = title {
             self.title = title
         }
@@ -15,6 +16,7 @@ class GuideAnnotation: NSObject, MKAnnotation {
             self.subtitle = subtitle
         }
         
+        self.imageUrl = imageUrl
         self.coordinate = coordinate
         
         super.init()
