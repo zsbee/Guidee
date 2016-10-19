@@ -8,7 +8,7 @@ class CircleAnnotationView: MKAnnotationView {
     let circleView: UIImageView
     let smallSize: CGFloat = 40
     let bigSize: CGFloat = 60
-    
+
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         self.circleView = UIImageView()
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -18,10 +18,6 @@ class CircleAnnotationView: MKAnnotationView {
         self.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
 
         self.configureView()
-        self.addSubview(self.circleView)
-        
-        // DO NOT PUT TO layoutSubviews
-        self.circleView.frame = CGRect(x: self.frame.width/2-self.smallSize/2, y: self.frame.height/2-self.smallSize/2, width: self.smallSize, height: self.smallSize)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,7 +35,13 @@ class CircleAnnotationView: MKAnnotationView {
             self.circleView.clipsToBounds = true
             self.circleView.layer.borderWidth = 3.0
             self.circleView.layer.borderColor = UIColor.white.cgColor
+            self.circleView.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
+            self.circleView.layer.shadowOffset = CGSize(width: 0, height: 1)
+            self.circleView.layer.shadowRadius = 5;
+            self.circleView.frame = CGRect(x: self.frame.width/2-self.smallSize/2, y: self.frame.height/2-self.smallSize/2, width: self.smallSize, height: self.smallSize)
         }
+        
+        self.addSubview(self.circleView)
     }
     
     override func layoutSubviews() {
@@ -53,6 +55,10 @@ class CircleAnnotationView: MKAnnotationView {
             springAnimation!.velocity = NSValue(cgPoint: CGPoint(x: 2, y: 2))
             springAnimation!.springBounciness = 25
             self.circleView.pop_add(springAnimation, forKey: "bounce")
+            
+//            let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+//            alphaAnimation!.toValue = 1
+//            self.calloutView.pop_add(alphaAnimation, forKey: "alpha")
         }
         else{
             let springAnimation = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
@@ -60,6 +66,29 @@ class CircleAnnotationView: MKAnnotationView {
             springAnimation!.velocity = NSValue(cgPoint: CGPoint(x: 2, y: 2))
             springAnimation!.springBounciness = 25
             self.circleView.pop_add(springAnimation, forKey: "bounce")
+            
+//            let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+//            alphaAnimation!.toValue = 0
+//            self.calloutView.pop_add(alphaAnimation, forKey: "alpha")
         }
     }
+    
+//    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+//        let hitView = super.hitTest(point, with: event)
+//        if (hitView != self)
+//        {
+//            self.superview?.bringSubview(toFront: self)
+//        }
+//        return hitView;
+//    }
+//    
+//    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+//        let isInsideCallout = self.calloutView.frame.contains(point) && self.calloutView.alpha == 1
+//        
+//        if (isInsideCallout) {
+//            return false
+//        }
+//        
+//        return super.point(inside: point, with: event)
+//    }
 }

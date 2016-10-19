@@ -74,11 +74,6 @@ class ExploreViewController: UIViewController, MKMapViewDelegate {
                 view = dequeuedView
             } else {
                 view = CircleAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.canShowCallout = true
-                let chevronBtn = UIButton(type: .detailDisclosure)
-                chevronBtn.tintColor = UIColor(red:1.00, green:0.40, blue:0.40, alpha:1.00)
-                chevronBtn.setImage(UIImage(named: "RightArrow"), for: .normal)
-                view.rightCalloutAccessoryView = chevronBtn
             }
             return view
         }
