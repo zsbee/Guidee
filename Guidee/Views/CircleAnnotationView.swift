@@ -8,6 +8,7 @@ class CircleAnnotationView: MKAnnotationView {
     let circleView: UIImageView
     let smallSize: CGFloat = 40
     let bigSize: CGFloat = 60
+    lazy var calloutView: PinCalloutView = PinCalloutView(frame: CGRect(x: 0, y: 0, width: 205, height: 125))
 
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         self.circleView = UIImageView()
@@ -41,7 +42,11 @@ class CircleAnnotationView: MKAnnotationView {
             self.circleView.frame = CGRect(x: self.frame.width/2-self.smallSize/2, y: self.frame.height/2-self.smallSize/2, width: self.smallSize, height: self.smallSize)
         }
         
+        self.calloutView.alpha = 0
+        self.calloutView.frame = CGRect(x: 30, y: -125+30, width: 205, height: 125)
+        
         self.addSubview(self.circleView)
+        self.addSubview(self.calloutView)
     }
     
     override func layoutSubviews() {
@@ -56,9 +61,9 @@ class CircleAnnotationView: MKAnnotationView {
             springAnimation!.springBounciness = 25
             self.circleView.pop_add(springAnimation, forKey: "bounce")
             
-//            let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
-//            alphaAnimation!.toValue = 1
-//            self.calloutView.pop_add(alphaAnimation, forKey: "alpha")
+            let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+            alphaAnimation!.toValue = 1
+            self.calloutView.pop_add(alphaAnimation, forKey: "alpha")
         }
         else{
             let springAnimation = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
@@ -67,9 +72,9 @@ class CircleAnnotationView: MKAnnotationView {
             springAnimation!.springBounciness = 25
             self.circleView.pop_add(springAnimation, forKey: "bounce")
             
-//            let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
-//            alphaAnimation!.toValue = 0
-//            self.calloutView.pop_add(alphaAnimation, forKey: "alpha")
+            let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+            alphaAnimation!.toValue = 0
+            self.calloutView.pop_add(alphaAnimation, forKey: "alpha")
         }
     }
     

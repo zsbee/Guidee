@@ -7,19 +7,12 @@ class ExploreViewController: UIViewController, MKMapViewDelegate {
     let mapView = MKMapView()
     var annotations: [GuideAnnotation]! = [GuideAnnotation]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        testBtn.setTitle("Open Event", for: .normal)
-        testBtn.titleLabel?.textAlignment = .center
-        testBtn.frame = CGRect(x: self.view.frame.width/2 - 50, y: self.view.frame.height - 200, width: 100, height: 100)
-        testBtn.addTarget(self, action: #selector(ExploreViewController.selected), for: .touchUpInside)
         
         annotations = self.mockedAnnotations()
         
         self.view.addSubview(self.mapView)
-//        self.view.addSubview(testBtn)
         mapView.delegate = self
         mapView.addAnnotations(annotations)
     }
