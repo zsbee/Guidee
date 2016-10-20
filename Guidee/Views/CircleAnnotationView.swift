@@ -81,22 +81,11 @@ class CircleAnnotationView: MKAnnotationView {
         }
     }
     
-//    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-//        let hitView = super.hitTest(point, with: event)
-//        if (hitView != self)
-//        {
-//            self.superview?.bringSubview(toFront: self)
-//        }
-//        return hitView;
-//    }
-//    
-//    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-//        let isInsideCallout = self.calloutView.frame.contains(point) && self.calloutView.alpha == 1
-//        
-//        if (isInsideCallout) {
-//            return false
-//        }
-//        
-//        return super.point(inside: point, with: event)
-//    }
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        return super.hitTest(point, with: event)
+    }
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        return super.point(inside: point, with: event)
+    }
 }

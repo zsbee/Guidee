@@ -19,29 +19,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Guidee/Nodes/EventCellNode.swift"
-            timestampString = "498438927.76331"
+            filePath = "Guidee/Views/PinCalloutView.swift"
+            timestampString = "498615229.938938"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "layoutSpecThatFits(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Guidee/Nodes/EventCellNode.swift"
-            timestampString = "498438927.76331"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "collectionView(_:nodeBlockForItemAt:)"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "touchesEnded(_:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,46 +35,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pods/PINRemoteImage/Pod/Classes/PINRemoteImageCategoryManager.m"
-            timestampString = "498599626.756703"
+            filePath = "Guidee/Views/PinCalloutView.swift"
+            timestampString = "498615229.938938"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "+setImageOnView:fromURLs:placeholderImage:processorKey:processor:completion:"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "point(inside:with:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__108+[PINRemoteImageCategoryManager setImageOnView:fromURLs:placeholderImage:processorKey:processor:completion:]_block_invoke.48"
-                  moduleName = "PINRemoteImage"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zsomborfuszenecker/dev/Guidee/Guidee/Pods/PINRemoteImage/Pod/Classes/PINRemoteImageCategoryManager.m"
-                  timestampString = "498613453.278468"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "194"
-                  endingLineNumber = "194"
-                  offsetFromSymbolStart = "88">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__108+[PINRemoteImageCategoryManager setImageOnView:fromURLs:placeholderImage:processorKey:processor:completion:]_block_invoke_2"
-                  moduleName = "PINRemoteImage"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zsomborfuszenecker/dev/Guidee/Guidee/Pods/PINRemoteImage/Pod/Classes/PINRemoteImageCategoryManager.m"
-                  timestampString = "498613453.282823"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "194"
-                  endingLineNumber = "194"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
