@@ -59,14 +59,14 @@ class PinCalloutView: UIView {
         return nil
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touch Up")
-        super.touchesEnded(touches, with: event)
-    }
-    
-    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        let realFrame = CGRect(x:self.superview!.frame.origin.x + 30, y: self.superview!.frame.origin.y - 125+30, width: self.frame.width, height: self.frame.height)
-        let isInside = realFrame.contains(point)
-        return false
-    }
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        print("Touch Up")
+//        super.touchesEnded(touches, with: event)
+//    }
+//    
+//    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+//        let realFrame = CGRect(x:self.superview!.frame.origin.x + 30, y: self.superview!.frame.origin.y - 125+30, width: self.frame.width, height: self.frame.height)
+//        let isInside = realFrame.contains(point)
+//        return false
+//    }
 }

@@ -1,12 +1,29 @@
 import UIKit
 import MapKit
 
+protocol CustomMapViewDelegate {
+   func customMapView_shouldNavigateWithAnnotation(annotation: GuideAnnotation?)
+}
+
 class CustomMapView: MKMapView {
     
     var began = false
     var ended = true
     var calloutViewFrame: CGRect?
     var annotation: GuideAnnotation?
+    
+    var customDelegate: CustomMapViewDelegate?
+    
+    init(customDelegate: CustomMapViewDelegate?) {
+        if let customD = customDelegate {
+            self.customDelegate = customD
+        }
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 //    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
 //        let hitView = super.hitTest(point, with: event)
@@ -67,6 +84,8 @@ class CustomMapView: MKMapView {
                     }
                     
                     // post noti
+                    self.customDelegate?.customMapView_shouldNavigateWithAnnotation(annotation: self.annotation)
+                    
                 }
             }
         }

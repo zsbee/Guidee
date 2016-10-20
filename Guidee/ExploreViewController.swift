@@ -1,10 +1,10 @@
 import UIKit
 import MapKit
 
-class ExploreViewController: UIViewController, MKMapViewDelegate {
+class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewDelegate {
 
     let testBtn = UIButton(type: .system)
-    let mapView = CustomMapView()
+    var mapView: CustomMapView!
     var annotations: [GuideAnnotation]! = [GuideAnnotation]()
     
     override func viewDidLoad() {
@@ -12,6 +12,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate {
         
         annotations = self.mockedAnnotations()
         
+        self.mapView = CustomMapView(customDelegate: self)
         self.view.addSubview(self.mapView)
         mapView.delegate = self
         mapView.addAnnotations(annotations)
@@ -88,5 +89,13 @@ class ExploreViewController: UIViewController, MKMapViewDelegate {
         print("Deselect pin")
     }
     
+    func customMapView_shouldNavigateWithAnnotation(annotation: GuideAnnotation?) {
+        if let annotation = annotation {
+            let vc = GuideHomeViewController()
+            // vc.modalTransitionStyle = .crossDissolve
+            
+            self.present(vc, animated: true, completion:nil)
+        }
+    }
 }
 
