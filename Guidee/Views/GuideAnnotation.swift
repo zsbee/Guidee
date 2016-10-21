@@ -1,15 +1,17 @@
 import UIKit
 import MapKit
 
-class GuideAnnotation: NSObject, MKAnnotation {
-    var title: String?
-    var subtitle: String?
-    let coordinate: CLLocationCoordinate2D
-    let imageUrl: String
+public class GuideAnnotation: NSObject, MKAnnotation {
+    public let identifier: String
+    public var title: String?
+    public var subtitle: String?
+    public let coordinate: CLLocationCoordinate2D
+    public let imageUrl: String
+    public let likes: Int
     
     public var calloutView: PinCalloutView?
     
-    init(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D, imageUrl: String) {
+    public init(identifier: String, title: String?, subtitle: String?, likes: Int, coordinate: CLLocationCoordinate2D, imageUrl: String) {
         if let title = title {
             self.title = title
         }
@@ -18,6 +20,8 @@ class GuideAnnotation: NSObject, MKAnnotation {
             self.subtitle = subtitle
         }
         
+        self.identifier = identifier
+        self.likes = likes
         self.imageUrl = imageUrl
         self.coordinate = coordinate
         

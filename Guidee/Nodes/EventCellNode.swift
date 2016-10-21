@@ -45,9 +45,11 @@ class EventCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource, U
     public func collectionView(_ collectionView: ASCollectionView, nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
         return {
             () -> ASCellNode in
-            let node = EventSubCellNode(model: self.models[indexPath.row], attributedTitleText: NSAttributedString(string: "#\(indexPath.row + 1) Cala Varques", attributes: TextStyles.getEventCellHeaderAttributes()),
-                                        attributedSummaryText: NSAttributedString(string: "This magical place takes place 45 minutes from the main road. You can only approach it by foot.", attributes: TextStyles.getEventCellSummaryAttributes()),
-                                                                                  carouselModels: [CarouselItemModel(imageURL: "https://i.imgsafe.org/3acbfb7037.jpg")])
+            let eventModel: GuideEventDetailModel = self.models[indexPath.row]
+            
+            let node = EventSubCellNode(model: eventModel,
+                                        attributedTitleText: NSAttributedString(string: "#\(indexPath.row + 1) \(eventModel.title)", attributes: TextStyles.getEventCellHeaderAttributes()),
+                                        attributedSummaryText: NSAttributedString(string: "\(eventModel.summary)", attributes: TextStyles.getEventCellSummaryAttributes()))
             return node
         }
     }

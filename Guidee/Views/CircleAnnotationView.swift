@@ -43,6 +43,7 @@ class CircleAnnotationView: MKAnnotationView {
         }
         
         self.calloutView.alpha = 0
+        self.calloutView.setData(title: self.annotation!.title!!, likes: (self.annotation! as! GuideAnnotation).likes)
         self.calloutView.frame = CGRect(x: 30, y: -125+30, width: 205, height: 125)
         (self.annotation as! GuideAnnotation).calloutView = self.calloutView
         

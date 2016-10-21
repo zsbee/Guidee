@@ -1,6 +1,6 @@
 import UIKit
 
-class PinCalloutView: UIView {
+public class PinCalloutView: UIView {
     
     let backgroundView: UIView
     let titleLabel: UILabel = UILabel()
@@ -8,7 +8,7 @@ class PinCalloutView: UIView {
     let heartCounter: UILabel = UILabel()
     let chevron: UIButton = UIButton(type: .custom)
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         self.backgroundView = UIView(frame: frame)
         self.backgroundView.backgroundColor = UIColor.white
         self.backgroundView.layer.cornerRadius = 8
@@ -25,12 +25,9 @@ class PinCalloutView: UIView {
         self.chevron.addTarget(self, action: #selector(self.navigateTapped), for: .touchUpInside)
 
 
-        self.titleLabel.attributedText = NSAttributedString(string: "Coast visits in Palma de Mallorca", attributes: TextStyles.getEventCellHeaderAttributes())
         self.titleLabel.numberOfLines = 2
         
-        
-        self.heartCounter.attributedText = NSAttributedString(string: "142 likes", attributes: TextStyles.getHeartCounterAttributes())
-        self.heartCounter.numberOfLines = 2
+        self.heartCounter.numberOfLines = 1
         
         self.addSubview(self.backgroundView)
         
@@ -40,11 +37,17 @@ class PinCalloutView: UIView {
         self.addSubview(self.chevron)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
+    public func setData(title: String, likes: Int) {
+        self.titleLabel.attributedText = NSAttributedString(string: title, attributes: TextStyles.getEventCellHeaderAttributes())
+        
+        self.heartCounter.attributedText = NSAttributedString(string: "\(likes) likes", attributes: TextStyles.getHeartCounterAttributes())
+    }
+    
+    override public func layoutSubviews() {
         self.titleLabel.frame = CGRect(x: 10, y: 5, width: 185, height: 60)
         self.heartIcon.frame = CGRect(x: 10, y: 75, width: 23, height: 20)
         self.heartCounter.frame = CGRect(x: 23+10+4, y: 75, width: 150, height: 25)
@@ -55,7 +58,7 @@ class PinCalloutView: UIView {
         print("navigate")
     }
     
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+    override public func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         return nil
     }
 

@@ -11,12 +11,7 @@ public class EventSubCellNode: ASCellNode {
     let firstImage: ASNetworkImageNode = ASNetworkImageNode()
     let chevronImage: ASImageNode = ASImageNode()
     
-    let carouselModels: [CarouselItemModel]
-    
-    public init(model: GuideEventDetailModel, attributedTitleText: NSAttributedString, attributedSummaryText: NSAttributedString, carouselModels: [CarouselItemModel]) {
-        
-        self.carouselModels = carouselModels
-        
+    public init(model: GuideEventDetailModel, attributedTitleText: NSAttributedString, attributedSummaryText: NSAttributedString) {
         chevronImage.image = UIImage(named: "RightArrow")
         self.model = model
         super.init()
@@ -59,8 +54,11 @@ public class EventSubCellNode: ASCellNode {
     
     override public func fetchData() {
         super.fetchData()
-        if let url3 = NSURL(string: self.carouselModels[0].imageURL) {
-            self.imageNode.setURL(url3 as URL, resetToDefault: true)
+        if (self.model.carouselModels.count > 0)
+        {
+            if let url3 = NSURL(string: self.model.carouselModels[0].imageURL) {
+                self.imageNode.setURL(url3 as URL, resetToDefault: true)
+            }
         }
     }
     

@@ -4,7 +4,7 @@ import AsyncDisplayKit
 class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate {
 
     let headerView: GuideHeaderView = GuideHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    public var models: [GuideBaseModel] = []
+    public var baseModel: GuideBaseModel!
     var collectionNode: ASCollectionNode!
 
     // Node map
@@ -75,19 +75,19 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
             () -> ASCellNode in
             switch indexPath.section {
             case self.sectionIndexHeader:
-                let node = GuideHeaderCellNode(coverImageUrl: "https://i.imgsafe.org/545a735254.jpg", attributedText: NSAttributedString(string: "Coast visits in Mallorca", attributes: TextStyles.getCenteredTitleAttirbutes()), avatarUrl: "https://s9.postimg.org/dcvk1ggy7/avatar2.jpg")
+                let node = GuideHeaderCellNode(coverImageUrl: self.baseModel.coverImageUrl, attributedText: NSAttributedString(string: self.baseModel.title, attributes: TextStyles.getCenteredTitleAttirbutes()), avatarUrl: self.baseModel.userAvatarUrl)
                 return node
             case self.sectionIndexSummaryHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Summary", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexSummary:
-                let node = GuideSummaryTextNode(attributedText: NSAttributedString(string: self.getMockedSummaryText() , attributes: TextStyles.getSummaryTextFontAttributes()))
+                let node = GuideSummaryTextNode(attributedText: NSAttributedString(string: self.baseModel.summary , attributes: TextStyles.getSummaryTextFontAttributes()))
                 return node
             case self.sectionIndexDetailsHeader:
-                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Places", attributes: TextStyles.getHeaderFontAttributes()))
+                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Moments", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexDetails:
-                return EventCellNode(models: self.getMockedModels(),delegate: self, detailCellSize: self.eventNodeSize)
+                return EventCellNode(models: self.baseModel.eventModels,delegate: self, detailCellSize: self.eventNodeSize)
             default:
                 return ASCellNode()
             }
@@ -98,7 +98,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right;
         
         if(indexPath.section == sectionIndexDetails) {
-            let numberOfItems = self.getMockedModels().count
+            let numberOfItems = self.baseModel.eventModels.count
             let nodeHeight = CGFloat(numberOfItems) * self.eventNodeSize.height
             return ASSizeRangeMake(CGSize(width: self.eventNodeSize.width, height: nodeHeight), CGSize(width: self.eventNodeSize.width, height: nodeHeight))
         }
@@ -122,28 +122,25 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         
     }
     
-    // Mocked data
-    private func getMockedSummaryText() -> String {
-        return "South from Érd, a loess wall forms a natural border between Százhalombatta (B/6) and Érd. The huge chimneys of Dunamenti Power Plant and the tanks, pipes and burning gas torches of the oil refi nery may not seem particularly attractive for tourists, but you would regret not visiting the city of the “hundred piles”. The history of the city (named after the 100 ancient piles from the times of the Hallstatt culture) is presented in the Matrica Museum, whose name in turn refers to the Roman name of the settlement."
-    }
-
-    private func getMockedModels() -> [GuideEventDetailModel] {
+    public static func getMockedModel1() -> [GuideEventDetailModel] {
         var models = [GuideEventDetailModel]()
         
         models.append(GuideEventDetailModel(title: "Cala Varques",
                                             summary: "This magical coast outside of civilization can be found 35 minutes walk time from the main road. You can't go to the beach with Car or Bicycle",
                                             carouselModels: [CarouselItemModel(imageURL:"https://i.imgsafe.org/3acbfb7037.jpg")]))
         models.append(GuideEventDetailModel(title: "Cala Pala",
-                                            summary: "This is a boring coast...",
+                                            summary: "This is a boring coast without any limitations whatsoever, lorem ipsum",
                                             carouselModels: [CarouselItemModel(imageURL:"https://i.imgsafe.org/3acc54103f.jpg")]))
 
         
         return models
     }
 
+    
+    
     internal func guideEventTapped(model: GuideEventDetailModel) {
         let vc = GuideEventDetailsViewController()
         self.present(vc, animated: true, completion:nil)
     }
-    
+
 }
