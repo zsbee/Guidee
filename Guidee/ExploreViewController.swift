@@ -6,18 +6,21 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
     var mapView: CustomMapView!
     var allGuides: [GuideBaseModel]! = [GuideBaseModel]()
     
+    let headerView = ExploreHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.allGuides = self.mockedBaseModels()
         
         self.mapView = CustomMapView(customDelegate: self)
-        self.view.addSubview(self.mapView)
         mapView.delegate = self
         mapView.addAnnotations(allGuides.map({ (guideModel) -> GuideAnnotation in
             return guideModel.annotationModel
         }))
         
+        self.view.addSubview(self.mapView)
+        self.view.addSubview(self.headerView)
     }
     
     public func selected(sender: UIButton!) {
@@ -35,6 +38,8 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
         super.viewDidLayoutSubviews()
         
         self.mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        self.headerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 60)
+
     }
 
     // navigation
