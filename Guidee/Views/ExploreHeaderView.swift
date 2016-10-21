@@ -4,7 +4,7 @@ class ExploreHeaderView: UIView {
 
     let titleLabel: UILabel = UILabel()
 
-    let blurEffectView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+    let blurEffectView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
     override init(frame: CGRect) {
         super.init(frame:frame)
