@@ -56,8 +56,10 @@ public class EventSubCellNode: ASCellNode {
         super.fetchData()
         if (self.model.carouselModels.count > 0)
         {
-            if let url3 = NSURL(string: self.model.carouselModels[0].imageURL) {
-                self.imageNode.setURL(url3 as URL, resetToDefault: true)
+            if let imageUrlString = self.model.carouselModels[0].imageURL {
+                if let url3 = NSURL(string: imageUrlString) {
+                    self.imageNode.setURL(url3 as URL, resetToDefault: true)
+                }
             }
         }
     }

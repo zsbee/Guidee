@@ -127,10 +127,10 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         
         models.append(GuideEventDetailModel(title: "Cala Varques",
                                             summary: "This magical coast outside of civilization can be found 35 minutes walk time from the main road. You can't go to the beach with Car or Bicycle",
-                                            carouselModels: [CarouselItemModel(imageURL:"https://i.imgsafe.org/3acbfb7037.jpg")]))
+                                            carouselModels: [CarouselItemModel(imageURL:"https://i.imgsafe.org/3acbfb7037.jpg", videoId: nil)]))
         models.append(GuideEventDetailModel(title: "Cala Pala",
                                             summary: "This is a boring coast without any limitations whatsoever, lorem ipsum",
-                                            carouselModels: [CarouselItemModel(imageURL:"https://i.imgsafe.org/3acc54103f.jpg")]))
+                                            carouselModels: [CarouselItemModel(imageURL:"https://i.imgsafe.org/3acc54103f.jpg", videoId: nil)]))
 
         
         return models

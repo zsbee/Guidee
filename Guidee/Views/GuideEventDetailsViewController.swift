@@ -131,14 +131,15 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     private func getMockedCarouselModels() -> [CarouselItemModel] {
         var models = [CarouselItemModel]()
         
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acbfb7037.jpg"))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc54103f.jpg"))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc6abc9d.jpg"))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc77d68b.jpg"))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acca50fe4.jpg"))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3accb4d595.jpg"))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc88e552.jpg"))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc95de51.jpg"))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acbfb7037.jpg", videoId: nil))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc54103f.jpg", videoId: nil))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc6abc9d.jpg", videoId: nil))
+        models.append(CarouselItemModel(imageURL: nil, videoId: "_dbyJdayCTU"))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc77d68b.jpg", videoId: nil))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acca50fe4.jpg", videoId: nil))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3accb4d595.jpg", videoId: nil))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc88e552.jpg", videoId: nil))
+        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc95de51.jpg", videoId: nil))
         
         return models
     }

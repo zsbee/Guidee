@@ -9,9 +9,10 @@ target ‘Guidee’ do
     pod 'FirebaseDatabase'
     pod 'AsyncDisplayKit'
     pod 'pop'
+    pod 'youtube-ios-player-helper'
 end
 
-target 'GuideeTests’ do
+target 'GuideeTests' do
 
 end
 
