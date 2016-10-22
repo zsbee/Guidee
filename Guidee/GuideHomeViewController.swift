@@ -84,7 +84,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
                 let node = GuideSummaryTextNode(attributedText: NSAttributedString(string: self.baseModel.summary , attributes: TextStyles.getSummaryTextFontAttributes()))
                 return node
             case self.sectionIndexDetailsHeader:
-                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Moments", attributes: TextStyles.getHeaderFontAttributes()))
+                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Spots", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexDetails:
                 return EventCellNode(models: self.baseModel.eventModels,delegate: self, detailCellSize: self.eventNodeSize)

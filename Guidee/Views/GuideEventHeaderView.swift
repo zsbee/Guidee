@@ -40,7 +40,7 @@ class GuideEventHeaderView: UIView {
         
         self.eventName.textColor = UIColor.black
         self.eventName.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightHeavy)
-        self.eventName.text = "Kürtőskalácsozó"
+        self.eventName.text = "Cala Varques"
         self.eventName.textAlignment = .center;
 
         self.addSubview(heartIconButton)

@@ -96,12 +96,12 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
         var models = [GuideBaseModel]()
         
         let baseModel1 = GuideBaseModel(identifier: "elsoID",
-                                        title: "Palma Guide",
-                                        summary: "Lorem Ipsum",
-                                        coverImageUrl: "https://i.imgsafe.org/545a735254.jpg",
+                                        title: "Beaches of Mallorca",
+                                        summary: "Collection of unspoilt beaches that only locals know of!",
+                                        coverImageUrl: "https://i.ytimg.com/vi/pnr_-oU006o/maxresdefault.jpg",
                                         userAvatarUrl: "https://s9.postimg.org/dcvk1ggy7/avatar2.jpg",
                                         eventModels: GuideHomeViewController.getMockedModel1(),
-                                        annotationModel: GuideAnnotation(identifier: "elsoID", title: "Palme de Mallorca, best places to visit", subtitle: "Lorem Ipsum Dolor Sit amet", likes:132, coordinate: CLLocationCoordinate2D(latitude: 39.49, longitude: 3.28), imageUrl: "https://i.imgsafe.org/7d5ce651e5.jpg"))
+                                        annotationModel: GuideAnnotation(identifier: "elsoID", title: "Beaches of Mallorca", subtitle: "Collection of beaches, unspoilt beaches and more...", likes:132, coordinate: CLLocationCoordinate2D(latitude: 39.49, longitude: 3.28), imageUrl: "https://i.imgsafe.org/7d5ce651e5.jpg"))
         
         models.append(baseModel1)
         
