@@ -123,6 +123,14 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
         
     }
     
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return [.portrait, .portraitUpsideDown]
+    }
+   
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
     // Mocked data
     private func getMockedSummaryText() -> String {
         return " South from Érd, a loess wall forms a natural border between Százhalombatta (B/6) and Érd.\n\n The huge chimneys of Dunamenti Power Plant and the tanks, pipes and burning gas torches of the oil refi nery may not seem particularly attractive for tourists.\n\n You would regret not visiting the city of the “hundred piles”.\n\n The history of the city (named after the 100 ancient piles from the times of the Hallstatt culture) is presented in the Matrica Museum, whose name in turn refers to the Roman name of the settlement."
