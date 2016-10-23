@@ -7,8 +7,6 @@ public class EventSubCellNode: ASCellNode {
     
     public let model: GuideEventDetailModel
     let imageNode: ASNetworkImageNode = ASNetworkImageNode()
-    let secondImage: ASNetworkImageNode = ASNetworkImageNode()
-    let firstImage: ASNetworkImageNode = ASNetworkImageNode()
     let chevronImage: ASImageNode = ASImageNode()
     
     public init(model: GuideEventDetailModel, attributedTitleText: NSAttributedString, attributedSummaryText: NSAttributedString) {

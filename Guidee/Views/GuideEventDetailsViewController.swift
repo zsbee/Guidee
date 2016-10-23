@@ -7,6 +7,12 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     var collectionNode: ASCollectionNode!
     var faderImage: UIImageView!
     
+    public var model: GuideEventDetailModel? {
+        didSet {
+            headerView.setTitle(title: self.model!.title)
+        }
+    }
+    
     private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 16, 0)
     private let sectionHeaderInset: UIEdgeInsets = UIEdgeInsetsMake(16, 0, 0, 0)
     private let sectionContentInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 0, 0)
@@ -15,9 +21,11 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     // Node map
     private let sectionIndexSummaryHeader: Int = 0
     private let sectionIndexSummary: Int = 1
-    private let sectionIndexAdvert: Int = 4
     private let sectionIndexCarouselHeader: Int = 2
     private let sectionIndexCarousel: Int = 3
+    private let sectionIndexMapHeader: Int = 4
+    private let sectionIndexMap: Int = 5
+    private let sectionIndexAdvert: Int = 6
 
     
     override func viewDidLoad() {
@@ -28,6 +36,7 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
         self.collectionNode.delegate = self
         self.collectionNode.dataSource = self
         self.collectionNode.backgroundColor = UIColor.clear
+        
         
         headerView.delegate = self
         
@@ -50,7 +59,7 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
         return 1
     }
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -88,18 +97,26 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
                     let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Summary", attributes: TextStyles.getHeaderFontAttributes()))
                     return node
                 case self.sectionIndexSummary:
-                    let node = GuideEventSummaryTextNode(attributedText: NSAttributedString(string: self.getMockedSummaryText(), attributes: TextStyles.getSummaryTextFontAttributes()))
+                    let node = GuideEventSummaryTextNode(attributedText: NSAttributedString(string: self.model!.summary, attributes: TextStyles.getSummaryTextFontAttributes()))
                     return node
+
+                case self.sectionIndexCarouselHeader:
+                    let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Images/Videos", attributes: TextStyles.getHeaderFontAttributes()))
+                    return node
+                case self.sectionIndexCarousel:
+                    let node = CarouselCellNode(models: self.model!.carouselModels)
+                    return node
+                case self.sectionIndexMapHeader:
+                    let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Map", attributes: TextStyles.getHeaderFontAttributes()))
+                    return node
+                case self.sectionIndexMap:
+                    let node = CarouselCellNode(models: self.model!.carouselModels)
+                    return ASCellNode()
+                    
                 case self.sectionIndexAdvert:
                     let node = AdvertNode()
                     node.preferredFrameSize = CGSize(width: 375, height: 250)
                     return ASCellNode()
-                case self.sectionIndexCarouselHeader:
-                    let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Images", attributes: TextStyles.getHeaderFontAttributes()))
-                    return node
-                case self.sectionIndexCarousel:
-                    let node = CarouselCellNode(models: self.getMockedCarouselModels())
-                    return node
                 default:
                     return ASCellNode()
             }
@@ -129,27 +146,6 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
    
     override var shouldAutorotate: Bool {
         return false
-    }
-    
-    // Mocked data
-    private func getMockedSummaryText() -> String {
-        return "Cala Varques (also known as Cala Barques) is a quiet and unspoilt beach about 12 km south of Porto Cristo on the east coast of Majorca. \nThe beach is around 90 metres in length and 60 metres deep, and has waves crashing against it, funnelled in from the cove. \nClosest resort to here is Porto Cristo to the north and Cales de Mallorca to the south. Read about our trip to Cala Varques."
-    }
-    
-    private func getMockedCarouselModels() -> [CarouselItemModel] {
-        var models = [CarouselItemModel]()
-        
-        models.append(CarouselItemModel(imageURL: nil, videoId: "_dbyJdayCTU"))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acbfb7037.jpg", videoId: nil))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc54103f.jpg", videoId: nil))
-        models.append(CarouselItemModel(imageURL: nil, videoId: "4c9WX9o8ws8"))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc77d68b.jpg", videoId: nil))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acca50fe4.jpg", videoId: nil))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3accb4d595.jpg", videoId: nil))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc88e552.jpg", videoId: nil))
-        models.append(CarouselItemModel(imageURL: "https://i.imgsafe.org/3acc95de51.jpg", videoId: nil))
-        
-        return models
     }
     
 }

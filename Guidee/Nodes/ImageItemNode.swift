@@ -5,6 +5,8 @@ import youtube_ios_player_helper
 class ImageItemNode: ASCellNode {
     let model: CarouselItemModel
     
+    let placeholderImages = ["placeholderPastel","placeholderBlue","placeholderYellow","placeholderPink", "placeholderGreen"]
+    
     let cornerClipImage: ASImageNode = ASImageNode()
     
     let mainImage: ASNetworkImageNode = ASNetworkImageNode()
@@ -14,8 +16,10 @@ class ImageItemNode: ASCellNode {
         self.model = model
         super.init()
         
-        self.mainImage.preferredFrameSize = CGSize(width: 162, height: 162)
+        let randomIndex = Int(arc4random_uniform(UInt32(placeholderImages.count)))
         
+        self.mainImage.preferredFrameSize = CGSize(width: 162, height: 162)
+        self.mainImage.defaultImage = UIImage(named: self.placeholderImages[randomIndex])
         self.cornerClipImage.preferredFrameSize = CGSize(width: 162, height: 162)
         
         self.addSubnode(mainImage)

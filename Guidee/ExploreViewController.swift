@@ -52,7 +52,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
     // MKMapKitDelegate
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? GuideAnnotation {
-            let identifier = "circlePin"
+            let identifier = annotation.identifier
             var view: CircleAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? CircleAnnotationView {
                 dequeuedView.annotation = annotation
@@ -101,9 +101,27 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
                                         coverImageUrl: "https://i.ytimg.com/vi/pnr_-oU006o/maxresdefault.jpg",
                                         userAvatarUrl: "https://s9.postimg.org/dcvk1ggy7/avatar2.jpg",
                                         eventModels: GuideHomeViewController.getMockedModel1(),
-                                        annotationModel: GuideAnnotation(identifier: "elsoID", title: "Beaches of Mallorca", subtitle: "Collection of beaches, unspoilt beaches and more...", likes:132, coordinate: CLLocationCoordinate2D(latitude: 39.49, longitude: 3.28), imageUrl: "https://i.imgsafe.org/7d5ce651e5.jpg"))
+                                        annotationModel: GuideAnnotation(identifier: "elsoID", title: "Beaches of Mallorca", subtitle: "Collection of beaches, unspoilt beaches and more...", likes:132, coordinate: CLLocationCoordinate2D(latitude: 39.49, longitude: 3.28), imageUrl: "https://s9.postimg.org/dcvk1ggy7/avatar2.jpg"))
+        
+        let baseModel2 = GuideBaseModel(identifier: "masodikID",
+                                        title: "Beautiful Thailand",
+                                        summary: "Experience the livelihood of Thailand through beutiful unpoilt, touristless spots!",
+                                        coverImageUrl: "https://newmedia.thomson.co.uk/live/vol/0/921d4b57639916341dfa76e38310ff7bc13b11e2/1080x608/web/ASIAFAREASTTHAILANDTHAILANDDES_000423KHAOLAKRES_002378.jpg",
+                                        userAvatarUrl: "https://i.imgsafe.org/c9333b4e93.png",
+                                        eventModels: GuideHomeViewController.getMockedModel2(),
+                                        annotationModel: GuideAnnotation(identifier: "masodikID", title: "Unspoilt beaches", subtitle: "Experience the livelihood of Thailand through beutiful unpoilt, touristless spots!", likes:479, coordinate: CLLocationCoordinate2D(latitude: 6.5944565, longitude: 99.35871), imageUrl: "https://i.imgsafe.org/c9333b4e93.png"))
+        
+        let baseModel3 = GuideBaseModel(identifier: "harmadikID",
+                                        title: "30 Things in Tobago",
+                                        summary: "So when it comes to the Caribbean island of Tobago, you can say I’m a bit of an Island Connoisseur. Having spent 60 days exploring everything there is to see and do here I thought I would put together a list of my top picks. So here they are listed in no particular order.",
+                                        coverImageUrl: "https://i2.wp.com/www.heynadine.com/wp-content/uploads/2014/09/Englishmans-Bay-Tobago.jpg",
+                                        userAvatarUrl: "https://yt3.ggpht.com/-IE9zWKgAAIA/AAAAAAAAAAI/AAAAAAAAAAA/MgaQTBTMi-0/s100-c-k-no-mo-rj-c0xffffff/photo.jpg",
+                                        eventModels: GuideHomeViewController.getMockedModel3(),
+                                        annotationModel: GuideAnnotation(identifier: "harmadikID", title: "30 Things in Tobago", subtitle: "Experience the livelihood of Thailand through beutiful unpoilt, touristless spots!", likes:1738, coordinate: CLLocationCoordinate2D(latitude: 11.248085, longitude: -60.6814262), imageUrl: "https://yt3.ggpht.com/-IE9zWKgAAIA/AAAAAAAAAAI/AAAAAAAAAAA/MgaQTBTMi-0/s100-c-k-no-mo-rj-c0xffffff/photo.jpg"))
         
         models.append(baseModel1)
+        models.append(baseModel2)
+        models.append(baseModel3)
         
         return models
     }

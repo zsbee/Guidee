@@ -40,7 +40,6 @@ class GuideEventHeaderView: UIView {
         
         self.eventName.textColor = UIColor.black
         self.eventName.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightHeavy)
-        self.eventName.text = "Cala Varques"
         self.eventName.textAlignment = .center;
 
         self.addSubview(heartIconButton)
@@ -51,6 +50,10 @@ class GuideEventHeaderView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func setTitle(title: String) {
+        self.eventName.text = title
     }
     
     override func layoutSubviews() {
