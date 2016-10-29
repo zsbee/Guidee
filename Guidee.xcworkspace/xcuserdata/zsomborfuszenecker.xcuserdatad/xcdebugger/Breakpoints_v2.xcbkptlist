@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Guidee/Views/GuideEventDetailsViewController.swift"
-            timestampString = "499093752.301195"
+            timestampString = "499441546.397708"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "GuideEventDetailsViewController"
             landmarkType = "3">
          </BreakpointContent>

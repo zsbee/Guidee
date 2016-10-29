@@ -36,8 +36,7 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
         self.collectionNode.delegate = self
         self.collectionNode.dataSource = self
         self.collectionNode.backgroundColor = UIColor.clear
-        
-        
+
         headerView.delegate = self
         
         self.view.backgroundColor = UIColor.white

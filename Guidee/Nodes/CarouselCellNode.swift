@@ -52,5 +52,6 @@ class CarouselCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource
     override func didLoad() {
         super.didLoad()
         self.collectionNode.view.showsHorizontalScrollIndicator = false
+        self.collectionNode.view.alwaysBounceHorizontal = true
     }
 }

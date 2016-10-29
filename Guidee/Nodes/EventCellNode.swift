@@ -60,7 +60,6 @@ class EventCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource, U
     
     override func didLoad() {
         super.didLoad()
-        self.collectionNode.view.showsHorizontalScrollIndicator = false
     }
     
 }
