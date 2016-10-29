@@ -1,8 +1,8 @@
 import UIKit
 import MapKit
+import Firebase
 
-class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewDelegate {
-
+class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewDelegate {    
     var mapView: CustomMapView!
     var allGuides: [GuideBaseModel]! = [GuideBaseModel]()
     
@@ -11,14 +11,17 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.allGuides = self.mockedBaseModels()
+        DataController.sharedInstance.getJourneys { (model) in
+            self.allGuides.append(model)
+            self.mapView.addAnnotation(model.annotationModel)
+        }
         
         self.mapView = CustomMapView(customDelegate: self)
         mapView.delegate = self
-        mapView.addAnnotations(allGuides.map({ (guideModel) -> GuideAnnotation in
-            return guideModel.annotationModel
-        }))
-        
+//        mapView.addAnnotations(allGuides.map({ (guideModel) -> GuideAnnotation in
+//            return guideModel.annotationModel
+//        }))
+//        
         self.view.addSubview(self.mapView)
         self.view.addSubview(self.headerView)
     }
@@ -109,7 +112,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
                                         coverImageUrl: "https://newmedia.thomson.co.uk/live/vol/0/921d4b57639916341dfa76e38310ff7bc13b11e2/1080x608/web/ASIAFAREASTTHAILANDTHAILANDDES_000423KHAOLAKRES_002378.jpg",
                                         userAvatarUrl: "https://i.imgsafe.org/c9333b4e93.png",
                                         eventModels: GuideHomeViewController.getMockedModel2(),
-                                        annotationModel: GuideAnnotation(identifier: "masodikID", title: "Unspoilt beaches", subtitle: "Experience the livelihood of Thailand through beutiful unpoilt, touristless spots!", likes:479, coordinate: CLLocationCoordinate2D(latitude: 6.5944565, longitude: 99.35871), imageUrl: "https://i.imgsafe.org/c9333b4e93.png"))
+                                        annotationModel: GuideAnnotation(identifier: "masodikID", title: "Unspoilt beaches", subtitle: "Experience the livelihood of Thailand through beutiful unpoilt, touristless spots!", likes:479, coordinate: CLLocationCoordinate2D(latitude: 6.5944565, longitude: 99.35871),  imageUrl: "https://i.imgsafe.org/c9333b4e93.png"))
         
         let baseModel3 = GuideBaseModel(identifier: "harmadikID",
                                         title: "30 Things in Tobago",

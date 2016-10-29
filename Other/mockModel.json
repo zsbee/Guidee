@@ -1,0 +1,118 @@
+{
+  "Users": [
+    {
+      "id": 1562456124,
+      "name": "Zsombi F",
+      "age": 18
+    },
+    {
+      "id": "1562456122",
+      "name": "Bela Janos",
+      "age": 19
+    }
+  ],
+  "Journeys": [
+    {
+      "identifier": "elsoID",
+      "title": "Beaches of Mallorca",
+      "summary": "Collection of unspoilt beaches that only locals know of!",
+      "coverImageUrl": "https://i.ytimg.com/vi/pnr_-oU006o/maxresdefault.jpg",
+      "userAvatarUrl": "https://s9.postimg.org/dcvk1ggy7/avatar2.jpg",
+      "userId": 1562456124,
+      "eventModels": [
+        {
+          "title": "Cala Varques",
+          "summary": "This magical coast outside of civilization can be found 35 minutes walk time from the main road. You can't go to the beach with Car or Bicycle",
+          "carouselModels": [
+            {
+              "imageURL": "https://i.imgsafe.org/3acbfb7037.jpg"
+            },
+            {
+              "imageURL": "https://i.imgsafe.org/3acc54103f.jpg"
+            },
+            {
+              "videoYoutubeId": "_dbyJdayCTU"
+            }
+          ]
+        },
+        {
+          "title": "Cala Pala",
+          "summary": "This is a boring coast without any limitations whatsoever, lorem ipsum",
+          "carouselModels": [
+            {
+              "imageURL": "https://i.imgsafe.org/3acc95de51.jpg"
+            },
+            {
+              "imageURL": "https://i.imgsafe.org/3acc88e552.jpg"
+            },
+            {
+              "videoYoutubeId": "_dbyJdayCTU"
+            }
+          ]
+        }
+      ],
+      "annotationModel": {
+        "identifier": "elsoID",
+        "title": "Unspoilt beaches",
+        "subtitle": "Experience the livelihood of Thailand through beutiful unpoilt, touristless spots!",
+        "likes": 479,
+        "imageURL": "https://i.imgsafe.org/c9333b4e93.png",
+        "location": {
+          "latitude": 6.5944565,
+          "longitude": 99.35871
+        }
+      }
+    },
+    {
+      "identifier": "elsoID",
+      "title": "Beaches of Mallorca",
+      "summary": "Collection of unspoilt beaches that only locals know of!",
+      "coverImageUrl": "https://i.ytimg.com/vi/pnr_-oU006o/maxresdefault.jpg",
+      "userAvatarUrl": "https://s9.postimg.org/dcvk1ggy7/avatar2.jpg",
+      "userId": 1562456124,
+      "eventModels": [
+        {
+          "title": "Cala Varques",
+          "summary": "This magical coast outside of civilization can be found 35 minutes walk time from the main road. You can't go to the beach with Car or Bicycle",
+          "carouselModels": [
+            {
+              "imageURL": "https://i.imgsafe.org/3acbfb7037.jpg"
+            },
+            {
+              "imageURL": "https://i.imgsafe.org/3acc54103f.jpg"
+            },
+            {
+              "videoYoutubeId": "_dbyJdayCTU"
+            }
+          ]
+        },
+        {
+          "title": "Cala Pala",
+          "summary": "This is a boring coast without any limitations whatsoever, lorem ipsum",
+          "carouselModels": [
+            {
+              "imageURL": "https://i.imgsafe.org/3acc95de51.jpg"
+            },
+            {
+              "imageURL": "https://i.imgsafe.org/3acc88e552.jpg"
+            },
+            {
+              "videoYoutubeId": "_dbyJdayCTU"
+            }
+          ]
+        }
+      ],
+      "annotationModel": {
+        "identifier": "elsoID",
+        "title": "Unspoilt beaches",
+        "subtitle": "Experience the livelihood of Thailand through beutiful unpoilt, touristless spots!",
+        "likes": 479,
+        "imageURL": "https://i.imgsafe.org/c9333b4e93.png",
+        "location": {
+          "latitude": 6.5944565,
+          "longitude": 99.35871
+        }
+      }
+    }
+  ]
+}

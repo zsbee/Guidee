@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1063E2E6E74A2CCA144E8C1E /* Pods_Guidee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B92959C20F898448EA6153 /* Pods_Guidee.framework */; };
+		1B03A3FE1DC15DD2002AF1F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B03A3FD1DC15DD2002AF1F1 /* GoogleService-Info.plist */; };
+		1B1EF3F91DC4A0B600CF99A4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1EF3F81DC4A0B600CF99A4 /* DataController.swift */; };
 		1B23C9971DBA94A6004783A8 /* ExploreHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */; };
 		1BBAF9DA1DB6BFFE00379004 /* GuideAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */; };
 		1BBAF9E31DB7FF7D00379004 /* CircleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */; };
@@ -52,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		0890909C25DA96DB5120F155 /* Pods-GuideeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GuideeTests/Pods-GuideeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1B03A3FD1DC15DD2002AF1F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1B1EF3F81DC4A0B600CF99A4 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataController.swift; path = Utilities/DataController.swift; sourceTree = "<group>"; };
 		1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreHeaderView.swift; path = Views/ExploreHeaderView.swift; sourceTree = "<group>"; };
 		1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideAnnotation.swift; path = Views/GuideAnnotation.swift; sourceTree = "<group>"; };
 		1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleAnnotationView.swift; path = Views/CircleAnnotationView.swift; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 				1BE287DF1DB3A84D005A0C59 /* Assets.xcassets */,
 				1BE287E11DB3A84D005A0C59 /* LaunchScreen.storyboard */,
 				1BE287E41DB3A84D005A0C59 /* Info.plist */,
+				1B03A3FD1DC15DD2002AF1F1 /* GoogleService-Info.plist */,
 			);
 			path = Guidee;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE288021DB3D60D005A0C59 /* TextStyles.swift */,
+				1B1EF3F81DC4A0B600CF99A4 /* DataController.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -329,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE287E31DB3A84D005A0C59 /* LaunchScreen.storyboard in Resources */,
+				1B03A3FE1DC15DD2002AF1F1 /* GoogleService-Info.plist in Resources */,
 				1BE287E01DB3A84D005A0C59 /* Assets.xcassets in Resources */,
 				1BE287DE1DB3A84D005A0C59 /* Main.storyboard in Resources */,
 			);
@@ -452,6 +459,7 @@
 				1B23C9971DBA94A6004783A8 /* ExploreHeaderView.swift in Sources */,
 				1BE288141DB570FE005A0C59 /* GuideEventDetailModel.swift in Sources */,
 				1BE287D71DB3A84D005A0C59 /* AppDelegate.swift in Sources */,
+				1B1EF3F91DC4A0B600CF99A4 /* DataController.swift in Sources */,
 				1BE288051DB3D8BD005A0C59 /* GuideEventSummaryTextNode.swift in Sources */,
 				1BE288101DB56DC3005A0C59 /* GuideHomeViewController.swift in Sources */,
 				1BE2880A1DB3DBA1005A0C59 /* CarouselItemModel.swift in Sources */,

@@ -3,10 +3,14 @@
 # Uncomment this line if you're using Swift
 use_frameworks!
 
-target ‘Guidee’ do
-    pod 'Firebase', '>= 2.5.1'
-    pod 'FirebaseAuth'
-    pod 'FirebaseDatabase'
+target 'Guidee' do
+    pod 'Firebase/Core'
+    pod 'Firebase/AdMob'
+    pod 'Firebase/Messaging'
+    pod 'Firebase/Database'
+    pod 'Firebase/Crash'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Storage'
     pod 'AsyncDisplayKit'
     pod 'pop'
     pod 'youtube-ios-player-helper'

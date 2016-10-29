@@ -1,3 +1,5 @@
+import Foundation
+
 public class GuideBaseModel: AnyObject {
     
     public let identifier: String
@@ -7,6 +9,26 @@ public class GuideBaseModel: AnyObject {
     public let eventModels: [GuideEventDetailModel]
     public let annotationModel: GuideAnnotation
     public let userAvatarUrl: String
+    
+    public init(dictionary: NSDictionary) {
+        self.identifier = (dictionary["identifier"] as! NSString) as String
+        self.title = (dictionary["title"] as! NSString) as String
+        self.summary = (dictionary["summary"] as! NSString) as String
+        self.coverImageUrl = (dictionary["coverImageUrl"] as! NSString) as String
+        self.userAvatarUrl = (dictionary["userAvatarUrl"] as! NSString) as String
+        
+        if let detailModels = dictionary["eventModels"] as? NSArray {
+            let models:NSMutableArray = NSMutableArray()
+            for detailModel in detailModels {
+                models.add(GuideEventDetailModel(dictionary: detailModel as! NSDictionary))
+            }
+            self.eventModels = models as NSArray as! [GuideEventDetailModel]
+        } else {
+            self.eventModels = [GuideEventDetailModel]()
+        }
+
+        self.annotationModel = GuideAnnotation(dictionary: dictionary["annotationModel"] as! NSDictionary)
+    }
     
     public init(identifier: String, title: String, summary: String, coverImageUrl: String, userAvatarUrl: String, eventModels: [GuideEventDetailModel], annotationModel: GuideAnnotation) {
         self.identifier = identifier
