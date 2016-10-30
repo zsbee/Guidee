@@ -75,7 +75,6 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     }
     
     public func collectionView(_ collectionView: ASCollectionView, constrainedSizeForNodeAt indexPath: IndexPath) -> ASSizeRange {
-        print("constraintSizeForNode \(indexPath.section)")
         let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right;
         if (indexPath.section == sectionIndexCarouselHeader) {
             return ASSizeRangeMake(CGSize(width: width, height:0), CGSize(width: width, height: 162))
@@ -93,7 +92,6 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
         return {
             () -> ASCellNode in
             
-            print("nodeBlock \(indexPath.section)")
             switch indexPath.section {
                 case self.sectionIndexSummaryHeader:
                     let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Summary", attributes: TextStyles.getHeaderFontAttributes()))
