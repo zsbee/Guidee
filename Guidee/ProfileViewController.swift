@@ -76,7 +76,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
             case self.sectionIndexProfileSummaryHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Profile", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
-                
+            case self.sectionIndexProfileSummary:
+                let node = ProfileCellNode(name: NSAttributedString(string: "Fuszenecker Zsombor", attributes: TextStyles.getEventCellHeaderAttributes()),
+                                           summary: NSAttributedString(string: "Lorem Ipsum Dolor Sit HANDSHAKE_COMPLETE, reason: nw_connection event, should deliver:  Zsombor, Amiens Strike at karkand", attributes: TextStyles.getEventCellSummaryAttributes()),
+                                           avatarUrl: "https://s9.postimg.org/dcvk1ggy7/avatar2.jpg")
+                return node
             case self.sectionIndexJourneysHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My Journeys", attributes: TextStyles.getHeaderFontAttributes()))
                 return node

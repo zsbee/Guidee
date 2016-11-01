@@ -11,6 +11,9 @@
 		1B03A3FE1DC15DD2002AF1F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B03A3FD1DC15DD2002AF1F1 /* GoogleService-Info.plist */; };
 		1B1EF3F91DC4A0B600CF99A4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1EF3F81DC4A0B600CF99A4 /* DataController.swift */; };
 		1B23C9971DBA94A6004783A8 /* ExploreHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */; };
+		1B6665121DC88A7100C13823 /* ProfileCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6665111DC88A7100C13823 /* ProfileCellNode.swift */; };
+		1B6665141DC88FD600C13823 /* JourneyCellContainerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6665131DC88FD600C13823 /* JourneyCellContainerNode.swift */; };
+		1B6665161DC88FF500C13823 /* JourneyCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6665151DC88FF500C13823 /* JourneyCellNode.swift */; };
 		1BBAF9DA1DB6BFFE00379004 /* GuideAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */; };
 		1BBAF9E31DB7FF7D00379004 /* CircleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */; };
 		1BBAF9E51DB8124300379004 /* PinCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9E41DB8124300379004 /* PinCalloutView.swift */; };
@@ -57,6 +60,9 @@
 		1B03A3FD1DC15DD2002AF1F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B1EF3F81DC4A0B600CF99A4 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataController.swift; path = Utilities/DataController.swift; sourceTree = "<group>"; };
 		1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreHeaderView.swift; path = Views/ExploreHeaderView.swift; sourceTree = "<group>"; };
+		1B6665111DC88A7100C13823 /* ProfileCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileCellNode.swift; path = Nodes/ProfileCellNode.swift; sourceTree = "<group>"; };
+		1B6665131DC88FD600C13823 /* JourneyCellContainerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JourneyCellContainerNode.swift; path = Nodes/JourneyCellContainerNode.swift; sourceTree = "<group>"; };
+		1B6665151DC88FF500C13823 /* JourneyCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JourneyCellNode.swift; path = Nodes/JourneyCellNode.swift; sourceTree = "<group>"; };
 		1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideAnnotation.swift; path = Views/GuideAnnotation.swift; sourceTree = "<group>"; };
 		1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleAnnotationView.swift; path = Views/CircleAnnotationView.swift; sourceTree = "<group>"; };
 		1BBAF9E41DB8124300379004 /* PinCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PinCalloutView.swift; path = Views/PinCalloutView.swift; sourceTree = "<group>"; };
@@ -199,6 +205,9 @@
 				1BE288191DB5799B005A0C59 /* GuideHeaderCellNode.swift */,
 				1BE2881B1DB583DF005A0C59 /* EventCellNode.swift */,
 				1BE2881D1DB5853A005A0C59 /* EventSubCellNode.swift */,
+				1B6665111DC88A7100C13823 /* ProfileCellNode.swift */,
+				1B6665131DC88FD600C13823 /* JourneyCellContainerNode.swift */,
+				1B6665151DC88FF500C13823 /* JourneyCellNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -448,9 +457,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B6665121DC88A7100C13823 /* ProfileCellNode.swift in Sources */,
 				1BBAF9DA1DB6BFFE00379004 /* GuideAnnotation.swift in Sources */,
 				1BE287FB1DB3B000005A0C59 /* GuideEventDetailsViewController.swift in Sources */,
 				1BE2880C1DB3E039005A0C59 /* ImageItemNode.swift in Sources */,
+				1B6665161DC88FF500C13823 /* JourneyCellNode.swift in Sources */,
 				1BE288181DB57955005A0C59 /* GuideSummaryNode.swift in Sources */,
 				1BE2881E1DB5853A005A0C59 /* EventSubCellNode.swift in Sources */,
 				1BBAF9E31DB7FF7D00379004 /* CircleAnnotationView.swift in Sources */,
@@ -473,6 +484,7 @@
 				1BE2881C1DB583E0005A0C59 /* EventCellNode.swift in Sources */,
 				1BE287FD1DB3B7E0005A0C59 /* GuideEventHeaderView.swift in Sources */,
 				1BBAF9E51DB8124300379004 /* PinCalloutView.swift in Sources */,
+				1B6665141DC88FD600C13823 /* JourneyCellContainerNode.swift in Sources */,
 				1BE288121DB57078005A0C59 /* GuideBaseModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
