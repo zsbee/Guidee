@@ -31,4 +31,19 @@ class DataController: AnyObject {
                 print(error)
         }
     }
+    
+    public func getCurrentUserInfo(completionBlock: @escaping (GuideBaseModel) -> ()) {
+        self.journeys.observe(.childAdded, with: { (snapshot) in
+            if snapshot.exists() {
+                if let modelDict = snapshot.value as? NSDictionary {
+                    let model = GuideBaseModel(dictionary: modelDict)
+                    completionBlock(model)
+                }
+            } else {
+                print("We do not have values")
+            }
+        }) { (error) in
+            print(error)
+        }
+    }
 }
