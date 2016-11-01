@@ -16,6 +16,7 @@ class ProfileCellNode: ASCellNode {
         
         nameNode.attributedText = name
         nameNode.maximumNumberOfLines = 1
+        nameNode.truncationMode = .byTruncatingTail
         
         summaryTextNode.attributedText = summary
         

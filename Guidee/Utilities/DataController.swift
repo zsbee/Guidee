@@ -57,4 +57,17 @@ class DataController: AnyObject {
             }
         }
     }
+    
+    public func getUsersWithFIRids(idArray: [String], completionBlock: @escaping (UserInfoModel) -> ()) {
+        for idString in idArray {
+            self.users.child(idString).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as! [String: AnyObject]
+                let userInfoModel = UserInfoModel(dictionary: value)
+                completionBlock(userInfoModel)
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

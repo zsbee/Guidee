@@ -78,6 +78,14 @@ class TextStyles: AnyObject {
         return attrs
     }
     
+    internal static func getFollowCellNameAttributes() -> [String:NSObject] {
+        var attrs = [String: NSObject]()
+        attrs[NSForegroundColorAttributeName] = UIColor.black
+        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 18, weight: UIFontWeightHeavy)
+        
+        return attrs
+    }
+    
     internal static func getEventCellSummaryAttributes() -> [String:NSObject] {
         var attrs = [String: NSObject]()
         attrs[NSForegroundColorAttributeName] = UIColor.black

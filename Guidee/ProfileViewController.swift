@@ -1,7 +1,7 @@
 import UIKit
 import AsyncDisplayKit
 
-class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate {
+class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate {
     
     var collectionNode: ASCollectionNode!
     
@@ -10,6 +10,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     var journeyModels: [GuideBaseModel] = [GuideBaseModel]()
     var planModels: [GuideBaseModel] = [GuideBaseModel]()
     var loveModels: [GuideBaseModel] = [GuideBaseModel]()
+    var followModels: [UserInfoModel] = [UserInfoModel]()
 
     // Node Insets
     private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(32, 0, 0, 0)
@@ -46,7 +47,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                 self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexProfileSummary)])
                 }, completion: nil)
             
-            // Fetch Own Journeys of User
+            // Fetch Own Journeys 📝 of User
             DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.journeyModels, completionBlock: { (journeyModel) in
                 self.journeyModels.append(journeyModel)
                 self.collectionNode.view.performBatchUpdates({
@@ -54,7 +55,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                     }, completion: nil)
             })
             
-            // Fetch Plans of User
+            // Fetch Plans ✈️ of User
             DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.planModels, completionBlock: { (journeyModel) in
                 self.planModels.append(journeyModel)
                 self.collectionNode.view.performBatchUpdates({
@@ -69,6 +70,15 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                     self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexLoved)])
                     }, completion: nil)
             })
+            
+            // Fetch follows
+            DataController.sharedInstance.getUsersWithFIRids(idArray: userInfoModel.following, completionBlock: { (followedUsedModel) in
+                self.followModels.append(followedUsedModel)
+                self.collectionNode.view.performBatchUpdates({
+                    self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexFollowing)])
+                    }, completion: nil)
+            })
+            
         }
         
         
@@ -157,6 +167,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
             case self.sectionIndexFollowingHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Following", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
+                
+            case self.sectionIndexFollowing:
+                let node = FollowsContainerCell(models: self.followModels)
+                node.delegate = self
+                return node
+                
             default:
                 return ASCellNode()
             }
@@ -170,6 +186,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.present(vc, animated: true, completion:nil)
     }
     
+    func didTapUser(userInfoModel: UserInfoModel) {
+        print("User Tapped")
+    }
     
 }
 

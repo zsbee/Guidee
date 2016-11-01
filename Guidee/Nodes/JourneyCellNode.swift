@@ -46,3 +46,4 @@ class JourneyCellNode: ASCellNode {
         self.coverImageNode.layer.masksToBounds = true
     }
 }
+    
