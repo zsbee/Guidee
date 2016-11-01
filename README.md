@@ -1,5 +1,5 @@
 # Guidee - In Development
-Social Travel Guide App
+Social Travel Inspiration App
 
 # In progress Video
 
@@ -11,8 +11,8 @@ Social Travel Guide App
 - iOS
 - Swift
 - AsyncDisplayKit
+- Firebase
 
 ## Will be integrated soon:
-- Firebase
 - Google Native Ads (maye admob)
 - Facebook Login
