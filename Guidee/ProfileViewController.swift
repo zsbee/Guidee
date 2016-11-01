@@ -37,21 +37,23 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         
         self.view.addSubnode(collectionNode)
         
-        // Getch Profile
+        // Fetch user Profile
         DataController.sharedInstance.getCurrentUserInfo { (userInfoModel) in
             self.userInfoModel = userInfoModel
             self.collectionNode.view.performBatchUpdates({
                 self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexProfileSummary)])
                 }, completion: nil)
+            
+            // Fetch Journeys of User
+            DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.journeyModels, completionBlock: { (journeyModel) in
+                self.journeyModels.append(journeyModel)
+                self.collectionNode.view.performBatchUpdates({
+                    self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
+                    }, completion: nil)
+            })
         }
         
-        // Fetch Journeys
-        DataController.sharedInstance.getJourneys { (model) in
-            self.journeyModels.append(model)
-            self.collectionNode.view.performBatchUpdates({ 
-                self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
-                }, completion: nil)
-        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,7 +62,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.collectionNode.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 50)
+        self.collectionNode.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: self.view.frame.height - 50)
     }
 
     //MARK - Collection Node

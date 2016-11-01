@@ -44,4 +44,17 @@ class DataController: AnyObject {
             print(error.localizedDescription)
         }
     }
+    
+    public func getJourneysWithFIRids(idArray: [String], completionBlock: @escaping (GuideBaseModel) -> ()) {
+        for idString in idArray {
+            self.journeys.child(idString).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let modelDict = snapshot.value as? NSDictionary {
+                    let model = GuideBaseModel(dictionary: modelDict)
+                    completionBlock(model)
+                }
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
