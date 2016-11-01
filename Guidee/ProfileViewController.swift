@@ -6,8 +6,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     var collectionNode: ASCollectionNode!
     
     // Fetched data
-    var journeyModels: [GuideBaseModel] = [GuideBaseModel]()
     var userInfoModel:UserInfoModel?
+    var journeyModels: [GuideBaseModel] = [GuideBaseModel]()
+    var planModels: [GuideBaseModel] = [GuideBaseModel]()
+    var loveModels: [GuideBaseModel] = [GuideBaseModel]()
 
     // Node Insets
     private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(32, 0, 0, 0)
@@ -44,11 +46,27 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                 self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexProfileSummary)])
                 }, completion: nil)
             
-            // Fetch Journeys of User
+            // Fetch Own Journeys of User
             DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.journeyModels, completionBlock: { (journeyModel) in
                 self.journeyModels.append(journeyModel)
                 self.collectionNode.view.performBatchUpdates({
                     self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
+                    }, completion: nil)
+            })
+            
+            // Fetch Plans of User
+            DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.planModels, completionBlock: { (journeyModel) in
+                self.planModels.append(journeyModel)
+                self.collectionNode.view.performBatchUpdates({
+                    self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexPlans)])
+                    }, completion: nil)
+            })
+            
+            // Fetch ❤️ of User
+            DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.loveModels, completionBlock: { (journeyModel) in
+                self.loveModels.append(journeyModel)
+                self.collectionNode.view.performBatchUpdates({
+                    self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexLoved)])
                     }, completion: nil)
             })
         }
@@ -62,7 +80,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.collectionNode.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: self.view.frame.height - 50)
+        self.collectionNode.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: self.view.frame.height - 50 - 20)
     }
 
     //MARK - Collection Node
@@ -109,23 +127,33 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                     return ASCellNode()
                 }
                 
-            case self.sectionIndexJourneys:
-                let node = JourneyCellContainerNode(models: self.journeyModels)
-                node.delegate = self
-                return node
-            
             case self.sectionIndexJourneysHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My Journeys", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
                 
+            case self.sectionIndexJourneys:
+                let node = JourneyCellContainerNode(models: self.journeyModels)
+                node.delegate = self
+                return node
+
             case self.sectionIndexPlansHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My Plans", attributes: TextStyles.getHeaderFontAttributes()))
+                return node
+                
+            case self.sectionIndexPlans:
+                let node = JourneyCellContainerNode(models: self.planModels)
+                node.delegate = self
                 return node
                 
             case self.sectionIndexLovedHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My ❤️", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             
+            case self.sectionIndexLoved:
+                let node = JourneyCellContainerNode(models: self.loveModels)
+                node.delegate = self
+                return node
+                
             case self.sectionIndexFollowingHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Following", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
