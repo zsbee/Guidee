@@ -128,7 +128,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                 }
                 
             case self.sectionIndexJourneysHeader:
-                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My Journeys", attributes: TextStyles.getHeaderFontAttributes()))
+                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My Journeys 📝", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
                 
             case self.sectionIndexJourneys:
@@ -137,7 +137,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                 return node
 
             case self.sectionIndexPlansHeader:
-                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My Plans", attributes: TextStyles.getHeaderFontAttributes()))
+                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My Plans ✈️", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
                 
             case self.sectionIndexPlans:
