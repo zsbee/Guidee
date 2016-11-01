@@ -9,7 +9,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     var journeyModels: [GuideBaseModel] = [GuideBaseModel]()
     
     // Node Insets
-    private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(64, 0, 0, 0)
+    private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(32, 0, 0, 0)
     private let sectionHeaderInset: UIEdgeInsets = UIEdgeInsetsMake(16, 0, 0, 0)
     private let sectionContentInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 0, 0)
     private let sectionLastCellInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 32, 0)
