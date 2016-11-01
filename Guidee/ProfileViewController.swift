@@ -7,7 +7,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     
     // Fetched data
     var journeyModels: [GuideBaseModel] = [GuideBaseModel]()
-    
+    var userInfoModel:UserInfoModel?
+
     // Node Insets
     private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(32, 0, 0, 0)
     private let sectionHeaderInset: UIEdgeInsets = UIEdgeInsetsMake(16, 0, 0, 0)
@@ -36,7 +37,15 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         
         self.view.addSubnode(collectionNode)
         
-        // Fetch data
+        // Getch Profile
+        DataController.sharedInstance.getCurrentUserInfo { (userInfoModel) in
+            self.userInfoModel = userInfoModel
+            self.collectionNode.view.performBatchUpdates({
+                self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexProfileSummary)])
+                }, completion: nil)
+        }
+        
+        // Fetch Journeys
         DataController.sharedInstance.getJourneys { (model) in
             self.journeyModels.append(model)
             self.collectionNode.view.performBatchUpdates({ 
@@ -88,10 +97,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Profile", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexProfileSummary:
-                let node = ProfileCellNode(name: NSAttributedString(string: "Fuszenecker Zsombor", attributes: TextStyles.getEventCellHeaderAttributes()),
-                                           summary: NSAttributedString(string: "Lorem Ipsum Dolor Sit HANDSHAKE_COMPLETE, reason: nw_connection event, should deliver:  Zsombor, Amiens Strike at karkand", attributes: TextStyles.getEventCellSummaryAttributes()),
-                                           avatarUrl: "https://s9.postimg.org/dcvk1ggy7/avatar2.jpg")
-                return node
+                if let userInfoModel = self.userInfoModel {
+                    let node = ProfileCellNode(name: NSAttributedString(string: userInfoModel.name, attributes: TextStyles.getEventCellHeaderAttributes()),
+                                           summary: NSAttributedString(string: userInfoModel.summary, attributes: TextStyles.getEventCellSummaryAttributes()),
+                                           avatarUrl: userInfoModel.avatarUrl)
+                    return node
+                }
+                else {
+                    return ASCellNode()
+                }
+                
             case self.sectionIndexJourneys:
                 let node = JourneyCellContainerNode(models: self.journeyModels)
                 node.delegate = self
