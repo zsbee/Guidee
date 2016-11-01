@@ -6,7 +6,7 @@ class GuideHeaderCellNode: ASCellNode {
     
     let titleNode: ASTextNode = ASTextNode()
     let coverImageUrl: String
-    let coverImageNode: ASNetworkImageNode = ASNetworkImageNode() //https://postimg.org/image/v4hz35izx/
+    let coverImageNode: ASNetworkImageNode = ASNetworkImageNode()
     
     let avatarUrl: String;
     let avatarSize: CGFloat = 80.0

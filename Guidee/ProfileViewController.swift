@@ -1,9 +1,12 @@
 import UIKit
 import AsyncDisplayKit
 
-class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource {
+class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate {
     
     var collectionNode: ASCollectionNode!
+    
+    // Fetched data
+    var journeyModels: [GuideBaseModel] = [GuideBaseModel]()
     
     // Node Insets
     private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(64, 0, 0, 0)
@@ -32,6 +35,14 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.collectionNode.backgroundColor = UIColor.clear
         
         self.view.addSubnode(collectionNode)
+        
+        // Fetch data
+        DataController.sharedInstance.getJourneys { (model) in
+            self.journeyModels.append(model)
+            self.collectionNode.view.performBatchUpdates({ 
+                self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
+                }, completion: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,7 +51,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        self.collectionNode.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 50)
     }
 
     //MARK - Collection Node
@@ -81,6 +92,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                                            summary: NSAttributedString(string: "Lorem Ipsum Dolor Sit HANDSHAKE_COMPLETE, reason: nw_connection event, should deliver:  Zsombor, Amiens Strike at karkand", attributes: TextStyles.getEventCellSummaryAttributes()),
                                            avatarUrl: "https://s9.postimg.org/dcvk1ggy7/avatar2.jpg")
                 return node
+            case self.sectionIndexJourneys:
+                let node = JourneyCellContainerNode(models: self.journeyModels)
+                node.delegate = self
+                return node
+            
             case self.sectionIndexJourneysHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My Journeys", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
@@ -101,6 +117,14 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
             }
         }
     }
+    
+    func didTapJourney(journeyModel: GuideBaseModel) {
+        let vc = GuideHomeViewController()
+        vc.baseModel = journeyModel
+        
+        self.present(vc, animated: true, completion:nil)
+    }
+    
     
 }
 
