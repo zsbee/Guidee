@@ -6,10 +6,13 @@ class DataController: AnyObject {
     
     private let journeys: FIRDatabaseReference
     private let users: FIRDatabaseReference
+    private let editableJourney: FIRDatabaseReference
+    
     
     private init() {
         self.journeys = root.child("Journeys")
         self.users = root.child("Users")
+        self.editableJourney = root.child("EditableJourney")
     }
     
     static let sharedInstance: DataController = {
@@ -68,6 +71,17 @@ class DataController: AnyObject {
             }) { (error) in
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    public func getEditableJourneyModel(completionBlock: @escaping (GuideBaseModel) -> ()) {
+        self.editableJourney.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let modelDict = snapshot.value as? NSDictionary {
+                let model = GuideBaseModel(dictionary: modelDict)
+                completionBlock(model)
+            }
+        }) { (error) in
+            print(error.localizedDescription)
         }
     }
 }

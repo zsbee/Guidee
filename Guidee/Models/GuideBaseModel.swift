@@ -20,7 +20,9 @@ public class GuideBaseModel: AnyObject {
         if let detailModels = dictionary["eventModels"] as? NSArray {
             let models:NSMutableArray = NSMutableArray()
             for detailModel in detailModels {
-                models.add(GuideEventDetailModel(dictionary: detailModel as! NSDictionary))
+                if let detailDict = detailModel as? NSDictionary {
+                    models.add(GuideEventDetailModel(dictionary: detailDict))
+                }
             }
             self.eventModels = models as NSArray as! [GuideEventDetailModel]
         } else {

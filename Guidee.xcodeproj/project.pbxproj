@@ -17,6 +17,7 @@
 		1B6665181DC8A10400C13823 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6665171DC8A10400C13823 /* UserInfoModel.swift */; };
 		1B6A54C91DC8F6F10072CD83 /* FollowsContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A54C81DC8F6F10072CD83 /* FollowsContainerCell.swift */; };
 		1B6A54CB1DC8F7010072CD83 /* FollowCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A54CA1DC8F7010072CD83 /* FollowCellNode.swift */; };
+		1B79E11C1DCBCDF500460066 /* JourneyEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */; };
 		1BBAF9DA1DB6BFFE00379004 /* GuideAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */; };
 		1BBAF9E31DB7FF7D00379004 /* CircleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */; };
 		1BBAF9E51DB8124300379004 /* PinCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9E41DB8124300379004 /* PinCalloutView.swift */; };
@@ -69,6 +70,7 @@
 		1B6665171DC8A10400C13823 /* UserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfoModel.swift; path = Models/UserInfoModel.swift; sourceTree = "<group>"; };
 		1B6A54C81DC8F6F10072CD83 /* FollowsContainerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowsContainerCell.swift; path = Nodes/FollowsContainerCell.swift; sourceTree = "<group>"; };
 		1B6A54CA1DC8F7010072CD83 /* FollowCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowCellNode.swift; path = Nodes/FollowCellNode.swift; sourceTree = "<group>"; };
+		1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JourneyEditorViewController.swift; sourceTree = "<group>"; };
 		1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideAnnotation.swift; path = Views/GuideAnnotation.swift; sourceTree = "<group>"; };
 		1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleAnnotationView.swift; path = Views/CircleAnnotationView.swift; sourceTree = "<group>"; };
 		1BBAF9E41DB8124300379004 /* PinCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PinCalloutView.swift; path = Views/PinCalloutView.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */,
 				1BE287FA1DB3B000005A0C59 /* GuideEventDetailsViewController.swift */,
 				1BE287DA1DB3A84D005A0C59 /* ProfileViewController.swift */,
+				1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				1B6665161DC88FF500C13823 /* JourneyCellNode.swift in Sources */,
 				1BE288181DB57955005A0C59 /* GuideSummaryNode.swift in Sources */,
 				1BE2881E1DB5853A005A0C59 /* EventSubCellNode.swift in Sources */,
+				1B79E11C1DCBCDF500460066 /* JourneyEditorViewController.swift in Sources */,
 				1BBAF9E31DB7FF7D00379004 /* CircleAnnotationView.swift in Sources */,
 				1B6A54CB1DC8F7010072CD83 /* FollowCellNode.swift in Sources */,
 				1BE288161DB5739F005A0C59 /* GuideHeaderView.swift in Sources */,

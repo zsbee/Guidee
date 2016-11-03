@@ -179,6 +179,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if(indexPath.section == self.sectionIndexJourneysHeader) {
+            let vc = JourneyEditorViewController()            
+            self.present(vc, animated: true, completion:nil)
+        }
+    }
+    
     func didTapJourney(journeyModel: GuideBaseModel) {
         let vc = GuideHomeViewController()
         vc.baseModel = journeyModel
