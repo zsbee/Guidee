@@ -32,7 +32,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         DataController.sharedInstance.getEditableJourneyModel { (baseModel) in
             self.baseModel = baseModel
             self.view.addSubnode(self.collectionNode)
-            self.view.addSubview(headerView)
+            self.view.addSubview(self.headerView)
         }
     }
     
