@@ -23,6 +23,7 @@
 		1BBAF9E51DB8124300379004 /* PinCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9E41DB8124300379004 /* PinCalloutView.swift */; };
 		1BDF50BD1DCFA0950003D566 /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50BC1DCFA0950003D566 /* EditTextViewController.swift */; };
 		1BDF50BF1DCFA1C40003D566 /* EditTextHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50BE1DCFA1C40003D566 /* EditTextHeaderView.swift */; };
+		1BDF50C11DCFACD50003D566 /* JourneyEditorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50C01DCFACD50003D566 /* JourneyEditorHeaderView.swift */; };
 		1BE287D71DB3A84D005A0C59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */; };
 		1BE287D91DB3A84D005A0C59 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */; };
 		1BE287DB1DB3A84D005A0C59 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287DA1DB3A84D005A0C59 /* ProfileViewController.swift */; };
@@ -78,6 +79,7 @@
 		1BBAF9E41DB8124300379004 /* PinCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PinCalloutView.swift; path = Views/PinCalloutView.swift; sourceTree = "<group>"; };
 		1BDF50BC1DCFA0950003D566 /* EditTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
 		1BDF50BE1DCFA1C40003D566 /* EditTextHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextHeaderView.swift; path = Views/EditTextHeaderView.swift; sourceTree = "<group>"; };
+		1BDF50C01DCFACD50003D566 /* JourneyEditorHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JourneyEditorHeaderView.swift; path = Views/JourneyEditorHeaderView.swift; sourceTree = "<group>"; };
 		1BE287D31DB3A84D005A0C59 /* Guidee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guidee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				1BE607EC1DB8335C0084CA9C /* CustomMapView.swift */,
 				1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */,
 				1BDF50BE1DCFA1C40003D566 /* EditTextHeaderView.swift */,
+				1BDF50C01DCFACD50003D566 /* JourneyEditorHeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				1B23C9971DBA94A6004783A8 /* ExploreHeaderView.swift in Sources */,
 				1BE288141DB570FE005A0C59 /* GuideEventDetailModel.swift in Sources */,
 				1BE287D71DB3A84D005A0C59 /* AppDelegate.swift in Sources */,
+				1BDF50C11DCFACD50003D566 /* JourneyEditorHeaderView.swift in Sources */,
 				1B1EF3F91DC4A0B600CF99A4 /* DataController.swift in Sources */,
 				1BE288051DB3D8BD005A0C59 /* GuideEventSummaryTextNode.swift in Sources */,
 				1BDF50BF1DCFA1C40003D566 /* EditTextHeaderView.swift in Sources */,

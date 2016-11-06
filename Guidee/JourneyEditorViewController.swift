@@ -1,9 +1,9 @@
 import UIKit
 import AsyncDisplayKit
 
-class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate {
+class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyEditorHeaderViewDelegate, EventCellNodeDelegate {
     
-    let headerView: GuideHeaderView = GuideHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    let headerView: JourneyEditorHeaderView = JourneyEditorHeaderView()
     public var baseModel: GuideBaseModel!
     var collectionNode: ASCollectionNode!
     
@@ -123,12 +123,12 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     }
     
     // Header
-    func header_closeButtonTapped() {
+    func header_cancelButtonTapped() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func header_heartButtonTapped() {
-        
+    func header_saveButtonTapped() {
+        //
     }
     
     internal func guideEventTapped(model: GuideEventDetailModel) {
