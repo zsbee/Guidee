@@ -31,6 +31,8 @@ class EditTextViewController: UIViewController, EditTextHeaderViewDelegate, UITe
         self.view.addSubview(headerView)
         
         self.view.backgroundColor = UIColor.white
+        
+        self.textView.becomeFirstResponder()
     }
 
     override func viewDidLayoutSubviews() {

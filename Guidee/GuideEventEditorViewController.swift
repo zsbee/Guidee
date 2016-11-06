@@ -2,7 +2,7 @@ import UIKit
 import AsyncDisplayKit
 
 protocol GuideEventEditorViewControllerDelegate {
-    func spotSavedWithModel(immutableModel: GuideEventDetailModel)
+    func spotSavedWithModel(immutableModel: GuideEventDetailModel, spotIndex: Int)
 }
 
 class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderViewDelegate, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, EditTextViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CarouselCellNodeDelegate {
@@ -20,6 +20,7 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
     }
     
     public var delegate: GuideEventEditorViewControllerDelegate?
+    public var spotIndex: Int = 0
     
     private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 16, 0)
     private let sectionHeaderInset: UIEdgeInsets = UIEdgeInsetsMake(16, 0, 0, 0)
@@ -169,7 +170,7 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
     
     // Header
     internal func header_saveButtonTapped() {
-        self.delegate?.spotSavedWithModel(immutableModel: self.mutatedModel!.copy())
+        self.delegate?.spotSavedWithModel(immutableModel: self.mutatedModel!.copy(), spotIndex: self.spotIndex)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -233,7 +234,7 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
             if let imageData = imageData {
                 DataController.sharedInstance.uploadImageToFirebase(imageData: imageData, completionBlock: { (string) in
                     if let urlString = string {
-                        self.mutatedModel?.carouselModels.append(CarouselItemModel(imageURL: urlString, videoId: nil))
+                        self.mutatedModel?.carouselModels.insert(CarouselItemModel(imageURL: urlString, videoId: nil), at: 0)
                         self.reloadItemAtIndex(sectionIndex: self.sectionIndexCarousel)
                     }
                 })

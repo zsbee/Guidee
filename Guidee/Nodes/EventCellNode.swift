@@ -2,7 +2,7 @@ import UIKit
 import AsyncDisplayKit
 
 protocol EventCellNodeDelegate {
-    func guideEventTapped(model: GuideEventDetailModel)
+    func guideEventTapped(model: GuideEventDetailModel, atIndex: Int)
 }
 
 class EventCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource, UICollectionViewDelegateFlowLayout {
@@ -55,7 +55,7 @@ class EventCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate.guideEventTapped(model: self.models[indexPath.row])
+        self.delegate.guideEventTapped(model: self.models[indexPath.row], atIndex:indexPath.row)
     }
     
     override func didLoad() {

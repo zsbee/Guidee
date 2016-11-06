@@ -190,15 +190,23 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         self.reloadItemAtIndex(sectionIndex: sectionIndex)
     }
     
-    internal func guideEventTapped(model: GuideEventDetailModel) {
+    internal func guideEventTapped(model: GuideEventDetailModel, atIndex: Int) {
         let vc = GuideEventEditorViewController()
         vc.mutatedModel = model.mutableObject()
         vc.delegate = self
+        vc.spotIndex = atIndex
+        
         self.present(vc, animated: true, completion:nil)
     }
     
-    internal func spotSavedWithModel(immutableModel: GuideEventDetailModel) {
-        self.mutatedModel.eventModels.append(immutableModel)
+    internal func spotSavedWithModel(immutableModel: GuideEventDetailModel, spotIndex: Int) {
+        if(spotIndex == 0) {
+            self.mutatedModel.eventModels.append(immutableModel)
+        }
+        else {
+            self.mutatedModel.eventModels.remove(at: spotIndex)
+            self.mutatedModel.eventModels.insert(immutableModel, at: spotIndex)
+        }
         
         self.reloadItemAtIndex(sectionIndex: self.sectionIndexDetails)
     }

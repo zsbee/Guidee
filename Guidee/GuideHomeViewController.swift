@@ -121,7 +121,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         
     }
     
-    internal func guideEventTapped(model: GuideEventDetailModel) {
+    internal func guideEventTapped(model: GuideEventDetailModel, atIndex: Int) {
         let vc = GuideEventDetailsViewController()
         vc.model = model
         self.present(vc, animated: true, completion:nil)
