@@ -18,7 +18,7 @@ class GuideHeaderCellNode: ASCellNode {
         super.init()
         
         titleNode.attributedText = attributedText
-        titleNode.maximumNumberOfLines = 3
+        titleNode.maximumNumberOfLines = 2
                 
         self.addSubnode(coverImageNode)
         self.addSubnode(avatarNode)
