@@ -1,7 +1,7 @@
 import UIKit
 import AsyncDisplayKit
 
-class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyEditorHeaderViewDelegate, EventCellNodeDelegate, EditTextViewControllerDelegate {
+class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyEditorHeaderViewDelegate, EventCellNodeDelegate, EditTextViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
    
     let headerView: JourneyEditorHeaderView = JourneyEditorHeaderView()
     var collectionNode: ASCollectionNode!
@@ -115,14 +115,42 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = EditTextViewController()
         vc.delegate = self
+        
         switch indexPath.section {
         case self.sectionIndexSummary:
             let textViewText = (self.baseModel.summary != self.mutatedModel.summary) ? self.mutatedModel.summary : ""
             vc.viewModel = EditTextSetupViewModel(title: "Edit Summary", sectionIndex: self.sectionIndexSummary, placeHolder: "Edit Summary of Guide", text: textViewText)
+            self.present(vc, animated: true, completion:nil)
+
+        case self.sectionIndexHeader:
+            // show actionsheet/alertcontroller
+            let alertController = UIAlertController(title: "Edit header information", message: nil, preferredStyle: .actionSheet)
+            
+            let editTitleAction = UIAlertAction(title: "Edit title", style: .default) { (_) in
+                let textViewText = (self.baseModel.title != self.mutatedModel.title) ? self.mutatedModel.title : ""
+                vc.viewModel = EditTextSetupViewModel(title: "Edit title", sectionIndex: self.sectionIndexHeader, placeHolder: "Edit title of journey", text: textViewText)
+                
+                self.present(vc, animated: true, completion:nil)
+            }
+            let uploadImageAction = UIAlertAction(title: "Upload Cover Image", style: .default) { (_) in
+                let imagePicker = UIImagePickerController()
+                imagePicker.sourceType = .photoLibrary
+                imagePicker.delegate = self
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+            
+            alertController.addAction(editTitleAction)
+            alertController.addAction(uploadImageAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: { 
+                //
+            })
+            return
         default:
             return
         }
-        self.present(vc, animated: true, completion:nil)
     }
     
     // Layout
@@ -143,17 +171,71 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     
     // EditTextVC
     internal func editTextViewController_saveTappedWithString(string: String, sectionIndex: Int) {
-        self.mutatedModel.summary = string
+        switch sectionIndex {
+        case self.sectionIndexSummary:
+            self.mutatedModel.summary = string
+            break
+        case self.sectionIndexHeader:
+            self.mutatedModel.title = string
+            self.checkHeaderState()
+            break
+        default:
+            break
+        }
         
-        self.collectionNode.view.performBatchUpdates({
-            self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: sectionIndex)])
-            }, completion: nil)
+        self.reloadItemAtIndex(sectionIndex: sectionIndex)
     }
     
     internal func guideEventTapped(model: GuideEventDetailModel) {
         let vc = GuideEventDetailsViewController()
         vc.model = model
         self.present(vc, animated: true, completion:nil)
+    }
+    
+    // Image Picker delegate
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true) { 
+            //
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let imageData = UIImageJPEGRepresentation(originalImage, 0.8)
+            if let imageData = imageData {
+                DataController.sharedInstance.uploadImageToFirebase(imageData: imageData, completionBlock: { (string) in
+                    if let urlString = string {
+                        self.mutatedModel.coverImageUrl = urlString
+                        self.checkHeaderState()
+
+                        self.reloadItemAtIndex(sectionIndex: self.sectionIndexHeader)
+                    }
+                })
+            }
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+        
+    }
+
+    func checkHeaderState() {
+        let coverImageModified = self.baseModel.coverImageUrl != self.mutatedModel.coverImageUrl
+        let titleModified = self.baseModel.title != self.mutatedModel.title
+        
+        if (titleModified && coverImageModified) {
+            // Load User avatar
+            DataController.sharedInstance.getCurrentUserInfo(completionBlock: { (userInfoModel) in
+                self.mutatedModel.userAvatarUrl = userInfoModel.avatarUrl
+                
+                self.reloadItemAtIndex(sectionIndex: self.sectionIndexHeader)
+            })
+        }
+    }
+    
+    func reloadItemAtIndex(sectionIndex: Int) {
+        self.collectionNode.view.performBatchUpdates({
+            self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: sectionIndex)])
+            }, completion: nil)
     }
     
 }

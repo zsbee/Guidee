@@ -8,7 +8,6 @@ class DataController: AnyObject {
     private let users: FIRDatabaseReference
     private let editableJourney: FIRDatabaseReference
     
-    
     private init() {
         self.journeys = root.child("Journeys")
         self.users = root.child("Users")
@@ -82,6 +81,24 @@ class DataController: AnyObject {
             }
         }) { (error) in
             print(error.localizedDescription)
+        }
+    }
+    
+    public func uploadImageToFirebase(imageData: Data, completionBlock: @escaping (String?) -> ()) {
+        let uuid = UUID().uuidString
+        let path = "images/\(uuid).jpg"
+        let storageRef = FIRStorage.storage().reference(withPath: path)
+        
+        let uploadMetadata = FIRStorageMetadata()
+        uploadMetadata.contentType = "image/jpeg"
+        
+        storageRef.put(imageData, metadata: uploadMetadata) { (metadata, error) in
+            if(error != nil) {
+                print("Uh oh, error while uploading! \(error?.localizedDescription)")
+            } else {
+                print("yaya, we have everything \(metadata?.downloadURL())")
+                completionBlock(metadata?.downloadURL()?.absoluteString)
+            }
         }
     }
 }
