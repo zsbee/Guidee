@@ -1,0 +1,211 @@
+import UIKit
+import AsyncDisplayKit
+
+class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderViewDelegate, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, EditTextViewControllerDelegate {
+    
+    let headerView: GuideEventEditorHeaderView = GuideEventEditorHeaderView()
+    var collectionNode: ASCollectionNode!
+    
+    var baseModel: GuideEventDetailModel!
+    
+    public var mutatedModel: MutableGuideEventDetailModel? {
+        didSet {
+            self.baseModel = mutatedModel!.copy()
+            headerView.titleLabel.text = self.mutatedModel!.title
+        }
+    }
+    
+    private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 16, 0)
+    private let sectionHeaderInset: UIEdgeInsets = UIEdgeInsetsMake(16, 0, 0, 0)
+    private let sectionContentInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 0, 0)
+    private let sectionLastCellInset: UIEdgeInsets = UIEdgeInsetsMake(16, 0, 32, 0)
+    
+    // Node map
+    private let sectionIndexSummaryHeader: Int = 0
+    private let sectionIndexSummary: Int = 1
+    private let sectionIndexCarouselHeader: Int = 2
+    private let sectionIndexCarousel: Int = 3
+    private let sectionIndexMapHeader: Int = 4
+    private let sectionIndexMap: Int = 5
+    private let sectionIndexAdvert: Int = 6
+    
+    // Fake
+    private let sectionIndexTitle: Int = 66
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.collectionNode = ASCollectionNode(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
+        self.collectionNode.delegate = self
+        self.collectionNode.dataSource = self
+        self.collectionNode.backgroundColor = UIColor.clear
+        
+        headerView.delegate = self
+        
+        self.view.backgroundColor = UIColor.white
+        self.view.addSubview(headerView)
+        self.view.addSubnode(collectionNode)
+    }
+    
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // CollectionNode
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 7
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        switch section {
+        case self.sectionIndexSummaryHeader:
+            return self.sectionFirstCellInset
+        case self.sectionIndexCarouselHeader:
+            return self.sectionHeaderInset
+        case self.sectionIndexCarousel:
+            return self.sectionLastCellInset
+        default:
+            return self.sectionContentInset
+        }
+    }
+    
+    public func collectionView(_ collectionView: ASCollectionView, constrainedSizeForNodeAt indexPath: IndexPath) -> ASSizeRange {
+        let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right;
+        if (indexPath.section == sectionIndexCarouselHeader) {
+            return ASSizeRangeMake(CGSize(width: width, height:0), CGSize(width: width, height: 162))
+        }
+        if (indexPath.section == sectionIndexCarousel) {
+            return ASSizeRangeMake(CGSize(width: collectionView.bounds.width - collectionView.contentInset.left, height:162), CGSize(width: CGFloat.greatestFiniteMagnitude, height: 162))
+        }
+        if (indexPath.section == sectionIndexAdvert) {
+            return ASSizeRangeMake(CGSize(width: collectionView.bounds.width, height:250), CGSize(width: collectionView.bounds.width, height:250))
+        }
+        return ASSizeRangeMake(CGSize(width: width, height:0), CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+    }
+    
+    public func collectionView(_ collectionView: ASCollectionView, nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
+        return {
+            () -> ASCellNode in
+            
+            switch indexPath.section {
+            case self.sectionIndexSummaryHeader:
+                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Summary", attributes: TextStyles.getHeaderFontAttributes()))
+                return node
+            case self.sectionIndexSummary:
+                let node = GuideEventSummaryTextNode(attributedText: NSAttributedString(string: self.mutatedModel!.summary, attributes: TextStyles.getSummaryTextFontAttributes()))
+                return node
+                
+            case self.sectionIndexCarouselHeader:
+                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Images/Videos", attributes: TextStyles.getHeaderFontAttributes()))
+                return node
+            case self.sectionIndexCarousel:
+                let node = CarouselCellNode(models: self.mutatedModel!.carouselModels)
+                return node
+            case self.sectionIndexMapHeader:
+                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Map", attributes: TextStyles.getHeaderFontAttributes()))
+                return node
+            case self.sectionIndexMap:
+                let node = CarouselCellNode(models: self.mutatedModel!.carouselModels)
+                return ASCellNode()
+                
+            case self.sectionIndexAdvert:
+                let node = AdvertNode()
+                node.preferredFrameSize = CGSize(width: 375, height: 250)
+                return ASCellNode()
+            default:
+                return ASCellNode()
+            }
+        }
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = EditTextViewController()
+        vc.delegate = self
+        
+        switch indexPath.section {
+        case self.sectionIndexSummary:
+            let textViewText = (self.baseModel.summary != self.mutatedModel!.summary) ? self.mutatedModel!.summary : ""
+            vc.viewModel = EditTextSetupViewModel(title: "Edit Summary", sectionIndex: self.sectionIndexSummary, placeHolder: "Edit Summary of Spot", text: textViewText)
+            self.present(vc, animated: true, completion:nil)
+            
+        case self.sectionIndexCarousel:
+            // show actionsheet/alertcontroller
+            return
+        default:
+            return
+        }
+    }
+    
+    // Layout
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.headerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 60)
+        self.collectionNode.frame = CGRect(x: 0, y: 60, width: self.view.frame.width, height: self.view.frame.height-60)
+    }
+    
+
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return [.portrait, .portraitUpsideDown]
+    }
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    // Header
+    internal func header_saveButtonTapped() {
+        //
+    }
+    
+    internal func header_cancelButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    internal func header_titleTapped() {
+        let vc = EditTextViewController()
+        vc.delegate = self
+        
+        let textViewText = (self.baseModel.title != self.mutatedModel!.title) ? self.mutatedModel!.title : ""
+        vc.viewModel = EditTextSetupViewModel(title: "Edit title", sectionIndex: self.sectionIndexTitle, placeHolder: "Edit title of spot", text: textViewText)
+        self.present(vc, animated: true, completion:nil)
+    }
+    
+    // EditTextVC
+    internal func editTextViewController_saveTappedWithString(string: String, sectionIndex: Int) {
+        if string.isEmpty {
+            return
+        }
+        
+        switch sectionIndex {
+        case self.sectionIndexSummary:
+            self.mutatedModel!.summary = string
+            break
+        case self.sectionIndexTitle:
+            self.mutatedModel!.title = string
+            self.headerView.titleLabel.text = string
+            break
+        default:
+            break
+        }
+        
+        if(sectionIndex != self.sectionIndexTitle)
+        {
+            self.reloadItemAtIndex(sectionIndex: sectionIndex)
+        }
+    }
+    
+    func reloadItemAtIndex(sectionIndex: Int) {
+        self.collectionNode.view.performBatchUpdates({
+            self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: sectionIndex)])
+            }, completion: nil)
+    }
+    
+}

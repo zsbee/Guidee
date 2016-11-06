@@ -171,6 +171,10 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     
     // EditTextVC
     internal func editTextViewController_saveTappedWithString(string: String, sectionIndex: Int) {
+        if string.isEmpty {
+            return
+        }
+        
         switch sectionIndex {
         case self.sectionIndexSummary:
             self.mutatedModel.summary = string
@@ -187,8 +191,8 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     }
     
     internal func guideEventTapped(model: GuideEventDetailModel) {
-        let vc = GuideEventDetailsViewController()
-        vc.model = model
+        let vc = GuideEventEditorViewController()
+        vc.mutatedModel = model.mutableObject()
         self.present(vc, animated: true, completion:nil)
     }
     

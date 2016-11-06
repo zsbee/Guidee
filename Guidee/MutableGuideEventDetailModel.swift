@@ -1,9 +1,9 @@
 import Foundation
 
-public class GuideEventDetailModel: AnyObject {
-    public let title: String
-    public let summary: String
-    public let carouselModels: [CarouselItemModel]
+public class MutableGuideEventDetailModel: AnyObject {
+    public var title: String
+    public var summary: String
+    public var carouselModels: [CarouselItemModel]
     
     public init(dictionary: NSDictionary) {
         self.title = (dictionary["title"] as! NSString) as String
@@ -32,7 +32,7 @@ public class GuideEventDetailModel: AnyObject {
         self.carouselModels = carouselModels
     }
     
-    public func mutableObject() -> MutableGuideEventDetailModel {
-        return MutableGuideEventDetailModel(title: self.title, summary: self.summary, carouselModels: self.carouselModels)
+    public func copy() -> GuideEventDetailModel {
+        return GuideEventDetailModel(title: self.title, summary: self.summary, carouselModels: self.carouselModels)
     }
 }

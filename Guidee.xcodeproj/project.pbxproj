@@ -26,6 +26,9 @@
 		1BDF50C11DCFACD50003D566 /* JourneyEditorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50C01DCFACD50003D566 /* JourneyEditorHeaderView.swift */; };
 		1BDF50C41DCFAEEB0003D566 /* MutableGuideBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50C31DCFAEEB0003D566 /* MutableGuideBaseModel.swift */; };
 		1BDF50C61DCFB0FA0003D566 /* EditTextSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50C51DCFB0FA0003D566 /* EditTextSetupViewModel.swift */; };
+		1BDF50C81DCFCA080003D566 /* GuideEventEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50C71DCFCA080003D566 /* GuideEventEditorViewController.swift */; };
+		1BDF50CA1DCFCAD50003D566 /* MutableGuideEventDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50C91DCFCAD50003D566 /* MutableGuideEventDetailModel.swift */; };
+		1BDF50CC1DCFCC4B0003D566 /* GuideEventEditorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50CB1DCFCC4B0003D566 /* GuideEventEditorHeaderView.swift */; };
 		1BE287D71DB3A84D005A0C59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */; };
 		1BE287D91DB3A84D005A0C59 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */; };
 		1BE287DB1DB3A84D005A0C59 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287DA1DB3A84D005A0C59 /* ProfileViewController.swift */; };
@@ -84,6 +87,9 @@
 		1BDF50C01DCFACD50003D566 /* JourneyEditorHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JourneyEditorHeaderView.swift; path = Views/JourneyEditorHeaderView.swift; sourceTree = "<group>"; };
 		1BDF50C31DCFAEEB0003D566 /* MutableGuideBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MutableGuideBaseModel.swift; path = Models/MutableGuideBaseModel.swift; sourceTree = "<group>"; };
 		1BDF50C51DCFB0FA0003D566 /* EditTextSetupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextSetupViewModel.swift; path = Models/EditTextSetupViewModel.swift; sourceTree = "<group>"; };
+		1BDF50C71DCFCA080003D566 /* GuideEventEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideEventEditorViewController.swift; sourceTree = "<group>"; };
+		1BDF50C91DCFCAD50003D566 /* MutableGuideEventDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableGuideEventDetailModel.swift; sourceTree = "<group>"; };
+		1BDF50CB1DCFCC4B0003D566 /* GuideEventEditorHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideEventEditorHeaderView.swift; path = Views/GuideEventEditorHeaderView.swift; sourceTree = "<group>"; };
 		1BE287D31DB3A84D005A0C59 /* Guidee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guidee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
@@ -190,10 +196,11 @@
 		1BE287F81DB3AFBF005A0C59 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1BE2880F1DB56DC3005A0C59 /* GuideHomeViewController.swift */,
 				1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */,
 				1BE287FA1DB3B000005A0C59 /* GuideEventDetailsViewController.swift */,
+				1BDF50C71DCFCA080003D566 /* GuideEventEditorViewController.swift */,
 				1BE287DA1DB3A84D005A0C59 /* ProfileViewController.swift */,
+				1BE2880F1DB56DC3005A0C59 /* GuideHomeViewController.swift */,
 				1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */,
 				1BDF50BC1DCFA0950003D566 /* EditTextViewController.swift */,
 			);
@@ -211,6 +218,7 @@
 				1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */,
 				1BDF50BE1DCFA1C40003D566 /* EditTextHeaderView.swift */,
 				1BDF50C01DCFACD50003D566 /* JourneyEditorHeaderView.swift */,
+				1BDF50CB1DCFCC4B0003D566 /* GuideEventEditorHeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -250,10 +258,11 @@
 			children = (
 				1BE288091DB3DBA1005A0C59 /* CarouselItemModel.swift */,
 				1BE288111DB57078005A0C59 /* GuideBaseModel.swift */,
+				1BDF50C31DCFAEEB0003D566 /* MutableGuideBaseModel.swift */,
 				1BE288131DB570FE005A0C59 /* GuideEventDetailModel.swift */,
+				1BDF50C91DCFCAD50003D566 /* MutableGuideEventDetailModel.swift */,
 				1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */,
 				1B6665171DC8A10400C13823 /* UserInfoModel.swift */,
-				1BDF50C31DCFAEEB0003D566 /* MutableGuideBaseModel.swift */,
 				1BDF50C51DCFB0FA0003D566 /* EditTextSetupViewModel.swift */,
 			);
 			name = Models;
@@ -495,8 +504,10 @@
 				1BBAF9E31DB7FF7D00379004 /* CircleAnnotationView.swift in Sources */,
 				1B6A54CB1DC8F7010072CD83 /* FollowCellNode.swift in Sources */,
 				1BE288161DB5739F005A0C59 /* GuideHeaderView.swift in Sources */,
+				1BDF50CC1DCFCC4B0003D566 /* GuideEventEditorHeaderView.swift in Sources */,
 				1BDF50C61DCFB0FA0003D566 /* EditTextSetupViewModel.swift in Sources */,
 				1BE287DB1DB3A84D005A0C59 /* ProfileViewController.swift in Sources */,
+				1BDF50C81DCFCA080003D566 /* GuideEventEditorViewController.swift in Sources */,
 				1B23C9971DBA94A6004783A8 /* ExploreHeaderView.swift in Sources */,
 				1BE288141DB570FE005A0C59 /* GuideEventDetailModel.swift in Sources */,
 				1BE287D71DB3A84D005A0C59 /* AppDelegate.swift in Sources */,
@@ -522,6 +533,7 @@
 				1BBAF9E51DB8124300379004 /* PinCalloutView.swift in Sources */,
 				1B6665141DC88FD600C13823 /* JourneyCellContainerNode.swift in Sources */,
 				1BE288121DB57078005A0C59 /* GuideBaseModel.swift in Sources */,
+				1BDF50CA1DCFCAD50003D566 /* MutableGuideEventDetailModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
