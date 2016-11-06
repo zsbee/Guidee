@@ -1,7 +1,7 @@
 import UIKit
 import AsyncDisplayKit
 
-class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderViewDelegate, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, EditTextViewControllerDelegate {
+class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderViewDelegate, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, EditTextViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CarouselCellNodeDelegate {
     
     let headerView: GuideEventEditorHeaderView = GuideEventEditorHeaderView()
     var collectionNode: ASCollectionNode!
@@ -108,12 +108,13 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
                 return node
             case self.sectionIndexCarousel:
                 let node = CarouselCellNode(models: self.mutatedModel!.carouselModels)
+                node.delegate = self
                 return node
             case self.sectionIndexMapHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Map", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexMap:
-                let node = CarouselCellNode(models: self.mutatedModel!.carouselModels)
+                
                 return ASCellNode()
                 
             case self.sectionIndexAdvert:
@@ -137,7 +138,7 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
             self.present(vc, animated: true, completion:nil)
             
         case self.sectionIndexCarousel:
-            // show actionsheet/alertcontroller
+            
             return
         default:
             return
@@ -192,6 +193,10 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
             self.mutatedModel!.title = string
             self.headerView.titleLabel.text = string
             break
+        case self.sectionIndexCarousel:
+
+
+            return
         default:
             break
         }
@@ -208,4 +213,35 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
             }, completion: nil)
     }
     
+    // Image Picker delegate
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true) {
+            //
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let imageData = UIImageJPEGRepresentation(originalImage, 0.8)
+            if let imageData = imageData {
+                DataController.sharedInstance.uploadImageToFirebase(imageData: imageData, completionBlock: { (string) in
+                    if let urlString = string {
+                        self.mutatedModel?.carouselModels.append(CarouselItemModel(imageURL: urlString, videoId: nil))
+                        self.reloadItemAtIndex(sectionIndex: self.sectionIndexCarousel)
+                    }
+                })
+            }
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    // Carousel
+    internal func carouselCellSelectedWithIndex(index: Int) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        self.present(imagePicker, animated: true, completion: nil)
+    }
 }

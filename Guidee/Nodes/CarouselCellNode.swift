@@ -2,6 +2,9 @@ import Foundation
 import UIKit
 import AsyncDisplayKit
 
+protocol CarouselCellNodeDelegate {
+    func carouselCellSelectedWithIndex(index: Int)
+}
 
 class CarouselCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -9,6 +12,8 @@ class CarouselCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource
     let collectionNode: ASCollectionNode
     
     let elementSize: CGSize = CGSize(width: 162, height: 162)
+    
+    public var delegate: CarouselCellNodeDelegate?
     
     init(models: [CarouselItemModel]) {
         self.models = models
@@ -47,6 +52,10 @@ class CarouselCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource
             let node = ImageItemNode(model: self.models[indexPath.row])
             return node
         }
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate?.carouselCellSelectedWithIndex(index: indexPath.row)
     }
     
     override func didLoad() {

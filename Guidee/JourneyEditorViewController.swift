@@ -219,7 +219,6 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         }
         
         picker.dismiss(animated: true, completion: nil)
-        
     }
 
     func checkHeaderState() {
