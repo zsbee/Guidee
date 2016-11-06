@@ -1,6 +1,10 @@
 import UIKit
 import AsyncDisplayKit
 
+protocol GuideEventEditorViewControllerDelegate {
+    func spotSavedWithModel(immutableModel: GuideEventDetailModel)
+}
+
 class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderViewDelegate, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, EditTextViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CarouselCellNodeDelegate {
     
     let headerView: GuideEventEditorHeaderView = GuideEventEditorHeaderView()
@@ -14,6 +18,8 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
             headerView.titleLabel.text = self.mutatedModel!.title
         }
     }
+    
+    public var delegate: GuideEventEditorViewControllerDelegate?
     
     private let sectionFirstCellInset: UIEdgeInsets = UIEdgeInsetsMake(8, 0, 16, 0)
     private let sectionHeaderInset: UIEdgeInsets = UIEdgeInsetsMake(16, 0, 0, 0)
@@ -163,7 +169,8 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
     
     // Header
     internal func header_saveButtonTapped() {
-        //
+        self.delegate?.spotSavedWithModel(immutableModel: self.mutatedModel!.copy())
+        self.dismiss(animated: true, completion: nil)
     }
     
     internal func header_cancelButtonTapped() {

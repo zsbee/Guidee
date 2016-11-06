@@ -1,7 +1,7 @@
 import UIKit
 import AsyncDisplayKit
 
-class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyEditorHeaderViewDelegate, EventCellNodeDelegate, EditTextViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyEditorHeaderViewDelegate, EventCellNodeDelegate, EditTextViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GuideEventEditorViewControllerDelegate {
    
     let headerView: JourneyEditorHeaderView = JourneyEditorHeaderView()
     var collectionNode: ASCollectionNode!
@@ -193,8 +193,16 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     internal func guideEventTapped(model: GuideEventDetailModel) {
         let vc = GuideEventEditorViewController()
         vc.mutatedModel = model.mutableObject()
+        vc.delegate = self
         self.present(vc, animated: true, completion:nil)
     }
+    
+    internal func spotSavedWithModel(immutableModel: GuideEventDetailModel) {
+        self.mutatedModel.eventModels.append(immutableModel)
+        
+        self.reloadItemAtIndex(sectionIndex: self.sectionIndexDetails)
+    }
+
     
     // Image Picker delegate
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
