@@ -14,6 +14,7 @@ target 'Guidee' do
     pod 'AsyncDisplayKit'
     pod 'pop'
     pod 'youtube-ios-player-helper'
+    pod 'SAMTextView'
 end
 
 target 'GuideeTests' do

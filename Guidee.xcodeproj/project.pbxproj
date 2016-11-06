@@ -21,6 +21,8 @@
 		1BBAF9DA1DB6BFFE00379004 /* GuideAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */; };
 		1BBAF9E31DB7FF7D00379004 /* CircleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */; };
 		1BBAF9E51DB8124300379004 /* PinCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9E41DB8124300379004 /* PinCalloutView.swift */; };
+		1BDF50BD1DCFA0950003D566 /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50BC1DCFA0950003D566 /* EditTextViewController.swift */; };
+		1BDF50BF1DCFA1C40003D566 /* EditTextHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50BE1DCFA1C40003D566 /* EditTextHeaderView.swift */; };
 		1BE287D71DB3A84D005A0C59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */; };
 		1BE287D91DB3A84D005A0C59 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */; };
 		1BE287DB1DB3A84D005A0C59 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287DA1DB3A84D005A0C59 /* ProfileViewController.swift */; };
@@ -74,6 +76,8 @@
 		1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideAnnotation.swift; path = Views/GuideAnnotation.swift; sourceTree = "<group>"; };
 		1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleAnnotationView.swift; path = Views/CircleAnnotationView.swift; sourceTree = "<group>"; };
 		1BBAF9E41DB8124300379004 /* PinCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PinCalloutView.swift; path = Views/PinCalloutView.swift; sourceTree = "<group>"; };
+		1BDF50BC1DCFA0950003D566 /* EditTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
+		1BDF50BE1DCFA1C40003D566 /* EditTextHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextHeaderView.swift; path = Views/EditTextHeaderView.swift; sourceTree = "<group>"; };
 		1BE287D31DB3A84D005A0C59 /* Guidee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guidee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 				1BE287FA1DB3B000005A0C59 /* GuideEventDetailsViewController.swift */,
 				1BE287DA1DB3A84D005A0C59 /* ProfileViewController.swift */,
 				1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */,
+				1BDF50BC1DCFA0950003D566 /* EditTextViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 				1BBAF9E41DB8124300379004 /* PinCalloutView.swift */,
 				1BE607EC1DB8335C0084CA9C /* CustomMapView.swift */,
 				1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */,
+				1BDF50BE1DCFA1C40003D566 /* EditTextHeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -486,8 +492,10 @@
 				1BE287D71DB3A84D005A0C59 /* AppDelegate.swift in Sources */,
 				1B1EF3F91DC4A0B600CF99A4 /* DataController.swift in Sources */,
 				1BE288051DB3D8BD005A0C59 /* GuideEventSummaryTextNode.swift in Sources */,
+				1BDF50BF1DCFA1C40003D566 /* EditTextHeaderView.swift in Sources */,
 				1BE288101DB56DC3005A0C59 /* GuideHomeViewController.swift in Sources */,
 				1BE2880A1DB3DBA1005A0C59 /* CarouselItemModel.swift in Sources */,
+				1BDF50BD1DCFA0950003D566 /* EditTextViewController.swift in Sources */,
 				1BE288031DB3D60D005A0C59 /* TextStyles.swift in Sources */,
 				1BE2880E1DB41A96005A0C59 /* AdvertNode.swift in Sources */,
 				1BE288071DB3DB60005A0C59 /* CarouselCellNode.swift in Sources */,
@@ -643,6 +651,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = G7DBMPM3W7;
 				INFOPLIST_FILE = Guidee/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zsombor.Fuszenecker.Guidee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -657,6 +666,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = G7DBMPM3W7;
 				INFOPLIST_FILE = Guidee/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zsombor.Fuszenecker.Guidee;
 				PRODUCT_NAME = "$(TARGET_NAME)";

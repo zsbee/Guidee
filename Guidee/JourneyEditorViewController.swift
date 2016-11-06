@@ -109,6 +109,12 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         return ASSizeRangeMake(CGSize(width: width, height:0), CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
     }
     
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = EditTextViewController()
+        
+        self.present(vc, animated: true, completion:nil)
+    }
+    
     // Layout
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SAMTextView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,7 +47,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2BF1E511B59B878E4EF59075EE53CA87</key>
+		<key>070B067A072725A20417F39CF1899D04</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4170456949C06C8B0E14E774A6D21885</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>687983C0B9F44A238B9A36C416DF64B9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>81CF0B648FD0A2E1F69ACD3587A55B83</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>87E5083FA4FE36F1DA96A3597A2EC405</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,17 +82,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BB9E6AA2A44C8233863F9F12F660DB82</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>DF18369CB6411FCBCF14BBADFE154B7A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F943E0BCE7752E5298F931E5489F8484</key>
 		<dict>
 			<key>primary</key>
 			<true/>
