@@ -1,14 +1,13 @@
 import Foundation
 
-public class GuideBaseModel: AnyObject {
-    
-    public let identifier: String
-    public let title: String
-    public let coverImageUrl: String
-    public let summary: String
-    public let eventModels: [GuideEventDetailModel]
-    public let annotationModel: GuideAnnotation
-    public let userAvatarUrl: String
+public class MutableGuideBaseModel: AnyObject {
+    public var identifier: String
+    public var title: String
+    public var coverImageUrl: String
+    public var summary: String
+    public var eventModels: [GuideEventDetailModel]
+    public var annotationModel: GuideAnnotation
+    public var userAvatarUrl: String
     
     public init(dictionary: NSDictionary) {
         self.identifier = (dictionary["identifier"] as! NSString) as String
@@ -28,7 +27,7 @@ public class GuideBaseModel: AnyObject {
         } else {
             self.eventModels = [GuideEventDetailModel]()
         }
-
+        
         self.annotationModel = GuideAnnotation(dictionary: dictionary["annotationModel"] as! NSDictionary)
     }
     
@@ -41,8 +40,5 @@ public class GuideBaseModel: AnyObject {
         self.annotationModel = annotationModel
         self.userAvatarUrl = userAvatarUrl
     }
-    
-    public func mutableObject() -> MutableGuideBaseModel {
-        return MutableGuideBaseModel(identifier: self.identifier, title: self.title, summary: self.summary, coverImageUrl: self.coverImageUrl, userAvatarUrl: self.userAvatarUrl, eventModels: self.eventModels, annotationModel: self.annotationModel)
-    }
+
 }

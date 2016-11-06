@@ -12,7 +12,7 @@ class EditTextHeaderView: UIView {
     let cancelButton: UIButton
     let saveButton: UIButton
     
-    let titleLabel: UILabel = UILabel()
+    public let titleLabel: UILabel = UILabel()
     
     override init(frame: CGRect) {
         self.cancelButton = UIButton(type: .system)

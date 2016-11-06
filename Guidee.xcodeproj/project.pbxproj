@@ -24,6 +24,8 @@
 		1BDF50BD1DCFA0950003D566 /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50BC1DCFA0950003D566 /* EditTextViewController.swift */; };
 		1BDF50BF1DCFA1C40003D566 /* EditTextHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50BE1DCFA1C40003D566 /* EditTextHeaderView.swift */; };
 		1BDF50C11DCFACD50003D566 /* JourneyEditorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50C01DCFACD50003D566 /* JourneyEditorHeaderView.swift */; };
+		1BDF50C41DCFAEEB0003D566 /* MutableGuideBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50C31DCFAEEB0003D566 /* MutableGuideBaseModel.swift */; };
+		1BDF50C61DCFB0FA0003D566 /* EditTextSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50C51DCFB0FA0003D566 /* EditTextSetupViewModel.swift */; };
 		1BE287D71DB3A84D005A0C59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */; };
 		1BE287D91DB3A84D005A0C59 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */; };
 		1BE287DB1DB3A84D005A0C59 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287DA1DB3A84D005A0C59 /* ProfileViewController.swift */; };
@@ -80,6 +82,8 @@
 		1BDF50BC1DCFA0950003D566 /* EditTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
 		1BDF50BE1DCFA1C40003D566 /* EditTextHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextHeaderView.swift; path = Views/EditTextHeaderView.swift; sourceTree = "<group>"; };
 		1BDF50C01DCFACD50003D566 /* JourneyEditorHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JourneyEditorHeaderView.swift; path = Views/JourneyEditorHeaderView.swift; sourceTree = "<group>"; };
+		1BDF50C31DCFAEEB0003D566 /* MutableGuideBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MutableGuideBaseModel.swift; path = Models/MutableGuideBaseModel.swift; sourceTree = "<group>"; };
+		1BDF50C51DCFB0FA0003D566 /* EditTextSetupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTextSetupViewModel.swift; path = Models/EditTextSetupViewModel.swift; sourceTree = "<group>"; };
 		1BE287D31DB3A84D005A0C59 /* Guidee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guidee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +253,8 @@
 				1BE288131DB570FE005A0C59 /* GuideEventDetailModel.swift */,
 				1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */,
 				1B6665171DC8A10400C13823 /* UserInfoModel.swift */,
+				1BDF50C31DCFAEEB0003D566 /* MutableGuideBaseModel.swift */,
+				1BDF50C51DCFB0FA0003D566 /* EditTextSetupViewModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -489,6 +495,7 @@
 				1BBAF9E31DB7FF7D00379004 /* CircleAnnotationView.swift in Sources */,
 				1B6A54CB1DC8F7010072CD83 /* FollowCellNode.swift in Sources */,
 				1BE288161DB5739F005A0C59 /* GuideHeaderView.swift in Sources */,
+				1BDF50C61DCFB0FA0003D566 /* EditTextSetupViewModel.swift in Sources */,
 				1BE287DB1DB3A84D005A0C59 /* ProfileViewController.swift in Sources */,
 				1B23C9971DBA94A6004783A8 /* ExploreHeaderView.swift in Sources */,
 				1BE288141DB570FE005A0C59 /* GuideEventDetailModel.swift in Sources */,
@@ -505,6 +512,7 @@
 				1BE288071DB3DB60005A0C59 /* CarouselCellNode.swift in Sources */,
 				1BE287D91DB3A84D005A0C59 /* ExploreViewController.swift in Sources */,
 				1BE288001DB3CE2C005A0C59 /* SectionHeaderNode.swift in Sources */,
+				1BDF50C41DCFAEEB0003D566 /* MutableGuideBaseModel.swift in Sources */,
 				1BE607ED1DB8335C0084CA9C /* CustomMapView.swift in Sources */,
 				1BE2881A1DB5799B005A0C59 /* GuideHeaderCellNode.swift in Sources */,
 				1B6665181DC8A10400C13823 /* UserInfoModel.swift in Sources */,

@@ -1,10 +1,9 @@
 import UIKit
 import AsyncDisplayKit
 
-class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyEditorHeaderViewDelegate, EventCellNodeDelegate {
-    
+class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyEditorHeaderViewDelegate, EventCellNodeDelegate, EditTextViewControllerDelegate {
+   
     let headerView: JourneyEditorHeaderView = JourneyEditorHeaderView()
-    public var baseModel: GuideBaseModel!
     var collectionNode: ASCollectionNode!
     
     // Node map
@@ -15,6 +14,9 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     private let sectionIndexDetails = 4
     
     private var eventNodeSize: CGSize!
+    
+    private var baseModel: GuideBaseModel!
+    private var mutatedModel: MutableGuideBaseModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         
         DataController.sharedInstance.getEditableJourneyModel { (baseModel) in
             self.baseModel = baseModel
+            self.mutatedModel = baseModel.mutableObject()
             self.view.addSubnode(self.collectionNode)
             self.view.addSubview(self.headerView)
         }
@@ -78,19 +81,19 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
             () -> ASCellNode in
             switch indexPath.section {
             case self.sectionIndexHeader:
-                let node = GuideHeaderCellNode(coverImageUrl: self.baseModel.coverImageUrl, attributedText: NSAttributedString(string: self.baseModel.title, attributes: TextStyles.getCenteredTitleAttirbutes()), avatarUrl: self.baseModel.userAvatarUrl)
+                let node = GuideHeaderCellNode(coverImageUrl: self.mutatedModel.coverImageUrl, attributedText: NSAttributedString(string: self.mutatedModel.title, attributes: TextStyles.getCenteredTitleAttirbutes()), avatarUrl: self.mutatedModel.userAvatarUrl)
                 return node
             case self.sectionIndexSummaryHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Summary", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexSummary:
-                let node = GuideSummaryTextNode(attributedText: NSAttributedString(string: self.baseModel.summary , attributes: TextStyles.getSummaryTextFontAttributes()))
+                let node = GuideSummaryTextNode(attributedText: NSAttributedString(string: self.mutatedModel.summary , attributes: TextStyles.getSummaryTextFontAttributes()))
                 return node
             case self.sectionIndexDetailsHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Spots", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexDetails:
-                return EventCellNode(models: self.baseModel.eventModels,delegate: self, detailCellSize: self.eventNodeSize)
+                return EventCellNode(models: self.mutatedModel.eventModels,delegate: self, detailCellSize: self.eventNodeSize)
             default:
                 return ASCellNode()
             }
@@ -101,7 +104,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right;
         
         if(indexPath.section == sectionIndexDetails) {
-            let numberOfItems = self.baseModel.eventModels.count
+            let numberOfItems = self.mutatedModel.eventModels.count
             let nodeHeight = CGFloat(numberOfItems) * self.eventNodeSize.height
             return ASSizeRangeMake(CGSize(width: self.eventNodeSize.width, height: nodeHeight), CGSize(width: self.eventNodeSize.width, height: nodeHeight))
         }
@@ -111,7 +114,14 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = EditTextViewController()
-        
+        vc.delegate = self
+        switch indexPath.section {
+        case self.sectionIndexSummary:
+            let textViewText = (self.baseModel.summary != self.mutatedModel.summary) ? self.mutatedModel.summary : ""
+            vc.viewModel = EditTextSetupViewModel(title: "Edit Summary", sectionIndex: self.sectionIndexSummary, placeHolder: "Edit Summary of Guide", text: textViewText)
+        default:
+            return
+        }
         self.present(vc, animated: true, completion:nil)
     }
     
@@ -128,7 +138,16 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     }
     
     func header_saveButtonTapped() {
-        //
+        // 
+    }
+    
+    // EditTextVC
+    internal func editTextViewController_saveTappedWithString(string: String, sectionIndex: Int) {
+        self.mutatedModel.summary = string
+        
+        self.collectionNode.view.performBatchUpdates({
+            self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: sectionIndex)])
+            }, completion: nil)
     }
     
     internal func guideEventTapped(model: GuideEventDetailModel) {

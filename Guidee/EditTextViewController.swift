@@ -1,17 +1,32 @@
 import UIKit
 import SAMTextView
 
+protocol EditTextViewControllerDelegate {
+    func editTextViewController_saveTappedWithString(string: String, sectionIndex: Int)
+}
+
 class EditTextViewController: UIViewController, EditTextHeaderViewDelegate, UITextViewDelegate {
 
     let textView = SAMTextView()
     let headerView = EditTextHeaderView()
+    public var delegate: EditTextViewControllerDelegate?
+    public var viewModel: EditTextSetupViewModel!
+    
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.headerView.delegate = self
-        self.textView.placeholder = "Tap to edit"
-        
+        self.headerView.titleLabel.text = self.viewModel.title
+        self.textView.placeholder = self.viewModel.placeHolder
+        self.textView.text = self.viewModel.text
         self.view.addSubview(textView)
         self.view.addSubview(headerView)
         
@@ -31,7 +46,7 @@ class EditTextViewController: UIViewController, EditTextHeaderViewDelegate, UITe
     }
     
     func header_saveButtonTapped() {
-        print("save me pleasee")
+        self.delegate?.editTextViewController_saveTappedWithString(string: self.textView.text, sectionIndex: self.viewModel.sectionIndex)
         
         self.textView.resignFirstResponder()
         self.dismiss(animated: true, completion: nil)
