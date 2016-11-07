@@ -17,6 +17,7 @@
 		1B6665181DC8A10400C13823 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6665171DC8A10400C13823 /* UserInfoModel.swift */; };
 		1B6A54C91DC8F6F10072CD83 /* FollowsContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A54C81DC8F6F10072CD83 /* FollowsContainerCell.swift */; };
 		1B6A54CB1DC8F7010072CD83 /* FollowCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A54CA1DC8F7010072CD83 /* FollowCellNode.swift */; };
+		1B787B631DD12BD700EE7B42 /* MapCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B787B621DD12BD700EE7B42 /* MapCellNode.swift */; };
 		1B79E11C1DCBCDF500460066 /* JourneyEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */; };
 		1BBAF9DA1DB6BFFE00379004 /* GuideAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */; };
 		1BBAF9E31DB7FF7D00379004 /* CircleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */; };
@@ -78,6 +79,7 @@
 		1B6665171DC8A10400C13823 /* UserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfoModel.swift; path = Models/UserInfoModel.swift; sourceTree = "<group>"; };
 		1B6A54C81DC8F6F10072CD83 /* FollowsContainerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowsContainerCell.swift; path = Nodes/FollowsContainerCell.swift; sourceTree = "<group>"; };
 		1B6A54CA1DC8F7010072CD83 /* FollowCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowCellNode.swift; path = Nodes/FollowCellNode.swift; sourceTree = "<group>"; };
+		1B787B621DD12BD700EE7B42 /* MapCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapCellNode.swift; path = Nodes/MapCellNode.swift; sourceTree = "<group>"; };
 		1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JourneyEditorViewController.swift; sourceTree = "<group>"; };
 		1BBAF9D91DB6BFFE00379004 /* GuideAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideAnnotation.swift; path = Views/GuideAnnotation.swift; sourceTree = "<group>"; };
 		1BBAF9E21DB7FF7D00379004 /* CircleAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleAnnotationView.swift; path = Views/CircleAnnotationView.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				1B6665151DC88FF500C13823 /* JourneyCellNode.swift */,
 				1B6A54C81DC8F6F10072CD83 /* FollowsContainerCell.swift */,
 				1B6A54CA1DC8F7010072CD83 /* FollowCellNode.swift */,
+				1B787B621DD12BD700EE7B42 /* MapCellNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				1B6665181DC8A10400C13823 /* UserInfoModel.swift in Sources */,
 				1BE2881C1DB583E0005A0C59 /* EventCellNode.swift in Sources */,
 				1B6A54C91DC8F6F10072CD83 /* FollowsContainerCell.swift in Sources */,
+				1B787B631DD12BD700EE7B42 /* MapCellNode.swift in Sources */,
 				1BE287FD1DB3B7E0005A0C59 /* GuideEventHeaderView.swift in Sources */,
 				1BBAF9E51DB8124300379004 /* PinCalloutView.swift in Sources */,
 				1B6665141DC88FD600C13823 /* JourneyCellContainerNode.swift in Sources */,

@@ -1,7 +1,7 @@
 import UIKit
 import AsyncDisplayKit
 
-class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyEditorHeaderViewDelegate, EventCellNodeDelegate, EditTextViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GuideEventEditorViewControllerDelegate {
+class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyEditorHeaderViewDelegate, EventCellNodeDelegate, EditTextViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GuideEventEditorViewControllerDelegate, MapCellNodeDelegate {
    
     let headerView: JourneyEditorHeaderView = JourneyEditorHeaderView()
     var collectionNode: ASCollectionNode!
@@ -12,6 +12,8 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     private let sectionIndexSummary: Int = 2
     private let sectionIndexDetailsHeader: Int = 3
     private let sectionIndexDetails = 4
+    private let sectionIndexMapHeader: Int = 5
+    private let sectionIndexMap = 6
     
     private var eventNodeSize: CGSize!
     
@@ -56,7 +58,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         return 1
     }
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -70,6 +72,10 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         case self.sectionIndexDetailsHeader:
             return UIEdgeInsetsMake(16, 0, 0, 0)
         case self.sectionIndexDetails:
+            return UIEdgeInsetsMake(16, 0, 0, 0)
+        case self.sectionIndexMapHeader:
+            return UIEdgeInsetsMake(16, 0, 0, 0)
+        case self.sectionIndexMap:
             return UIEdgeInsetsMake(16, 0, 32, 0)
         default:
             return UIEdgeInsetsMake(0, 0, 0, 0)
@@ -94,6 +100,13 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
                 return node
             case self.sectionIndexDetails:
                 return EventCellNode(models: self.mutatedModel.eventModels,delegate: self, detailCellSize: self.eventNodeSize)
+            case self.sectionIndexMapHeader:
+                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Set location", attributes: TextStyles.getHeaderFontAttributes()))
+                return node
+            case self.sectionIndexMap:
+                let node = MapCellNode()
+                node.delegate = self
+                return node
             default:
                 return ASCellNode()
             }
@@ -166,6 +179,10 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     }
     
     func header_saveButtonTapped() {
+        let uuid = UUID().uuidString
+        self.mutatedModel.identifier = uuid
+        self.mutatedModel.annotationModel.identifier = uuid
+        
         DataController.sharedInstance.saveGuideToFirebase(mutatedGuide: self.mutatedModel)
         
         self.dismiss(animated: true, completion: nil)
@@ -258,6 +275,10 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         self.collectionNode.view.performBatchUpdates({
             self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: sectionIndex)])
             }, completion: nil)
+    }
+    
+    func mapCenterDidUpdateWithCoordinates(coordinates: CLLocationCoordinate2D) {
+        self.mutatedModel.annotationModel.coordinate = coordinates
     }
     
 }

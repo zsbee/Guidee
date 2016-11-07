@@ -2,10 +2,10 @@ import UIKit
 import MapKit
 
 public class GuideAnnotation: NSObject, MKAnnotation {
-    public let identifier: String
+    public var identifier: String
     public var title: String?
     public var subtitle: String?
-    public let coordinate: CLLocationCoordinate2D
+    public var coordinate: CLLocationCoordinate2D
     public let imageUrl: String
     public let likes: Int
     
