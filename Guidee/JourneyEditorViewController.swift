@@ -183,9 +183,29 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         self.mutatedModel.identifier = uuid
         self.mutatedModel.annotationModel.identifier = uuid
         
+        self.mutatedModel.eventModels = self.filteredEventModels()
+        
         DataController.sharedInstance.saveGuideToFirebase(mutatedGuide: self.mutatedModel)
         
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func filteredEventModels() -> [GuideEventDetailModel] {
+        var filteredArr = [GuideEventDetailModel]()
+        
+        var i = 0
+        for event in self.mutatedModel.eventModels {
+            if (i != 0) {
+                var carouselModels = event.carouselModels
+                carouselModels.remove(at: carouselModels.count - 1)
+                let eventModel = GuideEventDetailModel(title: event.title, summary: event.summary, carouselModels: carouselModels)
+                
+                filteredArr.append(eventModel)
+            }
+            i += 1
+        }
+        
+        return filteredArr
     }
     
     // EditTextVC
