@@ -10,7 +10,7 @@ class GuideHeaderView: UIView {
     
     let heartIconButton: UIButton
     let closeButton: UIButton
-    let blurEffect = UIBlurEffect(style: .light)
+    let blurEffect = UIBlurEffect(style: .extraLight)
     let blurEffectView: UIVisualEffectView
     // states
     var isLoved: Bool = false
