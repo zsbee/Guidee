@@ -20,3 +20,4 @@ DerivedData
 .idea
 *.xcbkptlist
 *.DS_Store
+Breakpoints_v2.xcbkptlist
