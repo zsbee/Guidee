@@ -18,4 +18,5 @@ DerivedData
 *.xcuserstate
 *.xcscmblueprint
 .idea
+*.xcbkptlist
 *.DS_Store
