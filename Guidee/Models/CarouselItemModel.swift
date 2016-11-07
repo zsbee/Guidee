@@ -22,6 +22,17 @@ public class CarouselItemModel: AnyObject {
         } else {
             self.type = .youtube
         }
+    }
+    
+    public func objectAsDictionary() -> [String: AnyObject] {
+        var dict = [String:AnyObject]()
         
+        if (imageURL != nil) {
+            dict["imageURL"] = self.imageURL as AnyObject?
+        } else {
+            dict["videoYoutubeId"] = self.videoID as AnyObject?
+        }
+        
+        return dict;
     }
 }

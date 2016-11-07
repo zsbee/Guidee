@@ -44,4 +44,27 @@ public class GuideAnnotation: NSObject, MKAnnotation {
         super.init()
     }
     
+    public func objectAsDictionary() -> [String: AnyObject] {
+        var dict = [String:AnyObject]()
+        
+        dict["identifier"] = self.identifier as AnyObject?
+        dict["imageURL"] = DataController.sharedInstance.getCurrentUserModel()?.avatarUrl as AnyObject?
+        dict["likes"] = 0 as AnyObject?
+        dict["location"] = self.locationDictionary() as AnyObject?
+        dict["subtitle"] = self.subtitle as AnyObject?
+        dict["title"] = self.title as AnyObject?
+            
+        return dict;
+    }
+    
+    private func locationDictionary() -> [String:AnyObject] {
+        var dict = [String:AnyObject]()
+        
+        dict["latitude"] = self.coordinate.latitude as AnyObject?
+        dict["longitude"] = self.coordinate.longitude as AnyObject?
+        
+        return dict
+    }
+
+    
 }

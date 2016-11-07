@@ -35,4 +35,25 @@ public class GuideEventDetailModel: AnyObject {
     public func mutableObject() -> MutableGuideEventDetailModel {
         return MutableGuideEventDetailModel(title: self.title, summary: self.summary, carouselModels: self.carouselModels)
     }
+    
+    public func objectAsDictionary() -> [String: AnyObject] {
+        var dict = [String:AnyObject]()
+        
+        dict["title"] = self.title as AnyObject?
+        dict["summary"] = self.summary as AnyObject?
+        dict["carouselModels"] = self.carouselModelsArray() as AnyObject?
+        
+        return dict;
+    }
+
+    private func carouselModelsArray() -> [[String:AnyObject]] {
+        var array = [[String:AnyObject]]()
+        
+        for carouselModel in self.carouselModels {
+            array.append(carouselModel.objectAsDictionary())
+        }
+        
+        return array
+    }
+    
 }

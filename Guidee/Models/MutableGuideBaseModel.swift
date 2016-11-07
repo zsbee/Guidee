@@ -40,5 +40,28 @@ public class MutableGuideBaseModel: AnyObject {
         self.annotationModel = annotationModel
         self.userAvatarUrl = userAvatarUrl
     }
+    
+    public func objectAsDictionary() -> [String: AnyObject] {
+        var dict = [String:AnyObject]()
+        
+        dict["identifier"] = self.identifier as AnyObject?
+        dict["title"] = self.title as AnyObject?
+        dict["coverImageUrl"] = self.coverImageUrl as AnyObject?
+        dict["summary"] = self.summary as AnyObject?
+        dict["userAvatarUrl"] = self.userAvatarUrl as AnyObject?
+        dict["eventModels"] = self.eventModelsArray() as AnyObject
+        dict["annotationModel"] = self.annotationModel.objectAsDictionary() as AnyObject?
+        
+        return dict;
+    }
 
+    private func eventModelsArray() -> [[String:AnyObject]] {
+        var array = [[String:AnyObject]]()
+        
+        for eventModel in self.eventModels {
+            array.append(eventModel.objectAsDictionary())
+        }
+        
+        return array
+    }
 }

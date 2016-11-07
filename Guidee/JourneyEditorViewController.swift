@@ -166,7 +166,9 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     }
     
     func header_saveButtonTapped() {
-        // 
+        DataController.sharedInstance.saveGuideToFirebase(mutatedGuide: self.mutatedModel)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     // EditTextVC
@@ -181,6 +183,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
             break
         case self.sectionIndexHeader:
             self.mutatedModel.title = string
+            self.mutatedModel.annotationModel.title = string
             self.checkHeaderState()
             break
         default:

@@ -8,6 +8,10 @@ class DataController: AnyObject {
     private let users: FIRDatabaseReference
     private let editableJourney: FIRDatabaseReference
     
+    
+    // cache
+    private var currentUser: UserInfoModel?
+    
     private init() {
         self.journeys = root.child("Journeys")
         self.users = root.child("Users")
@@ -41,6 +45,7 @@ class DataController: AnyObject {
             // Get user value
             let value = snapshot.value as! [String: AnyObject]
             let userInfoModel = UserInfoModel(dictionary: value)
+            self.currentUser = userInfoModel
             completionBlock(userInfoModel)
         }) { (error) in
             print(error.localizedDescription)
@@ -100,5 +105,13 @@ class DataController: AnyObject {
                 completionBlock(metadata?.downloadURL()?.absoluteString)
             }
         }
+    }
+    
+    public func saveGuideToFirebase(mutatedGuide: MutableGuideBaseModel) {
+        self.journeys.childByAutoId().setValue(mutatedGuide.objectAsDictionary())
+    }
+    
+    public func getCurrentUserModel() -> UserInfoModel? {
+        return self.currentUser
     }
 }
