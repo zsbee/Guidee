@@ -1,5 +1,12 @@
 # Guidee, social travel inspiration app
 
+#### What?
+<img src="./Other/IMG_1625.PNG" height="550">
+<img src="./Other/IMG_1629.PNG" height="550">
+<img src="./Other/IMG_1627.PNG" height="550">
+<img src="./Other/IMG_1626.PNG" height="550">
+<img src="./Other/IMG_1628.PNG" height="550">
+
 #### Why?
 ##### TLDR: My travel planning takes too much time, because my travel lust needs more than visiting the common touristic places to get satisfied.
 I realised in the last couple of months that even though I know which region/country I would like to visit in the future, I do not know where I would like to go exactly. Which spots are the one I would like to visit? I need the experience of other people.
@@ -35,6 +42,7 @@ Journeys can be commented on, made private, one could steal highlights from them
 * Profile UI is done, and loading data from Firebase
 * Creating a journey with images and highlights and pinning it on the map -> Live updating the Explore map with the new pin.
 
+
 # Next steps:
 * Creating a Journey should put it into the users journeys
 * Liking a Journey
@@ -42,10 +50,3 @@ Journeys can be commented on, made private, one could steal highlights from them
 * Map for the Highlight pages
 * Creating a Plan
 * Following someone.
-
-#### images
-<img src="./Other/IMG_1625.PNG" height="550">
-<img src="./Other/IMG_1629.PNG" height="550">
-<img src="./Other/IMG_1627.PNG" height="550">
-<img src="./Other/IMG_1626.PNG" height="550">
-<img src="./Other/IMG_1628.PNG" height="550">
