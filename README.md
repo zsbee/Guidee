@@ -1,13 +1,13 @@
 # Guidee, social travel inspiration app
 
-#### What?
+# What?
 <img src="./Other/IMG_1625.PNG" height="550">
 <img src="./Other/IMG_1629.PNG" height="550">
 <img src="./Other/IMG_1627.PNG" height="550">
 <img src="./Other/IMG_1626.PNG" height="550">
 <img src="./Other/IMG_1628.PNG" height="550">
 
-#### Why?
+# Why?
 ##### TLDR: My travel planning takes too much time, because my travel lust needs more than visiting the common touristic places to get satisfied.
 I realised in the last couple of months that even though I know which region/country I would like to visit in the future, I do not know where I would like to go exactly. Which spots are the one I would like to visit? I need the experience of other people.
 
