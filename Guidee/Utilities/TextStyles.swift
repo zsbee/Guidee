@@ -94,6 +94,21 @@ class TextStyles: AnyObject {
         return attrs
     }
     
+    internal static func getActionNormalStateCellAttributes() -> [String:NSObject] {
+        var attrs = [String: NSObject]()
+        attrs[NSForegroundColorAttributeName] = UIColor(red:0.19, green:0.53, blue:0.99, alpha:1.00)
+        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 18, weight: UIFontWeightRegular)
+        
+        return attrs
+    }
+    
+    internal static func getActionHighlightedStateCellAttributes() -> [String:NSObject] {
+        var attrs = [String: NSObject]()
+        attrs[NSForegroundColorAttributeName] = UIColor(red:0.84, green:0.91, blue:1.00, alpha:1.00)
+        attrs[NSFontAttributeName] = UIFont.systemFont(ofSize: 18, weight: UIFontWeightRegular)
+        
+        return attrs
+    }
     
     internal static func getHeartCounterAttributes() -> [String:NSObject] {
         var attrs = [String: NSObject]()
