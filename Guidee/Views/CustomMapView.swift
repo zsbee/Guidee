@@ -25,28 +25,6 @@ class CustomMapView: MKMapView {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-//        let hitView = super.hitTest(point, with: event)
-//        if (hitView == nil)
-//        {
-//            for annotation in self.selectedAnnotations {
-//                if let annotation = annotation as? GuideAnnotation {
-//                    let calloutView = annotation.calloutView
-//                    let pinViewOptional = self.view(for: annotation)
-//                    if let pinView = pinViewOptional {
-//                        let finalHitFrame = CGRect(x: pinView.frame.origin.x + 30, y:pinView.frame.origin.y - 125+30, width:205, height: 125)
-//                        let isInsideCallout = finalHitFrame.contains(point) && calloutView!.alpha == 1
-//                        
-//                        if (isInsideCallout) {
-//                            return calloutView?.hitTest(point, with: event)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return super.hitTest(point, with: event);
-//    }
-//    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.calloutViewFrame = nil
         for annotation in self.selectedAnnotations {
@@ -92,24 +70,4 @@ class CustomMapView: MKMapView {
         
         super.touchesEnded(touches, with: event)
     }
-    
-//    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-//        for annotation in self.selectedAnnotations {
-//            if let annotation = annotation as? GuideAnnotation {
-//                let calloutView = annotation.calloutView
-//                let pinViewOptional = self.view(for: annotation)
-//                if let pinView = pinViewOptional {
-//                    let finalHitFrame = CGRect(x: pinView.frame.origin.x + 30, y:pinView.frame.origin.y - 125+30, width:205, height: 125)
-//                    let isInsideCallout = finalHitFrame.contains(point) && calloutView!.alpha == 1
-//                    
-//                    if (isInsideCallout) {
-//                        return false
-//                    }
-//                }
-//            }
-//            
-//        }
-//        return super.point(inside: point, with: event)
-//    }
-    
 }
