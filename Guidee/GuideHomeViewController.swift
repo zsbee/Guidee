@@ -1,12 +1,13 @@
 import UIKit
 import AsyncDisplayKit
 
-class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate {
-
+class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, CommentsCollectionNodeDelegate {
+    var baseModel: GuideBaseModel!
+    var comments: [CommentModel]!
+    
     let headerView: GuideHeaderView = GuideHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    public var baseModel: GuideBaseModel!
     var collectionNode: ASCollectionNode!
-
+    
     // Node map
     private let sectionIndexHeader: Int = 0
     private let sectionIndexSummaryHeader: Int = 1
@@ -27,11 +28,21 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         
         self.headerView.delegate = self
         
+        self.comments = [CommentModel]()
+        
         eventNodeSize = CGSize(width: self.view.frame.width, height: 92)
         
         self.view.backgroundColor = UIColor.white
         self.view.addSubnode(collectionNode)
         self.view.addSubview(headerView)
+        
+        DataController.sharedInstance.getCommentsForJourneyWithId(journeyID: self.baseModel.firebaseID, completionBlock: { (comments) in
+            self.comments = comments
+            self.collectionNode.view.performBatchUpdates({
+                self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexComments)])
+            }, completion: nil)
+        })
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,7 +108,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Comments", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexComments:
-                let node = ASCellNode()
+                let node = CommentsCollectionNode(models: self.comments, delegate: self, detailCellSize: self.eventNodeSize)
                 return node
             default:
                 return ASCellNode()
@@ -110,6 +121,12 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         
         if(indexPath.section == sectionIndexDetails) {
             let numberOfItems = self.baseModel.eventModels.count
+            let nodeHeight = CGFloat(numberOfItems) * self.eventNodeSize.height
+            return ASSizeRangeMake(CGSize(width: self.eventNodeSize.width, height: nodeHeight), CGSize(width: self.eventNodeSize.width, height: nodeHeight))
+        }
+        
+        if(indexPath.section == sectionIndexComments) {
+            let numberOfItems = self.comments?.count ?? 0
             let nodeHeight = CGFloat(numberOfItems) * self.eventNodeSize.height
             return ASSizeRangeMake(CGSize(width: self.eventNodeSize.width, height: nodeHeight), CGSize(width: self.eventNodeSize.width, height: nodeHeight))
         }

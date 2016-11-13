@@ -12,7 +12,7 @@ class CommentCellNode: ASCellNode {
         self.model = model
         super.init()
         
-        nameTextNode.attributedText = NSAttributedString(string: model.authorName, attributes: TextStyles.getEventCellSummaryAttributes())
+        nameTextNode.attributedText = NSAttributedString(string: model.authorName, attributes: TextStyles.getEventCellHeaderAttributes())
         
         commentTextNode.attributedText = NSAttributedString(string: model.comment, attributes: TextStyles.getEventCellSummaryAttributes())
         commentTextNode.maximumNumberOfLines = 2
@@ -56,7 +56,7 @@ class CommentCellNode: ASCellNode {
     
     override func didLoad() {
         super.didLoad()
-        self.avatarNode.layer.cornerRadius = self.avatarNode.frame.width/2
+        self.avatarNode.layer.cornerRadius = 40
         self.avatarNode.layer.masksToBounds = true
     }
 

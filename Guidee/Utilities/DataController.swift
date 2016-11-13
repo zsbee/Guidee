@@ -7,7 +7,7 @@ class DataController: AnyObject {
     private let journeys: FIRDatabaseReference
     private let users: FIRDatabaseReference
     private let editableJourney: FIRDatabaseReference
-    
+    private let comments: FIRDatabaseReference
     
     // cache
     private var currentUser: UserInfoModel?
@@ -16,6 +16,7 @@ class DataController: AnyObject {
         self.journeys = root.child("Journeys")
         self.users = root.child("Users")
         self.editableJourney = root.child("EditableJourney")
+        self.comments = root.child("Comments")
     }
     
     static let sharedInstance: DataController = {
@@ -47,6 +48,27 @@ class DataController: AnyObject {
             let userInfoModel = UserInfoModel(dictionary: value)
             self.currentUser = userInfoModel
             completionBlock(userInfoModel)
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    public func getCommentsForJourneyWithId(journeyID: String, completionBlock: @escaping ([CommentModel]) -> ()) {
+        self.comments.child(journeyID).observeSingleEvent(of: .value, with: { (snapshot) in
+            if(snapshot.exists()) {
+                let commentsRawArray = snapshot.value as! [[String: AnyObject]]
+                
+                var commentModels = [CommentModel]()
+                for commentDict in commentsRawArray {
+                    let commentModel = CommentModel(dictionary: commentDict)
+                    commentModels.append(commentModel)
+                }
+                
+                completionBlock(commentModels)
+            }
+            else {
+                print("snapshot does not exist")
+            }
         }) { (error) in
             print(error.localizedDescription)
         }
