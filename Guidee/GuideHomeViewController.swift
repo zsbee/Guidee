@@ -13,6 +13,8 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     private let sectionIndexSummary: Int = 2
     private let sectionIndexDetailsHeader: Int = 3
     private let sectionIndexDetails = 4
+    private let sectionIndexCommentsHeader: Int = 5
+    private let sectionIndexComments = 6
     
     private var eventNodeSize: CGSize!
     
@@ -49,7 +51,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         return 1
     }
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -63,6 +65,10 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         case self.sectionIndexDetailsHeader:
             return UIEdgeInsetsMake(16, 0, 0, 0)
         case self.sectionIndexDetails:
+            return UIEdgeInsetsMake(16, 0, 0, 0)
+        case self.sectionIndexCommentsHeader:
+            return UIEdgeInsetsMake(16, 0, 0, 0)
+        case self.sectionIndexComments:
             return UIEdgeInsetsMake(16, 0, 32, 0)
         default:
             return UIEdgeInsetsMake(0, 0, 0, 0)
@@ -83,10 +89,16 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
                 let node = GuideSummaryTextNode(attributedText: NSAttributedString(string: self.baseModel.summary , attributes: TextStyles.getSummaryTextFontAttributes()))
                 return node
             case self.sectionIndexDetailsHeader:
-                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Spots", attributes: TextStyles.getHeaderFontAttributes()))
+                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Highlights", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexDetails:
                 return EventCellNode(models: self.baseModel.eventModels,delegate: self, detailCellSize: self.eventNodeSize)
+            case self.sectionIndexCommentsHeader:
+                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Comments", attributes: TextStyles.getHeaderFontAttributes()))
+                return node
+            case self.sectionIndexComments:
+                let node = ASCellNode()
+                return node
             default:
                 return ASCellNode()
             }
