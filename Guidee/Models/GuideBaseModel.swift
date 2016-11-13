@@ -2,6 +2,7 @@ import Foundation
 
 public class GuideBaseModel: AnyObject {
     
+    public let firebaseID: String
     public let identifier: String
     public let title: String
     public let coverImageUrl: String
@@ -10,7 +11,8 @@ public class GuideBaseModel: AnyObject {
     public let annotationModel: GuideAnnotation
     public let userAvatarUrl: String
     
-    public init(dictionary: NSDictionary) {
+    public init(dictionary: NSDictionary, firID: String) {
+        self.firebaseID = firID
         self.identifier = (dictionary["identifier"] as! NSString) as String
         self.title = (dictionary["title"] as! NSString) as String
         self.summary = (dictionary["summary"] as! NSString) as String
@@ -40,6 +42,7 @@ public class GuideBaseModel: AnyObject {
         self.eventModels = eventModels
         self.annotationModel = annotationModel
         self.userAvatarUrl = userAvatarUrl
+        self.firebaseID = identifier
     }
     
     public func mutableObject() -> MutableGuideBaseModel {

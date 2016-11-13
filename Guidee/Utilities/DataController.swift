@@ -29,7 +29,7 @@ class DataController: AnyObject {
         self.journeys.observe(.childAdded, with: { (snapshot) in
                 if snapshot.exists() {
                     if let modelDict = snapshot.value as? NSDictionary {
-                        let model = GuideBaseModel(dictionary: modelDict)
+                        let model = GuideBaseModel(dictionary: modelDict, firID: snapshot.key)
                         completionBlock(model)
                     }
                 } else {
@@ -56,7 +56,7 @@ class DataController: AnyObject {
         for idString in idArray {
             self.journeys.child(idString).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let modelDict = snapshot.value as? NSDictionary {
-                    let model = GuideBaseModel(dictionary: modelDict)
+                    let model = GuideBaseModel(dictionary: modelDict, firID: snapshot.key)
                     completionBlock(model)
                 }
             }) { (error) in
@@ -81,7 +81,7 @@ class DataController: AnyObject {
     public func getEditableJourneyModel(completionBlock: @escaping (GuideBaseModel) -> ()) {
         self.editableJourney.observeSingleEvent(of: .value, with: { (snapshot) in
             if let modelDict = snapshot.value as? NSDictionary {
-                let model = GuideBaseModel(dictionary: modelDict)
+                let model = GuideBaseModel(dictionary: modelDict, firID: snapshot.key)
                 completionBlock(model)
             }
         }) { (error) in
