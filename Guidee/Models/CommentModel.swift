@@ -10,5 +10,4 @@ class CommentModel: AnyObject {
         self.comment = dictionary["comment"] as! String
         self.avatarUrl = dictionary["avatarURL"] as! String
     }
-    
 }

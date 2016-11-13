@@ -1,9 +1,12 @@
 import UIKit
 import AsyncDisplayKit
 
-class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, CommentsCollectionNodeDelegate {
+class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, CommentsCollectionNodeDelegate, ActionCellNodeDelegate, EditTextViewControllerDelegate {
+
+
     var baseModel: GuideBaseModel!
     var comments: [CommentModel]!
+    var currentUser: UserInfoModel?
     
     let headerView: GuideHeaderView = GuideHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var collectionNode: ASCollectionNode!
@@ -16,6 +19,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     private let sectionIndexDetails = 4
     private let sectionIndexCommentsHeader: Int = 5
     private let sectionIndexComments = 6
+    private let sectionIndexCommentsAction = 7
     
     private var eventNodeSize: CGSize!
     
@@ -36,17 +40,22 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         self.view.addSubnode(collectionNode)
         self.view.addSubview(headerView)
         
-        DataController.sharedInstance.getCommentsForJourneyWithId(journeyID: self.baseModel.firebaseID, completionBlock: { (comments) in
-            self.comments = comments
-            self.collectionNode.view.performBatchUpdates({
-                self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexComments)])
-            }, completion: nil)
+        DataController.sharedInstance.getCurrentUserInfo(completionBlock: { (userModel) in
+            self.currentUser = userModel
         })
-
+        
+        self.loadComments()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    func loadComments() {
+        DataController.sharedInstance.getCommentsForJourneyWithId(journeyID: self.baseModel.firebaseID, completionBlock: { (comments) in
+            self.comments = comments
+            if self.comments.count > 0 {
+                self.collectionNode.view.performBatchUpdates({
+                    self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexComments)])
+                }, completion: nil)
+            }
+        })
     }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -62,7 +71,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         return 1
     }
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 7
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -80,6 +89,8 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         case self.sectionIndexCommentsHeader:
             return UIEdgeInsetsMake(16, 0, 0, 0)
         case self.sectionIndexComments:
+            return UIEdgeInsetsMake(16, 0, 0, 0)
+        case self.sectionIndexCommentsAction:
             return UIEdgeInsetsMake(16, 0, 32, 0)
         default:
             return UIEdgeInsetsMake(0, 0, 0, 0)
@@ -108,7 +119,18 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Comments", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexComments:
-                let node = CommentsCollectionNode(models: self.comments, delegate: self, detailCellSize: self.eventNodeSize)
+                if self.comments.count > 0 {
+                    let node = CommentsCollectionNode(models: self.comments, delegate: self, detailCellSize: self.eventNodeSize)
+                    return node
+                }
+                else {
+                    return ASCellNode()
+                }
+            case self.sectionIndexCommentsAction:
+                let node = ActionCellNode(actionStringNormal: NSAttributedString(string: "Add comment", attributes: TextStyles.getActionNormalStateCellAttributes()),
+                                          actionStringHighlighted: NSAttributedString(string: "Add comment", attributes: TextStyles.getActionHighlightedStateCellAttributes()),
+                                          delegate: self)
+
                 return node
             default:
                 return ASCellNode()
@@ -155,5 +177,23 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         vc.model = model
         self.present(vc, animated: true, completion:nil)
     }
+    
+    
+    // Comments
+    internal func actionButtonTappedWithString(string: String) {
+        let vc = EditTextViewController()
+        vc.delegate = self
+        vc.viewModel = EditTextSetupViewModel(title: "Add comment", sectionIndex: self.sectionIndexCommentsAction, placeHolder: "Write a comment", text: "")
+        self.present(vc, animated: true, completion:nil)
+    }
 
+    func editTextViewController_saveTappedWithString(string: String, sectionIndex: Int) {
+        DataController.sharedInstance.uploadCommentToFirebase(guideFirebaseID: self.baseModel.firebaseID, comment: string)
+//        Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (timer)
+//            in
+//            self.loadComments()
+//        })
+        self.loadComments()
+    }
+    
 }

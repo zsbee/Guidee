@@ -56,15 +56,15 @@ class DataController: AnyObject {
     public func getCommentsForJourneyWithId(journeyID: String, completionBlock: @escaping ([CommentModel]) -> ()) {
         self.comments.child(journeyID).observeSingleEvent(of: .value, with: { (snapshot) in
             if(snapshot.exists()) {
-                let commentsRawArray = snapshot.value as! [[String: AnyObject]]
-                
-                var commentModels = [CommentModel]()
-                for commentDict in commentsRawArray {
-                    let commentModel = CommentModel(dictionary: commentDict)
-                    commentModels.append(commentModel)
+                if let commentsRawDict = snapshot.value as? [String: AnyObject] {
+                    var commentModels = [CommentModel]()
+                    for (key, commentDict) in commentsRawDict {
+                        let commentModel = CommentModel(dictionary: commentDict as! [String: AnyObject])
+                        commentModels.append(commentModel)
+                    }
+                    
+                    completionBlock(commentModels)
                 }
-                
-                completionBlock(commentModels)
             }
             else {
                 print("snapshot does not exist")
@@ -127,6 +127,23 @@ class DataController: AnyObject {
                 completionBlock(metadata?.downloadURL()?.absoluteString)
             }
         }
+    }
+    
+    public func uploadCommentToFirebase(guideFirebaseID: String, comment: String) {
+        guard let currentUser = self.currentUser else {
+            return
+        }
+        
+        let author = currentUser.name
+        let avatar = currentUser.avatarUrl
+        let comment = comment
+        
+        var dict = [String: AnyObject]()
+        dict["author"] = author as AnyObject
+        dict["avatarURL"] = avatar as AnyObject
+        dict["comment"] = comment as AnyObject
+        
+        self.comments.child(guideFirebaseID).childByAutoId().setValue(dict)
     }
     
     public func saveGuideToFirebase(mutatedGuide: MutableGuideBaseModel) {
