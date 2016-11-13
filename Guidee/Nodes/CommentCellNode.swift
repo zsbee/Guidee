@@ -13,6 +13,8 @@ class CommentCellNode: ASCellNode {
         super.init()
         
         nameTextNode.attributedText = NSAttributedString(string: model.authorName, attributes: TextStyles.getEventCellHeaderAttributes())
+        nameTextNode.maximumNumberOfLines = 1
+        nameTextNode.truncationMode = .byTruncatingTail
         
         commentTextNode.attributedText = NSAttributedString(string: model.comment, attributes: TextStyles.getEventCellSummaryAttributes())
         commentTextNode.maximumNumberOfLines = 2

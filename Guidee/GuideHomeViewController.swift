@@ -119,13 +119,8 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Comments", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexComments:
-                if self.comments.count > 0 {
-                    let node = CommentsCollectionNode(models: self.comments, delegate: self, detailCellSize: self.eventNodeSize)
-                    return node
-                }
-                else {
-                    return ASCellNode()
-                }
+                let node = CommentsCollectionNode(models: self.comments, delegate: self, detailCellSize: self.eventNodeSize)
+                return node
             case self.sectionIndexCommentsAction:
                 let node = ActionCellNode(actionStringNormal: NSAttributedString(string: "Add comment", attributes: TextStyles.getActionNormalStateCellAttributes()),
                                           actionStringHighlighted: NSAttributedString(string: "Add comment", attributes: TextStyles.getActionHighlightedStateCellAttributes()),
@@ -148,9 +143,14 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         }
         
         if(indexPath.section == sectionIndexComments) {
-            let numberOfItems = self.comments?.count ?? 0
-            let nodeHeight = CGFloat(numberOfItems) * self.eventNodeSize.height
-            return ASSizeRangeMake(CGSize(width: self.eventNodeSize.width, height: nodeHeight), CGSize(width: self.eventNodeSize.width, height: nodeHeight))
+            
+            if (self.comments!.count > 0) {
+                let numberOfItems = self.comments.count
+                let nodeHeight = CGFloat(numberOfItems) * self.eventNodeSize.height
+                return ASSizeRangeMake(CGSize(width: self.eventNodeSize.width, height: nodeHeight), CGSize(width: self.eventNodeSize.width, height: nodeHeight))
+            } else {
+                return ASSizeRangeMake(CGSize(width: self.eventNodeSize.width, height: 0), CGSize(width: self.eventNodeSize.width, height: CGFloat.greatestFiniteMagnitude))
+            }
         }
         
         return ASSizeRangeMake(CGSize(width: width, height:0), CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
