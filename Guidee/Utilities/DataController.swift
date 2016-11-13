@@ -58,7 +58,7 @@ class DataController: AnyObject {
             if(snapshot.exists()) {
                 if let commentsRawDict = snapshot.value as? [String: AnyObject] {
                     var commentModels = [CommentModel]()
-                    for (key, commentDict) in commentsRawDict {
+                    for (_, commentDict) in commentsRawDict {
                         let commentModel = CommentModel(dictionary: commentDict as! [String: AnyObject])
                         commentModels.append(commentModel)
                     }
@@ -67,7 +67,7 @@ class DataController: AnyObject {
                 }
             }
             else {
-                print("snapshot does not exist")
+                print("No comments for this guide")
             }
         }) { (error) in
             print(error.localizedDescription)
