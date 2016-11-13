@@ -60,12 +60,13 @@ class CircleAnnotationView: MKAnnotationView {
             let springAnimation = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             springAnimation!.toValue = NSValue(cgPoint: CGPoint(x: 1.5, y: 1.5))
             springAnimation!.velocity = NSValue(cgPoint: CGPoint(x: 2, y: 2))
-            springAnimation!.springBounciness = 25
+            springAnimation!.springBounciness = 12
             springAnimation!.springSpeed = 20
             self.circleView.pop_add(springAnimation, forKey: "bounce")
             
             let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
             alphaAnimation!.toValue = 1
+            alphaAnimation!.duration = 0.1
             self.calloutView.pop_add(alphaAnimation, forKey: "alpha")
             //self.calloutView.layer.zPosition = 1000
         }
@@ -73,11 +74,12 @@ class CircleAnnotationView: MKAnnotationView {
             let springAnimation = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             springAnimation!.toValue = NSValue(cgPoint: CGPoint(x: 1.0, y: 1.0))
             springAnimation!.velocity = NSValue(cgPoint: CGPoint(x: 2, y: 2))
-            springAnimation!.springBounciness = 25
+            springAnimation!.springBounciness = 12
             springAnimation!.springSpeed = 20
             self.circleView.pop_add(springAnimation, forKey: "bounce")
             
             let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+            alphaAnimation!.duration = 0.1
             alphaAnimation!.toValue = 0
             self.calloutView.pop_add(alphaAnimation, forKey: "alpha")
             //self.calloutView.layer.zPosition = 1000
