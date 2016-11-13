@@ -1,15 +1,15 @@
 import Foundation
 import AsyncDisplayKit
 
-public class EventSubCellNode: ASCellNode {
+class EventSubCellNode: ASCellNode {
     let titleTextNode: ASTextNode = ASTextNode()
     let summaryTextNode: ASTextNode = ASTextNode()
     
-    public let model: GuideEventDetailModel
+    let model: GuideEventDetailModel
     let imageNode: ASNetworkImageNode = ASNetworkImageNode()
     let chevronImage: ASImageNode = ASImageNode()
     
-    public init(model: GuideEventDetailModel, attributedTitleText: NSAttributedString, attributedSummaryText: NSAttributedString) {
+    init(model: GuideEventDetailModel, attributedTitleText: NSAttributedString, attributedSummaryText: NSAttributedString) {
         chevronImage.image = UIImage(named: "RightArrow")
         self.model = model
         super.init()
@@ -26,7 +26,7 @@ public class EventSubCellNode: ASCellNode {
         self.addSubnode(chevronImage)
     }
     
-    override public func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+    override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         let spacer = ASLayoutSpec()
         spacer.flexGrow = true
         
@@ -50,7 +50,7 @@ public class EventSubCellNode: ASCellNode {
         return ASInsetLayoutSpec.init(insets: UIEdgeInsets(top: 0, left: 16, bottom: 12, right: 16), child: horizontalStack)
     }
     
-    override public func fetchData() {
+    override func fetchData() {
         super.fetchData()
         if (self.model.carouselModels.count > 0)
         {
@@ -62,7 +62,7 @@ public class EventSubCellNode: ASCellNode {
         }
     }
     
-    override public func didLoad() {
+    override func didLoad() {
         super.didLoad()
         self.imageNode.layer.cornerRadius = 8
         self.imageNode.layer.masksToBounds = true
