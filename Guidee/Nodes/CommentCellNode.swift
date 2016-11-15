@@ -29,7 +29,7 @@ class CommentCellNode: ASCellNode {
         let spacer = ASLayoutSpec()
         spacer.flexGrow = true
         
-        self.avatarNode.preferredFrameSize = CGSize(width: 80, height:80)
+        self.avatarNode.preferredFrameSize = CGSize(width: 60, height:60)
         
         self.commentTextNode.flexShrink = true
         
@@ -42,8 +42,8 @@ class CommentCellNode: ASCellNode {
         
         let horizontalStack: ASStackLayoutSpec = ASStackLayoutSpec(direction: .horizontal,
                                                                    spacing: 8,
-                                                                   justifyContent: .spaceAround,
-                                                                   alignItems: .center,
+                                                                   justifyContent: .start,
+                                                                   alignItems: .start,
                                                                    children: [self.avatarNode, verticalStack])
         
         return ASInsetLayoutSpec.init(insets: UIEdgeInsets(top: 0, left: 16, bottom: 12, right: 16), child: horizontalStack)
@@ -58,7 +58,7 @@ class CommentCellNode: ASCellNode {
     
     override func didLoad() {
         super.didLoad()
-        self.avatarNode.layer.cornerRadius = 40
+        self.avatarNode.layer.cornerRadius = 30
         self.avatarNode.layer.masksToBounds = true
     }
 
