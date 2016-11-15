@@ -17,8 +17,8 @@ class CommentCellNode: ASCellNode {
         nameTextNode.truncationMode = .byTruncatingTail
         
         commentTextNode.attributedText = NSAttributedString(string: model.comment, attributes: TextStyles.getEventCellSummaryAttributes())
-        commentTextNode.maximumNumberOfLines = 2
-        commentTextNode.truncationMode = .byWordWrapping
+        //commentTextNode.maximumNumberOfLines = 2
+        //commentTextNode.truncationMode = .byWordWrapping
         
         self.addSubnode(avatarNode)
         self.addSubnode(nameTextNode)

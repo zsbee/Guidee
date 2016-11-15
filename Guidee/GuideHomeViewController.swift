@@ -1,7 +1,7 @@
 import UIKit
 import AsyncDisplayKit
 
-class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, CommentsCollectionNodeDelegate, ActionCellNodeDelegate, EditTextViewControllerDelegate {
+class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, ActionCellNodeDelegate, EditTextViewControllerDelegate {
 
 
     var baseModel: GuideBaseModel!
@@ -17,9 +17,8 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     private let sectionIndexSummary: Int = 2
     private let sectionIndexDetailsHeader: Int = 3
     private let sectionIndexDetails = 4
-    private let sectionIndexCommentsHeader: Int = 5
-    private let sectionIndexComments = 6
-    private let sectionIndexCommentsAction = 7
+    private let sectionIndexComments: Int = 5
+    private let sectionIndexCommentsAction = 6
     
     private var eventNodeSize: CGSize!
     
@@ -50,10 +49,9 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     func loadComments() {
         DataController.sharedInstance.getCommentsForJourneyWithId(journeyID: self.baseModel.firebaseID, completionBlock: { (comments) in
             self.comments = comments
+
             if self.comments.count > 0 {
-                self.collectionNode.view.performBatchUpdates({
-                    self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexComments)])
-                }, completion: nil)
+                self.collectionNode.view.reloadSections(IndexSet(integer: self.sectionIndexComments))
             }
         })
     }
@@ -68,10 +66,21 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     
     // CollectionView
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        switch section {
+        case self.sectionIndexComments:
+            var numberOfItems = 0
+            if(self.comments.count > 0) {
+                numberOfItems = 1 + self.comments.count // Header + comments
+            } else {
+                numberOfItems = 2 //Header + Placeholder
+            }
+            return numberOfItems
+        default:
+            return 1
+        }
     }
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 8
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -86,8 +95,6 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
             return UIEdgeInsetsMake(16, 0, 0, 0)
         case self.sectionIndexDetails:
             return UIEdgeInsetsMake(16, 0, 0, 0)
-        case self.sectionIndexCommentsHeader:
-            return UIEdgeInsetsMake(16, 0, 0, 0)
         case self.sectionIndexComments:
             return UIEdgeInsetsMake(16, 0, 0, 0)
         case self.sectionIndexCommentsAction:
@@ -98,6 +105,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     }
     
     public func collectionView(_ collectionView: ASCollectionView, nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
+        
         return {
             () -> ASCellNode in
             switch indexPath.section {
@@ -115,11 +123,22 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
                 return node
             case self.sectionIndexDetails:
                 return EventCellNode(models: self.baseModel.eventModels,delegate: self, detailCellSize: self.eventNodeSize)
-            case self.sectionIndexCommentsHeader:
-                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Comments", attributes: TextStyles.getHeaderFontAttributes()))
-                return node
             case self.sectionIndexComments:
-                let node = CommentsCollectionNode(models: self.comments, delegate: self, detailCellSize: self.eventNodeSize)
+                var node: ASCellNode = ASCellNode()
+                if(indexPath.row == 0)
+                {
+                    node = SectionHeaderNode(attributedText: NSAttributedString(string: "Comments", attributes: TextStyles.getHeaderFontAttributes()))
+                }
+                else
+                {
+                    if (self.comments.count > 0) {
+
+                        node = CommentCellNode(model: self.comments[indexPath.row - 1])
+                    }
+                    else {
+                        node = PlaceholderNode()
+                    }
+                }
                 return node
             case self.sectionIndexCommentsAction:
                 let node = ActionCellNode(actionStringNormal: NSAttributedString(string: "Add comment", attributes: TextStyles.getActionNormalStateCellAttributes()),
@@ -142,25 +161,16 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
             return ASSizeRangeMake(CGSize(width: self.eventNodeSize.width, height: nodeHeight), CGSize(width: self.eventNodeSize.width, height: nodeHeight))
         }
         
-        if(indexPath.section == sectionIndexComments) {
-            
-            if (self.comments!.count > 0) {
-                let numberOfItems = self.comments.count
-                let nodeHeight = CGFloat(numberOfItems) * self.eventNodeSize.height
-                return ASSizeRangeMake(CGSize(width: self.eventNodeSize.width, height: nodeHeight), CGSize(width: self.eventNodeSize.width, height: nodeHeight))
-            } else {
-                return ASSizeRangeMake(CGSize(width: self.eventNodeSize.width, height: 0), CGSize(width: self.eventNodeSize.width, height: CGFloat.greatestFiniteMagnitude))
-            }
-        }
-        
-        return ASSizeRangeMake(CGSize(width: width, height:0), CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+        return ASSizeRangeMake(CGSize(width: width, height:0), CGSize(width: width, height: 1000))
     }
     
     // Layout
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.headerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 60)
+        
         self.collectionNode.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        
     }
     
     // Header
@@ -189,10 +199,6 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
 
     func editTextViewController_saveTappedWithString(string: String, sectionIndex: Int) {
         DataController.sharedInstance.uploadCommentToFirebase(guideFirebaseID: self.baseModel.firebaseID, comment: string)
-//        Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (timer)
-//            in
-//            self.loadComments()
-//        })
         self.loadComments()
     }
     
