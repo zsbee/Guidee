@@ -2,7 +2,7 @@ import UIKit
 import MapKit
 import Firebase
 
-class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewDelegate {    
+class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewDelegate, ExploreheaderViewDelegate {
     var mapView: CustomMapView!
     var allGuides: [GuideBaseModel]! = [GuideBaseModel]()
     
@@ -16,6 +16,8 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
             self.allGuides.append(model)
             self.mapView.addAnnotation(model.annotationModel)
         }
+        
+        self.headerView.delegate = self
         
         self.mapView = CustomMapView(customDelegate: self)
         mapView.delegate = self
@@ -92,6 +94,11 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
         }
         
         return nil
+    }
+    
+    func addButtonDidTap() {
+        let vc = JourneyEditorViewController()
+        self.present(vc, animated: true, completion:nil)
     }
 }
 

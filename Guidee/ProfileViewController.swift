@@ -5,6 +5,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     
     var collectionNode: ASCollectionNode!
     
+    let addButton: UIButton = UIButton()
+    
     // Fetched data
     var userInfoModel:UserInfoModel?
     var journeyModels: [GuideBaseModel] = [GuideBaseModel]()
@@ -39,6 +41,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.collectionNode.backgroundColor = UIColor.clear
         
         self.view.addSubnode(collectionNode)
+        
+        self.addButton.setImage(UIImage(named:"addIcon"), for: .normal)
+        self.addButton.addTarget(self, action: #selector(self.addButtonTapped), for: .touchUpInside)
+        
+        self.view.addSubview(addButton)
         
         // Fetch user Profile
         DataController.sharedInstance.getCurrentUserInfo { (userInfoModel) in
@@ -91,6 +98,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.collectionNode.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: self.view.frame.height - 49 - 20)
+        
+        self.addButton.frame = CGRect(x: self.view.frame.width - 32 - 8,
+                                      y: 20 + 32 - 12,
+                                      width: 24,
+                                      height: 24)
     }
 
     //MARK - Collection Node
@@ -181,9 +193,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if(indexPath.section == self.sectionIndexJourneysHeader) {
-            let vc = JourneyEditorViewController()            
-            self.present(vc, animated: true, completion:nil)
+            openEditor()
         }
+    }
+    
+    func openEditor() {
+        let vc = JourneyEditorViewController()
+        self.present(vc, animated: true, completion:nil)
     }
     
     func didTapJourney(journeyModel: GuideBaseModel) {
@@ -195,6 +211,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     
     func didTapUser(userInfoModel: UserInfoModel) {
         print("User Tapped")
+    }
+    
+    func addButtonTapped() {
+        openEditor()
     }
     
 }
