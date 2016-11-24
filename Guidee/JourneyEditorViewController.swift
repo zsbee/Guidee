@@ -20,6 +20,8 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     private var baseModel: GuideBaseModel!
     private var mutatedModel: MutableGuideBaseModel!
     
+    public var mapCenter: CLLocationCoordinate2D!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,7 +106,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Set location", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexMap:
-                let node = MapCellNode()
+                let node = MapCellNode(mapCenterCoordinate: self.mapCenter)
                 node.delegate = self
                 return node
             default:

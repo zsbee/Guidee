@@ -12,11 +12,11 @@ class MapCellNode: ASCellNode, MKMapViewDelegate {
     
     public var delegate: MapCellNodeDelegate?
     
-    override init() {
+    init(mapCenterCoordinate: CLLocationCoordinate2D) {
         super.init()
         
-        let coord = CLLocationCoordinate2DMake(37.7749, -122.4194)
-        self.mapNode.region = MKCoordinateRegionMakeWithDistance(coord, 20000, 20000)
+        self.mapNode.region = MKCoordinateRegionMakeWithDistance(mapCenterCoordinate, 2000000, 2000000)
+        
         self.mapNode.mapDelegate = self
         self.mapNode.isLiveMap = true
         

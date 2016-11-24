@@ -98,6 +98,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
     
     func addButtonDidTap() {
         let vc = JourneyEditorViewController()
+        vc.mapCenter = self.mapView.centerCoordinate
         self.present(vc, animated: true, completion:nil)
     }
 }

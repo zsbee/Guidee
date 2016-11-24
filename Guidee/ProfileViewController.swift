@@ -199,6 +199,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     
     func openEditor() {
         let vc = JourneyEditorViewController()
+        vc.mapCenter = CLLocationCoordinate2DMake(35.1809143,-73.6917192)
         self.present(vc, animated: true, completion:nil)
     }
     
