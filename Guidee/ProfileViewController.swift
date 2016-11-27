@@ -1,11 +1,12 @@
 import UIKit
 import AsyncDisplayKit
 
-class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate {
+class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, ActionCellNodeDelegate {
+    
+    let kNewPlanCtaStr: String = "Start a new plan"
+    let kNewJourneyCtaStr: String = "Add new journey"
     
     var collectionNode: ASCollectionNode!
-    
-    let addButton: UIButton = UIButton()
     
     // Fetched data
     var userInfoModel:UserInfoModel?
@@ -41,11 +42,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.collectionNode.backgroundColor = UIColor.clear
         
         self.view.addSubnode(collectionNode)
-        
-        self.addButton.setImage(UIImage(named:"addIcon"), for: .normal)
-        self.addButton.addTarget(self, action: #selector(self.addButtonTapped), for: .touchUpInside)
-        
-        self.view.addSubview(addButton)
         
         // Fetch user Profile
         DataController.sharedInstance.getCurrentUserInfo { (userInfoModel) in
@@ -98,17 +94,19 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.collectionNode.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: self.view.frame.height - 49 - 20)
-        
-        self.addButton.frame = CGRect(x: self.view.frame.width - 32 - 8,
-                                      y: 20 + 32 - 12,
-                                      width: 24,
-                                      height: 24)
     }
 
     //MARK - Collection Node
     // CollectionNode
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        switch section {
+        case self.sectionIndexJourneys:
+            return 2
+        case self.sectionIndexPlans:
+            return 2
+        default:
+            return 1
+        }
     }
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 10
@@ -118,6 +116,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         switch section {
         case self.sectionIndexProfileSummaryHeader:
             return self.sectionFirstCellInset
+        case self.sectionIndexJourneys:
+            return UIEdgeInsetsMake(8, 0, 16, 0);
+        case self.sectionIndexPlans:
+            return UIEdgeInsetsMake(8, 0, 16, 0);
         default:
             return self.sectionContentInset
         }
@@ -154,18 +156,35 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                 return node
                 
             case self.sectionIndexJourneys:
-                let node = JourneyCellContainerNode(models: self.journeyModels)
-                node.delegate = self
-                return node
+                switch indexPath.row {
+                case 0:
+                    let node = JourneyCellContainerNode(models: self.journeyModels)
+                    node.delegate = self
+                    return node
+                default:
+                    let node = ActionCellNode(actionStringNormal: NSAttributedString(string: self.kNewJourneyCtaStr, attributes: TextStyles.getActionNormalStateCellAttributes()),
+                                              actionStringHighlighted: NSAttributedString(string: self.kNewJourneyCtaStr, attributes: TextStyles.getActionHighlightedStateCellAttributes()),
+                                              delegate: self)
+                    return node
+                }
 
             case self.sectionIndexPlansHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My Plans ✈️", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
                 
             case self.sectionIndexPlans:
-                let node = JourneyCellContainerNode(models: self.planModels)
-                node.delegate = self
-                return node
+                switch indexPath.row {
+                case 0:
+                    let node = JourneyCellContainerNode(models: self.planModels)
+                    node.delegate = self
+                    return node
+                default:
+                    let node = ActionCellNode(actionStringNormal: NSAttributedString(string: self.kNewPlanCtaStr, attributes: TextStyles.getActionNormalStateCellAttributes()),
+                                              actionStringHighlighted: NSAttributedString(string: self.kNewPlanCtaStr, attributes: TextStyles.getActionHighlightedStateCellAttributes()),
+                                              delegate: self)
+                    return node
+                }
+
                 
             case self.sectionIndexLovedHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My ❤️", attributes: TextStyles.getHeaderFontAttributes()))
@@ -214,8 +233,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         print("User Tapped")
     }
     
-    func addButtonTapped() {
-        openEditor()
+    func actionButtonTappedWithString(string: String) {
+        switch string {
+        case self.kNewPlanCtaStr:
+            print("asasa")
+        case self.kNewJourneyCtaStr:
+            print("bebebe")
+            openEditor()
+        default:
+            print(string)
+        }
     }
     
 }
