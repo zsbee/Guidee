@@ -139,13 +139,4 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
     func header_heartButtonTapped() {
         
     }
-    
-    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
-        return [.portrait, .portraitUpsideDown]
-    }
-   
-    override var shouldAutorotate: Bool {
-        return false
-    }
-    
 }
