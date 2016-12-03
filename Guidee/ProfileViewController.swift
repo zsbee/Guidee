@@ -1,7 +1,7 @@
 import UIKit
 import AsyncDisplayKit
 
-class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, ActionCellNodeDelegate {
+class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, ActionCellNodeDelegate, JourneyEditorViewControllerDelegate {
     
     let kNewPlanCtaStr: String = "Start a new plan"
     let kNewJourneyCtaStr: String = "Add new journey"
@@ -219,7 +219,24 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     func openEditor() {
         let vc = JourneyEditorViewController()
         vc.mapCenter = CLLocationCoordinate2DMake(35.1809143,-73.6917192)
+        vc.delegate = self
         self.present(vc, animated: true, completion:nil)
+    }
+    
+    func didFinishUploadingToDatabase() {
+        self.journeyModels = [GuideBaseModel]()
+        
+        // Update user model
+        DataController.sharedInstance.getCurrentUserInfo { (userInfoModel) in
+            self.userInfoModel = userInfoModel
+            // Fetch Own Journeys 📝 of User
+            DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.journeyModels, completionBlock: { (journeyModel) in
+                self.journeyModels.append(journeyModel)
+                self.collectionNode.view.performBatchUpdates({
+                    self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
+                }, completion: nil)
+            })
+        }
     }
     
     func didTapJourney(journeyModel: GuideBaseModel) {

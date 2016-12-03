@@ -146,11 +146,14 @@ class DataController: AnyObject {
         self.comments.child(guideFirebaseID).childByAutoId().setValue(dict)
     }
     
-    public func saveGuideToFirebase(mutatedGuide: MutableGuideBaseModel) {
+    public func saveGuideToFirebase(mutatedGuide: MutableGuideBaseModel, completionBlock: @escaping () -> ()) {
         self.journeys.childByAutoId().setValue(mutatedGuide.objectAsDictionary(), withCompletionBlock: {(error, ref) in
             let uniqueKey = ref.key
             // append user journeys 
             self.users.child("0").child("journeys").childByAutoId().setValue(uniqueKey)
+            if(completionBlock != nil) {
+                completionBlock()
+            }
         })
         
         

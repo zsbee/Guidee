@@ -1,6 +1,10 @@
 import UIKit
 import AsyncDisplayKit
 
+protocol JourneyEditorViewControllerDelegate {
+    func didFinishUploadingToDatabase()
+}
+
 class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyEditorHeaderViewDelegate, EventCellNodeDelegate, EditTextViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GuideEventEditorViewControllerDelegate, MapCellNodeDelegate {
    
     let headerView: JourneyEditorHeaderView = JourneyEditorHeaderView()
@@ -19,6 +23,8 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     
     private var baseModel: GuideBaseModel!
     private var mutatedModel: MutableGuideBaseModel!
+    
+    public var delegate:JourneyEditorViewControllerDelegate?
     
     public var mapCenter: CLLocationCoordinate2D!
     
@@ -187,7 +193,9 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         
         self.mutatedModel.eventModels = self.filteredEventModels()
         
-        DataController.sharedInstance.saveGuideToFirebase(mutatedGuide: self.mutatedModel)
+        DataController.sharedInstance.saveGuideToFirebase(mutatedGuide: self.mutatedModel, completionBlock: { () in
+            self.delegate?.didFinishUploadingToDatabase()
+        })
         
         self.dismiss(animated: true, completion: nil)
     }
