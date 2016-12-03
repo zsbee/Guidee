@@ -151,9 +151,7 @@ class DataController: AnyObject {
             let uniqueKey = ref.key
             // append user journeys 
             self.users.child("0").child("journeys").childByAutoId().setValue(uniqueKey)
-            if(completionBlock != nil) {
-                completionBlock()
-            }
+            completionBlock()
         })
         
         
