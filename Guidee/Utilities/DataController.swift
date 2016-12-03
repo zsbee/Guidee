@@ -57,8 +57,10 @@ class DataController: AnyObject {
         self.comments.child(journeyID).observeSingleEvent(of: .value, with: { (snapshot) in
             if(snapshot.exists()) {
                 if let commentsRawDict = snapshot.value as? [String: AnyObject] {
+                    let sortedCommentDict = commentsRawDict.sorted(by: { $0.0 > $1.0 })
+                    
                     var commentModels = [CommentModel]()
-                    for (_, commentDict) in commentsRawDict {
+                    for (_, commentDict) in sortedCommentDict {
                         let commentModel = CommentModel(dictionary: commentDict as! [String: AnyObject])
                         commentModels.append(commentModel)
                     }
