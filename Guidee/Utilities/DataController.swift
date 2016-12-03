@@ -147,7 +147,13 @@ class DataController: AnyObject {
     }
     
     public func saveGuideToFirebase(mutatedGuide: MutableGuideBaseModel) {
-        self.journeys.childByAutoId().setValue(mutatedGuide.objectAsDictionary())
+        self.journeys.childByAutoId().setValue(mutatedGuide.objectAsDictionary(), withCompletionBlock: {(error, ref) in
+            let uniqueKey = ref.key
+            // append user journeys 
+            self.users.child("0").child("journeys").childByAutoId().setValue(uniqueKey)
+        })
+        
+        
     }
     
     public func getCurrentUserModel() -> UserInfoModel? {

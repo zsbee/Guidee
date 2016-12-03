@@ -13,9 +13,12 @@ class UserInfoModel: AnyObject {
         self.avatarUrl = dictionary["avatarUrl"] as! String
         
         var journeysFiltered = [String]()
-        for element in dictionary["journeys"] as! [AnyObject] {
-            if let str = element as? String {
-                journeysFiltered.append(str)
+        
+        if let userJourneys = dictionary["journeys"] as? [String: AnyObject] {
+            for (_,element) in userJourneys {
+                if let str = element as? String {
+                    journeysFiltered.append(str)
+                }
             }
         }
         
