@@ -1,9 +1,12 @@
 import Foundation
+import MapKit
 
 public class GuideEventDetailModel: AnyObject {
     public let title: String
     public let summary: String
     public let carouselModels: [CarouselItemModel]
+    public var coordinate: CLLocationCoordinate2D
+
     
     public init(dictionary: NSDictionary) {
         self.title = (dictionary["title"] as! NSString) as String
@@ -28,12 +31,19 @@ public class GuideEventDetailModel: AnyObject {
         else {
             self.carouselModels = [CarouselItemModel]()
         }
+        
+//        let locationDict = (dictionary["location"] as! NSDictionary)
+//        let latitude = (locationDict["latitude"] as! NSNumber) as Double
+//        let longitude = (locationDict["longitude"] as! NSNumber) as Double
+        let coordinates = CLLocationCoordinate2D(latitude: 43, longitude: 17)
+        self.coordinate = coordinates
     }
     
     public init(title: String, summary: String, carouselModels: [CarouselItemModel]) {
         self.title = title
         self.summary = summary
         self.carouselModels = carouselModels
+        self.coordinate = CLLocationCoordinate2D(latitude: 43, longitude: 17)
     }
     
     public func mutableObject() -> MutableGuideEventDetailModel {

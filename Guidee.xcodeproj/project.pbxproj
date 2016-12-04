@@ -12,6 +12,7 @@
 		1B094B061DDBC4E0009E1564 /* PlaceholderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B094B051DDBC4E0009E1564 /* PlaceholderNode.swift */; };
 		1B1EF3F91DC4A0B600CF99A4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1EF3F81DC4A0B600CF99A4 /* DataController.swift */; };
 		1B23C9971DBA94A6004783A8 /* ExploreHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */; };
+		1B5EFB7F1DF42CA100034F57 /* StaticMapCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5EFB7E1DF42CA100034F57 /* StaticMapCellNode.swift */; };
 		1B6665121DC88A7100C13823 /* ProfileCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6665111DC88A7100C13823 /* ProfileCellNode.swift */; };
 		1B6665141DC88FD600C13823 /* JourneyCellContainerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6665131DC88FD600C13823 /* JourneyCellContainerNode.swift */; };
 		1B6665161DC88FF500C13823 /* JourneyCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6665151DC88FF500C13823 /* JourneyCellNode.swift */; };
@@ -78,6 +79,7 @@
 		1B094B051DDBC4E0009E1564 /* PlaceholderNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaceholderNode.swift; path = Nodes/PlaceholderNode.swift; sourceTree = "<group>"; };
 		1B1EF3F81DC4A0B600CF99A4 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataController.swift; path = Utilities/DataController.swift; sourceTree = "<group>"; };
 		1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreHeaderView.swift; path = Views/ExploreHeaderView.swift; sourceTree = "<group>"; };
+		1B5EFB7E1DF42CA100034F57 /* StaticMapCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StaticMapCellNode.swift; path = Nodes/StaticMapCellNode.swift; sourceTree = "<group>"; };
 		1B6665111DC88A7100C13823 /* ProfileCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileCellNode.swift; path = Nodes/ProfileCellNode.swift; sourceTree = "<group>"; };
 		1B6665131DC88FD600C13823 /* JourneyCellContainerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JourneyCellContainerNode.swift; path = Nodes/JourneyCellContainerNode.swift; sourceTree = "<group>"; };
 		1B6665151DC88FF500C13823 /* JourneyCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JourneyCellNode.swift; path = Nodes/JourneyCellNode.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				1B9BDA561DD89A880024635B /* CommentCellNode.swift */,
 				1B9BDA581DD8AE440024635B /* ActionCellNode.swift */,
 				1B094B051DDBC4E0009E1564 /* PlaceholderNode.swift */,
+				1B5EFB7E1DF42CA100034F57 /* StaticMapCellNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				1B6665121DC88A7100C13823 /* ProfileCellNode.swift in Sources */,
 				1BBAF9DA1DB6BFFE00379004 /* GuideAnnotation.swift in Sources */,
 				1BE287FB1DB3B000005A0C59 /* GuideEventDetailsViewController.swift in Sources */,
+				1B5EFB7F1DF42CA100034F57 /* StaticMapCellNode.swift in Sources */,
 				1BE2880C1DB3E039005A0C59 /* ImageItemNode.swift in Sources */,
 				1B6665161DC88FF500C13823 /* JourneyCellNode.swift in Sources */,
 				1B9BDA591DD8AE440024635B /* ActionCellNode.swift in Sources */,
