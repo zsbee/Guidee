@@ -5,9 +5,8 @@ public class GuideEventDetailModel: AnyObject {
     public let title: String
     public let summary: String
     public let carouselModels: [CarouselItemModel]
-    public var coordinate: CLLocationCoordinate2D
+    public var coordinates: CLLocationCoordinate2D
 
-    
     public init(dictionary: NSDictionary) {
         self.title = (dictionary["title"] as! NSString) as String
         self.summary = (dictionary["summary"] as! NSString) as String
@@ -32,22 +31,25 @@ public class GuideEventDetailModel: AnyObject {
             self.carouselModels = [CarouselItemModel]()
         }
         
-//        let locationDict = (dictionary["location"] as! NSDictionary)
-//        let latitude = (locationDict["latitude"] as! NSNumber) as Double
-//        let longitude = (locationDict["longitude"] as! NSNumber) as Double
-        let coordinates = CLLocationCoordinate2D(latitude: 43, longitude: 17)
-        self.coordinate = coordinates
+        if(dictionary["location"] != nil) {
+            let locationDict = (dictionary["location"] as! NSDictionary)
+            let latitude = (locationDict["latitude"] as! NSNumber) as Double
+            let longitude = (locationDict["longitude"] as! NSNumber) as Double
+            self.coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        } else {
+            self.coordinates = CLLocationCoordinate2D(latitude: 43, longitude: 17)
+        }
     }
     
-    public init(title: String, summary: String, carouselModels: [CarouselItemModel]) {
+    public init(title: String, summary: String, carouselModels: [CarouselItemModel], coordinates: CLLocationCoordinate2D) {
         self.title = title
         self.summary = summary
         self.carouselModels = carouselModels
-        self.coordinate = CLLocationCoordinate2D(latitude: 43, longitude: 17)
+        self.coordinates = coordinates
     }
     
     public func mutableObject() -> MutableGuideEventDetailModel {
-        return MutableGuideEventDetailModel(title: self.title, summary: self.summary, carouselModels: self.carouselModels)
+        return MutableGuideEventDetailModel(title: self.title, summary: self.summary, carouselModels: self.carouselModels, coordinates: self.coordinates)
     }
     
     public func objectAsDictionary() -> [String: AnyObject] {

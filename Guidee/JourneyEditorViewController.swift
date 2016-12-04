@@ -208,7 +208,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
             if (i != 0) {
                 var carouselModels = event.carouselModels
                 carouselModels.remove(at: carouselModels.count - 1)
-                let eventModel = GuideEventDetailModel(title: event.title, summary: event.summary, carouselModels: carouselModels)
+                let eventModel = GuideEventDetailModel(title: event.title, summary: event.summary, carouselModels: carouselModels, coordinates: event.coordinates)
                 
                 filteredArr.append(eventModel)
             }
