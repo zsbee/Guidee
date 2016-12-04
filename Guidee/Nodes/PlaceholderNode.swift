@@ -15,7 +15,7 @@ class PlaceholderNode: ASCellNode {
         let insetSpec = ASInsetLayoutSpec()
 
         insetSpec.insets = UIEdgeInsetsMake(0, 16, 0, 16)
-        insetSpec.setChild(self.placeholderTextNode)
+        insetSpec.setChild(self.placeholderTextNode, at: 0)
     
         return insetSpec
     }

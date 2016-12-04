@@ -22,16 +22,16 @@ class FollowCellNode: ASCellNode {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.avatarNode.preferredFrameSize = CGSize(width: avatarSize, height: avatarSize)
-        self.avatarNode.flexGrow = false
+        self.avatarNode.style.preferredSize = CGSize(width: avatarSize, height: avatarSize)
+        self.avatarNode.style.flexGrow = 1
         
         let verticalStack: ASStackLayoutSpec = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .center, children: [self.avatarNode, self.userNameNode])
         
         return verticalStack
     }
     
-    override func fetchData() {
-        super.fetchData()
+    override func didEnterPreloadState() {
+        super.didEnterPreloadState()
         if let avatarUrl = NSURL(string: self.avatarUrl) {
             self.avatarNode.setURL(avatarUrl as URL, resetToDefault: true)
         }

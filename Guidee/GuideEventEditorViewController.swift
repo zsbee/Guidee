@@ -126,8 +126,8 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
                 return node
                 
             case self.sectionIndexAdvert:
-                let node = AdvertNode()
-                node.preferredFrameSize = CGSize(width: 375, height: 250)
+                //let node = AdvertNode()
+                //node.preferredFrameSize = CGSize(width: 375, height: 250)
                 return ASCellNode()
             default:
                 return ASCellNode()

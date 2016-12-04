@@ -28,18 +28,18 @@ class EventSubCellNode: ASCellNode {
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         let spacer = ASLayoutSpec()
-        spacer.flexGrow = true
+        spacer.style.flexGrow = 1
         
         self.imageNode.preferredFrameSize = CGSize(width: 80, height:80)
         
-        self.summaryTextNode.flexShrink = true
+        self.summaryTextNode.style.flexShrink = 1
         
         let verticalStack: ASStackLayoutSpec = ASStackLayoutSpec(direction: .vertical,
                                                                  spacing: 0,
                                                                  justifyContent: .spaceAround,
                                                                  alignItems: .stretch,
                                                                  children: [self.titleTextNode, self.summaryTextNode, spacer])
-        verticalStack.flexShrink = true
+        verticalStack.style.flexShrink = 1
 
         let horizontalStack: ASStackLayoutSpec = ASStackLayoutSpec(direction: .horizontal,
                                                                  spacing: 8,
@@ -50,8 +50,8 @@ class EventSubCellNode: ASCellNode {
         return ASInsetLayoutSpec.init(insets: UIEdgeInsets(top: 0, left: 16, bottom: 12, right: 16), child: horizontalStack)
     }
     
-    override func fetchData() {
-        super.fetchData()
+    override func didEnterPreloadState() {
+        super.didEnterPreloadState()
         if (self.model.carouselModels.count > 0)
         {
             if let imageUrlString = self.model.carouselModels[0].imageURL {

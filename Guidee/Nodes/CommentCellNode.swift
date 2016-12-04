@@ -27,18 +27,18 @@ class CommentCellNode: ASCellNode {
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         let spacer = ASLayoutSpec()
-        spacer.flexGrow = true
+        spacer.style.flexGrow = 1
         
-        self.avatarNode.preferredFrameSize = CGSize(width: 60, height:60)
+        self.avatarNode.style.preferredSize = CGSize(width: 60, height:60)
         
-        self.commentTextNode.flexShrink = true
+        self.commentTextNode.style.flexShrink = 1
         
         let verticalStack: ASStackLayoutSpec = ASStackLayoutSpec(direction: .vertical,
                                                                  spacing: 0,
                                                                  justifyContent: .spaceAround,
                                                                  alignItems: .stretch,
                                                                  children: [self.nameTextNode, self.commentTextNode, spacer])
-        verticalStack.flexShrink = true
+        verticalStack.style.flexShrink = 1
         
         let horizontalStack: ASStackLayoutSpec = ASStackLayoutSpec(direction: .horizontal,
                                                                    spacing: 8,
@@ -49,8 +49,8 @@ class CommentCellNode: ASCellNode {
         return ASInsetLayoutSpec.init(insets: UIEdgeInsets(top: 0, left: 16, bottom: 12, right: 16), child: horizontalStack)
     }
     
-    override func fetchData() {
-        super.fetchData()
+    override func didEnterPreloadState() {
+        super.didEnterPreloadState()
         if let url = NSURL(string: self.model.avatarUrl) {
             self.avatarNode.setURL(url as URL, resetToDefault: true)
         }

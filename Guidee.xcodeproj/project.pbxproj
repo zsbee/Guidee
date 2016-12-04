@@ -50,7 +50,6 @@
 		1BE288071DB3DB60005A0C59 /* CarouselCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE288061DB3DB60005A0C59 /* CarouselCellNode.swift */; };
 		1BE2880A1DB3DBA1005A0C59 /* CarouselItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE288091DB3DBA1005A0C59 /* CarouselItemModel.swift */; };
 		1BE2880C1DB3E039005A0C59 /* ImageItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2880B1DB3E039005A0C59 /* ImageItemNode.swift */; };
-		1BE2880E1DB41A96005A0C59 /* AdvertNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2880D1DB41A96005A0C59 /* AdvertNode.swift */; };
 		1BE288101DB56DC3005A0C59 /* GuideHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2880F1DB56DC3005A0C59 /* GuideHomeViewController.swift */; };
 		1BE288121DB57078005A0C59 /* GuideBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE288111DB57078005A0C59 /* GuideBaseModel.swift */; };
 		1BE288141DB570FE005A0C59 /* GuideEventDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE288131DB570FE005A0C59 /* GuideEventDetailModel.swift */; };
@@ -121,7 +120,6 @@
 		1BE288061DB3DB60005A0C59 /* CarouselCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CarouselCellNode.swift; path = Nodes/CarouselCellNode.swift; sourceTree = "<group>"; };
 		1BE288091DB3DBA1005A0C59 /* CarouselItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CarouselItemModel.swift; path = Models/CarouselItemModel.swift; sourceTree = "<group>"; };
 		1BE2880B1DB3E039005A0C59 /* ImageItemNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageItemNode.swift; path = Nodes/ImageItemNode.swift; sourceTree = "<group>"; };
-		1BE2880D1DB41A96005A0C59 /* AdvertNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdvertNode.swift; path = Nodes/AdvertNode.swift; sourceTree = "<group>"; };
 		1BE2880F1DB56DC3005A0C59 /* GuideHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideHomeViewController.swift; sourceTree = "<group>"; };
 		1BE288111DB57078005A0C59 /* GuideBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideBaseModel.swift; path = Models/GuideBaseModel.swift; sourceTree = "<group>"; };
 		1BE288131DB570FE005A0C59 /* GuideEventDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideEventDetailModel.swift; path = Models/GuideEventDetailModel.swift; sourceTree = "<group>"; };
@@ -242,7 +240,6 @@
 				1BE288041DB3D8BD005A0C59 /* GuideEventSummaryTextNode.swift */,
 				1BE288061DB3DB60005A0C59 /* CarouselCellNode.swift */,
 				1BE2880B1DB3E039005A0C59 /* ImageItemNode.swift */,
-				1BE2880D1DB41A96005A0C59 /* AdvertNode.swift */,
 				1BE288171DB57955005A0C59 /* GuideSummaryNode.swift */,
 				1BE288191DB5799B005A0C59 /* GuideHeaderCellNode.swift */,
 				1BE2881B1DB583DF005A0C59 /* EventCellNode.swift */,
@@ -426,7 +423,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2EA0ECDEEC21A25A5DF72E4D /* [CP] Check Pods Manifest.lock */ = {
@@ -441,7 +438,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		64CA93F3F7A865920AA90A04 /* [CP] Embed Pods Frameworks */ = {
@@ -541,7 +538,6 @@
 				1BDF50BD1DCFA0950003D566 /* EditTextViewController.swift in Sources */,
 				1BE288031DB3D60D005A0C59 /* TextStyles.swift in Sources */,
 				1B9BDA571DD89A880024635B /* CommentCellNode.swift in Sources */,
-				1BE2880E1DB41A96005A0C59 /* AdvertNode.swift in Sources */,
 				1BE288071DB3DB60005A0C59 /* CarouselCellNode.swift in Sources */,
 				1BE287D91DB3A84D005A0C59 /* ExploreViewController.swift in Sources */,
 				1B9BDA551DD898D50024635B /* CommentModel.swift in Sources */,

@@ -58,8 +58,8 @@ class ImageItemNode: ASCellNode {
         return overlaySpec
     }
     
-    override func fetchData() {
-        super.fetchData()
+    override func didEnterPreloadState() {
+        super.didEnterPreloadState()
         if let imageUrlString = self.model.imageURL {
             if let url = NSURL(string: imageUrlString) {
                 self.mainImage.setURL(url as URL, resetToDefault: true)

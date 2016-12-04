@@ -26,13 +26,13 @@ class GuideHeaderCellNode: ASCellNode {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.coverImageNode.preferredFrameSize = CGSize(width: constrainedSize.max.width, height: 300)
+        self.coverImageNode.style.preferredSize = CGSize(width: constrainedSize.max.width, height: 300)
         
-        self.avatarNode.preferredFrameSize = CGSize(width: avatarSize, height: avatarSize)
-        self.avatarNode.flexGrow = false
+        self.avatarNode.style.preferredSize = CGSize(width: avatarSize, height: avatarSize)
+        self.avatarNode.style.flexGrow = 0
         
         let spacer = ASLayoutSpec()
-        spacer.flexGrow = true
+        spacer.style.flexGrow = 1
         
         let verticalStack: ASStackLayoutSpec = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .center, children: [spacer, self.avatarNode, titleNode])
         
@@ -43,8 +43,8 @@ class GuideHeaderCellNode: ASCellNode {
         return overlaySpec
     }
     
-    override func fetchData() {
-        super.fetchData()
+    override func didEnterPreloadState() {
+        super.didEnterPreloadState()
         if let url = NSURL(string: self.coverImageUrl) {
             self.coverImageNode.setURL(url as URL, resetToDefault: true)
         }

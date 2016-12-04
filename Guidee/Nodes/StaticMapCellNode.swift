@@ -19,7 +19,7 @@ class StaticMapCellNode: ASCellNode, MKMapViewDelegate {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.mapNode.preferredFrameSize = CGSize(width: constrainedSize.max.width, height: 300)
+        self.mapNode.style.preferredSize = CGSize(width: constrainedSize.max.width, height: 300)
         
         let containerSpec = ASInsetLayoutSpec(insets: UIEdgeInsetsMake(0, 16, 0, 16), child: self.mapNode)
         return containerSpec

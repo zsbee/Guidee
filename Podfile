@@ -11,7 +11,7 @@ target 'Guidee' do
     pod 'Firebase/Crash'
     pod 'Firebase/Auth'
     pod 'Firebase/Storage'
-    pod 'AsyncDisplayKit'
+    pod 'AsyncDisplayKit', '>= 2.0-beta.3'
     pod 'pop'
     pod 'youtube-ios-player-helper'
     pod 'SAMTextView'

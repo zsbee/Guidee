@@ -26,11 +26,11 @@ class ProfileCellNode: ASCellNode {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.avatarNode.preferredFrameSize = CGSize(width: avatarSize, height: avatarSize)
-        self.avatarNode.flexGrow = false
+        self.avatarNode.style.preferredSize = CGSize(width: avatarSize, height: avatarSize)
+        self.avatarNode.style.flexGrow = 1
         
         let rightVerticalStack = ASStackLayoutSpec(direction: .vertical, spacing: 4, justifyContent: .start, alignItems: .stretch, children: [nameNode, summaryTextNode])
-        rightVerticalStack.flexShrink = true
+        rightVerticalStack.style.flexShrink = 1
         
         let mainStack = ASStackLayoutSpec(direction: .horizontal, spacing: 8, justifyContent: .start, alignItems: .center, children: [avatarNode, rightVerticalStack])
         
@@ -39,8 +39,8 @@ class ProfileCellNode: ASCellNode {
         return insetSpec
     }
     
-    override func fetchData() {
-        super.fetchData()
+    override func didEnterPreloadState() {
+        super.didEnterPreloadState()
         if let avatarUrl = NSURL(string: self.avatarUrl) {
             self.avatarNode.setURL(avatarUrl as URL, resetToDefault: true)
         }

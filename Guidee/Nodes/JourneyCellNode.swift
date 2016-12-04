@@ -19,10 +19,10 @@ class JourneyCellNode: ASCellNode {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.coverImageNode.preferredFrameSize = CGSize(width: constrainedSize.max.width, height: 162)
+        self.coverImageNode.style.preferredSize = CGSize(width: constrainedSize.max.width, height: 162)
         
         let spacer = ASDisplayNode()
-        spacer.flexGrow = true
+        spacer.style.flexGrow = 1
         
         let verticalStack: ASStackLayoutSpec = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .center, children: [spacer, self.titleNode])
         
@@ -33,8 +33,8 @@ class JourneyCellNode: ASCellNode {
         return overlaySpec
     }
     
-    override func fetchData() {
-        super.fetchData()
+    override func didEnterPreloadState() {
+        super.didEnterPreloadState()
         if let url = NSURL(string: self.coverImageUrl) {
             self.coverImageNode.setURL(url as URL, resetToDefault: true)
         }
