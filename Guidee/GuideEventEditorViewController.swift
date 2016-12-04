@@ -5,7 +5,7 @@ protocol GuideEventEditorViewControllerDelegate {
     func spotSavedWithModel(immutableModel: GuideEventDetailModel, spotIndex: Int)
 }
 
-class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderViewDelegate, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, EditTextViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CarouselCellNodeDelegate {
+class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderViewDelegate, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, EditTextViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CarouselCellNodeDelegate, MapCellNodeDelegate {
     
     let headerView: GuideEventEditorHeaderView = GuideEventEditorHeaderView()
     var collectionNode: ASCollectionNode!
@@ -121,8 +121,9 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Map", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
             case self.sectionIndexMap:
-                
-                return ASCellNode()
+                let node = MapCellNode(mapCenterCoordinate: self.mutatedModel!.coordinates)
+                node.delegate = self;
+                return node
                 
             case self.sectionIndexAdvert:
                 let node = AdvertNode()
@@ -251,5 +252,9 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
         self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func mapCenterDidUpdateWithCoordinates(coordinates: CLLocationCoordinate2D) {
+        self.mutatedModel!.coordinates = coordinates
     }
 }

@@ -58,10 +58,20 @@ public class GuideEventDetailModel: AnyObject {
         dict["title"] = self.title as AnyObject?
         dict["summary"] = self.summary as AnyObject?
         dict["carouselModels"] = self.carouselModelsArray() as AnyObject?
+        dict["location"] = self.locationDictionary() as AnyObject?
         
         return dict;
     }
 
+    private func locationDictionary() -> [String:AnyObject] {
+        var dict = [String:AnyObject]()
+        
+        dict["latitude"] = self.coordinates.latitude as AnyObject?
+        dict["longitude"] = self.coordinates.longitude as AnyObject?
+        
+        return dict
+    }
+    
     private func carouselModelsArray() -> [[String:AnyObject]] {
         var array = [[String:AnyObject]]()
         
