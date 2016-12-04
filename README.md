@@ -41,12 +41,11 @@ Journeys can be commented on, made private, one could steal highlights from them
 * Highlights page is done, except for the highlights map view (Hihglight page inside a Journey page)
 * Profile UI is done, and loading data from Firebase
 * Creating a journey with images and highlights and pinning it on the map -> Live updating the Explore map with the new pin.
-
+* Commenting on a Journey is possible
+* Map for the Highlight pages
+* Creating a Journey should put it into the users journeys
 
 # Next steps:
-* Creating a Journey should put it into the users journeys
 * Liking a Journey
-* Commenting on a Journey
-* Map for the Highlight pages
 * Creating a Plan
 * Following someone.
