@@ -21,7 +21,6 @@ class DataController: AnyObject {
     
     static let sharedInstance: DataController = {
         let instance = DataController()
-    
         return instance
     }()
     

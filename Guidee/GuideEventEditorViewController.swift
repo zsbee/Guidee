@@ -28,16 +28,18 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
     private let sectionLastCellInset: UIEdgeInsets = UIEdgeInsetsMake(16, 0, 32, 0)
     
     // Node map
-    private let sectionIndexSummaryHeader: Int = 0
-    private let sectionIndexSummary: Int = 1
-    private let sectionIndexCarouselHeader: Int = 2
-    private let sectionIndexCarousel: Int = 3
-    private let sectionIndexMapHeader: Int = 4
-    private let sectionIndexMap: Int = 5
-    private let sectionIndexAdvert: Int = 6
+    private let sectionIndexTitleHeader: Int = 0
+    private let sectionIndexTitle: Int = 1
+    private let sectionIndexSummaryHeader: Int = 2
+    private let sectionIndexSummary: Int = 3
+    private let sectionIndexCarouselHeader: Int = 4
+    private let sectionIndexCarousel: Int = 5
+    private let sectionIndexMapHeader: Int = 6
+    private let sectionIndexMap: Int = 7
+    private let sectionIndexAdvert: Int = 8
     
     // Fake
-    private let sectionIndexTitle: Int = 66
+   // private let sectionIndexTitle: Int = 66
 
     
     override func viewDidLoad() {
@@ -68,12 +70,12 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
         return 1
     }
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 7
+        return 9
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         switch section {
-        case self.sectionIndexSummaryHeader:
+        case self.sectionIndexTitleHeader:
             return self.sectionFirstCellInset
         case self.sectionIndexCarouselHeader:
             return self.sectionHeaderInset
@@ -103,6 +105,12 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
             () -> ASCellNode in
             
             switch indexPath.section {
+            case self.sectionIndexTitleHeader:
+                let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Title", attributes: TextStyles.getHeaderFontAttributes()))
+                return node
+            case self.sectionIndexTitle:
+                let node = GuideEventSummaryTextNode(attributedText: NSAttributedString(string: self.mutatedModel!.title, attributes: TextStyles.getSummaryTextFontAttributes()))
+                return node
             case self.sectionIndexSummaryHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Summary", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
@@ -144,7 +152,10 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
             let textViewText = (self.baseModel.summary != self.mutatedModel!.summary) ? self.mutatedModel!.summary : ""
             vc.viewModel = EditTextSetupViewModel(title: "Edit Summary", sectionIndex: self.sectionIndexSummary, placeHolder: "Edit Summary of Spot", text: textViewText)
             self.present(vc, animated: true, completion:nil)
-            
+        case self.sectionIndexTitle:
+            let textViewText = (self.baseModel.summary != self.mutatedModel!.summary) ? self.mutatedModel!.summary : ""
+            vc.viewModel = EditTextSetupViewModel(title: "Edit Title", sectionIndex: self.sectionIndexTitle, placeHolder: "Edit Title of Spot", text: textViewText)
+            self.present(vc, animated: true, completion:nil)
         case self.sectionIndexCarousel:
             
             return
@@ -183,9 +194,9 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
         let vc = EditTextViewController()
         vc.delegate = self
         
-        let textViewText = (self.baseModel.title != self.mutatedModel!.title) ? self.mutatedModel!.title : ""
-        vc.viewModel = EditTextSetupViewModel(title: "Edit title", sectionIndex: self.sectionIndexTitle, placeHolder: "Edit title of spot", text: textViewText)
-        self.present(vc, animated: true, completion:nil)
+//        let textViewText = (self.baseModel.title != self.mutatedModel!.title) ? self.mutatedModel!.title : ""
+//        vc.viewModel = EditTextSetupViewModel(title: "Edit title", sectionIndex: self.sectionIndexTitle, placeHolder: "Edit title of spot", text: textViewText)
+//        self.present(vc, animated: true, completion:nil)
     }
     
     // EditTextVC
@@ -200,7 +211,7 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
             break
         case self.sectionIndexTitle:
             self.mutatedModel!.title = string
-            self.headerView.titleLabel.text = string
+            //self.headerView.titleLabel.text = string
             break
         case self.sectionIndexCarousel:
 
@@ -210,10 +221,10 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
             break
         }
         
-        if(sectionIndex != self.sectionIndexTitle)
-        {
-            self.reloadItemAtIndex(sectionIndex: sectionIndex)
-        }
+        
+        
+        self.reloadItemAtIndex(sectionIndex: sectionIndex)
+        
     }
     
     func reloadItemAtIndex(sectionIndex: Int) {

@@ -24,6 +24,9 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
         
         self.view.addSubview(self.mapView)
         self.view.addSubview(self.headerView)
+        
+        DataController.sharedInstance.getCurrentUserInfo(completionBlock: { (userModel) in
+        })
     }
     
     public func selected(sender: UIButton!) {
