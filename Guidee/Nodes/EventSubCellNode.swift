@@ -30,7 +30,10 @@ class EventSubCellNode: ASCellNode {
         let spacer = ASLayoutSpec()
         spacer.style.flexGrow = 1
         
-        self.imageNode.preferredFrameSize = CGSize(width: 80, height:80)
+        let horizontalSpacer = ASLayoutSpec()
+        horizontalSpacer.style.flexGrow = 1
+        
+        self.imageNode.style.preferredSize = CGSize(width: 80, height:80)
         
         self.summaryTextNode.style.flexShrink = 1
         
@@ -45,7 +48,7 @@ class EventSubCellNode: ASCellNode {
                                                                  spacing: 8,
                                                                  justifyContent: .spaceAround,
                                                                  alignItems: .center,
-                                                                 children: [self.imageNode, verticalStack, chevronImage])
+                                                                 children: [self.imageNode, verticalStack, horizontalSpacer, chevronImage])
         
         return ASInsetLayoutSpec.init(insets: UIEdgeInsets(top: 0, left: 16, bottom: 12, right: 16), child: horizontalStack)
     }

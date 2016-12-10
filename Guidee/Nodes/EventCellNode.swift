@@ -26,7 +26,7 @@ class EventCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource, U
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        collectionNode.preferredFrameSize = CGSize(width: constrainedSize.max.width, height: constrainedSize.max.height)
+        collectionNode.style.preferredSize = CGSize(width: constrainedSize.max.width, height: constrainedSize.max.height)
         return ASInsetLayoutSpec.init(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: collectionNode)
     }
     
