@@ -38,7 +38,6 @@ class MapCellNode: ASCellNode, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print("Node map center: \(mapView.centerCoordinate)")
         self.delegate?.mapCenterDidUpdateWithCoordinates(coordinates: mapView.centerCoordinate)
         self.pinNode.view.clipsToBounds = false
     }

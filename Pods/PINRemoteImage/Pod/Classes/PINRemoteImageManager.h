@@ -53,6 +53,8 @@ typedef NS_OPTIONS(NSUInteger, PINRemoteImageManagerDownloadOptions) {
     PINRemoteImageManagerDownloadOptionsSkipEarlyCheck = 1 << 2,
     /** Save processed images as JPEGs in the cache. The default is PNG to support transparency */
     PINRemoteImageManagerSaveProcessedImageAsJPEG = 1 << 3,
+    /** Ignore cache and force download */
+    PINRemoteImageManagerDownloadOptionsIgnoreCache = 1 << 4,
 };
 
 /**
@@ -167,7 +169,7 @@ typedef void(^PINRemoteImageManagerProgressDownload)(int64_t completedBytes, int
 + (nonnull instancetype)sharedImageManager;
 
 /**
- Sets the shared instance of PINRemoteImageManager to an instance with the supplied configuration. If configuration is nil, [NSURLSessionConfiguration defaultConfiguration] is used. You specify a custom configuration if you need to configure timeout values, cookie policies, additional HTTP headers, etc. This method should not be used if the shared instance has already been created.
+ Sets the shared instance of PINRemoteImageManager to an instance with the supplied configuration. If configuration is nil, [NSURLSessionConfiguration ephemeralSessionConfiguration] is used. You specify a custom configuration if you need to configure timeout values, cookie policies, additional HTTP headers, etc. This method should not be used if the shared instance has already been created.
 
  @param configuration The configuration used to create the PINRemoteImageManager.
  */

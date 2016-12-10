@@ -26,6 +26,8 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
         self.view.addSubview(self.headerView)
         
         DataController.sharedInstance.getCurrentUserInfo(completionBlock: { (userModel) in
+            let loginVC = LoginViewController()
+            self.present(loginVC, animated: true, completion: nil)
         })
     }
     

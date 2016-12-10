@@ -564,12 +564,14 @@ static dispatch_once_t sharedDispatchToken;
         UUID = [NSUUID UUID];
     }
 
-    //Check to see if the image is in memory cache and we're on the main thread.
-    //If so, special case this to avoid flashing the UI
-    id object = [self.cache objectFromMemoryForKey:key];
-    if (object) {
-        if ([self earlyReturnWithOptions:options url:url key:key object:object completion:completion]) {
-            return nil;
+    if ((options & PINRemoteImageManagerDownloadOptionsIgnoreCache) == 0) {
+        //Check to see if the image is in memory cache and we're on the main thread.
+        //If so, special case this to avoid flashing the UI
+        id object = [self.cache objectFromMemoryForKey:key];
+        if (object) {
+            if ([self earlyReturnWithOptions:options url:url key:key object:object completion:completion]) {
+                return nil;
+            }
         }
     }
     
@@ -829,6 +831,9 @@ static dispatch_once_t sharedDispatchToken;
                 if (task.numberOfRetries < PINRemoteImageMaxRetries) {
                     retry = YES;
                     newNumberOfRetries = ++task.numberOfRetries;
+                  
+                    // Clear out the exsiting progress image or else new data from retry will be appended
+                    task.progressImage = nil;
                     task.urlSessionTaskOperation = nil;
                 }
                 [strongSelf unlock];
@@ -1411,7 +1416,6 @@ static dispatch_once_t sharedDispatchToken;
     __block PINImage *image = nil;
     __block NSData *data = nil;
     __block BOOL updateMemoryCache = NO;
-    NSUInteger cacheCost = additionalCost;
     
     PINRemoteImageMemoryContainer *container = nil;
     if ([object isKindOfClass:[PINRemoteImageMemoryContainer class]]) {
@@ -1461,9 +1465,16 @@ static dispatch_once_t sharedDispatchToken;
     }
     
     if (updateMemoryCache) {
-        cacheCost += [data length];
-        cacheCost += (image.size.width + image.size.height) * 4; // 4 bytes per pixel
-        [self.cache setObjectInMemory:container forKey:key withCost:cacheCost];
+        [container.lock lockWithBlock:^{
+            NSUInteger cacheCost = additionalCost;
+            cacheCost += [container.data length];
+            CGImageRef imageRef = container.image.CGImage;
+            NSAssert(container.image == nil || imageRef != NULL, @"We only cache a decompressed image if we decompressed it ourselves. In that case, it should be backed by a CGImageRef.");
+            if (imageRef) {
+                cacheCost += CGImageGetHeight(imageRef) * CGImageGetBytesPerRow(imageRef);
+            }
+            [self.cache setObjectInMemory:container forKey:key withCost:cacheCost];
+        }];
     }
     
     if (diskData) {
@@ -1520,6 +1531,11 @@ static dispatch_once_t sharedDispatchToken;
 
 - (void)objectForKey:(NSString *)key options:(PINRemoteImageManagerDownloadOptions)options completion:(void (^)(BOOL found, BOOL valid, PINImage *image, id alternativeRepresentation))completion
 {
+    if ((options & PINRemoteImageManagerDownloadOptionsIgnoreCache) != 0) {
+        completion(NO, YES, nil, nil);
+        return;
+    }
+
     void (^materialize)(id object) = ^(id object) {
         PINImage *image = nil;
         id alternativeRepresentation = nil;
@@ -1542,7 +1558,7 @@ static dispatch_once_t sharedDispatchToken;
           if (object) {
               materialize(object);
           } else {
-              completion(NO, NO, nil, nil);
+              completion(NO, YES, nil, nil);
           }
         }];
     }

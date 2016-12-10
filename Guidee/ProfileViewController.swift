@@ -253,9 +253,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     func actionButtonTappedWithString(string: String) {
         switch string {
         case self.kNewPlanCtaStr:
-            print("asasa")
+            print("NewPlanCTA Tapped")
         case self.kNewJourneyCtaStr:
-            print("bebebe")
             openEditor()
         default:
             print(string)

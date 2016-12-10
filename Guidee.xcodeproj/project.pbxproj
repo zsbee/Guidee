@@ -12,6 +12,7 @@
 		1B094B061DDBC4E0009E1564 /* PlaceholderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B094B051DDBC4E0009E1564 /* PlaceholderNode.swift */; };
 		1B1EF3F91DC4A0B600CF99A4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1EF3F81DC4A0B600CF99A4 /* DataController.swift */; };
 		1B23C9971DBA94A6004783A8 /* ExploreHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */; };
+		1B462B721DFC2B2900A8370B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B462B711DFC2B2900A8370B /* LoginViewController.swift */; };
 		1B5EFB7F1DF42CA100034F57 /* StaticMapCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5EFB7E1DF42CA100034F57 /* StaticMapCellNode.swift */; };
 		1B6665121DC88A7100C13823 /* ProfileCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6665111DC88A7100C13823 /* ProfileCellNode.swift */; };
 		1B6665141DC88FD600C13823 /* JourneyCellContainerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6665131DC88FD600C13823 /* JourneyCellContainerNode.swift */; };
@@ -78,6 +79,7 @@
 		1B094B051DDBC4E0009E1564 /* PlaceholderNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaceholderNode.swift; path = Nodes/PlaceholderNode.swift; sourceTree = "<group>"; };
 		1B1EF3F81DC4A0B600CF99A4 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataController.swift; path = Utilities/DataController.swift; sourceTree = "<group>"; };
 		1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreHeaderView.swift; path = Views/ExploreHeaderView.swift; sourceTree = "<group>"; };
+		1B462B711DFC2B2900A8370B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1B5EFB7E1DF42CA100034F57 /* StaticMapCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StaticMapCellNode.swift; path = Nodes/StaticMapCellNode.swift; sourceTree = "<group>"; };
 		1B6665111DC88A7100C13823 /* ProfileCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileCellNode.swift; path = Nodes/ProfileCellNode.swift; sourceTree = "<group>"; };
 		1B6665131DC88FD600C13823 /* JourneyCellContainerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JourneyCellContainerNode.swift; path = Nodes/JourneyCellContainerNode.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				1BE2880F1DB56DC3005A0C59 /* GuideHomeViewController.swift */,
 				1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */,
 				1BDF50BC1DCFA0950003D566 /* EditTextViewController.swift */,
+				1B462B711DFC2B2900A8370B /* LoginViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				1B6665181DC8A10400C13823 /* UserInfoModel.swift in Sources */,
 				1BE2881C1DB583E0005A0C59 /* EventCellNode.swift in Sources */,
 				1B6A54C91DC8F6F10072CD83 /* FollowsContainerCell.swift in Sources */,
+				1B462B721DFC2B2900A8370B /* LoginViewController.swift in Sources */,
 				1B787B631DD12BD700EE7B42 /* MapCellNode.swift in Sources */,
 				1BE287FD1DB3B7E0005A0C59 /* GuideEventHeaderView.swift in Sources */,
 				1BBAF9E51DB8124300379004 /* PinCalloutView.swift in Sources */,
@@ -722,7 +726,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0890909C25DA96DB5120F155 /* Pods-GuideeTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = G7DBMPM3W7;
 				INFOPLIST_FILE = GuideeTests/Info.plist;
@@ -738,7 +742,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E461466E6692B01729CB0B36 /* Pods-GuideeTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = G7DBMPM3W7;
 				INFOPLIST_FILE = GuideeTests/Info.plist;
