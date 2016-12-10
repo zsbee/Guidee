@@ -46,39 +46,39 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         // Fetch user Profile
         DataController.sharedInstance.getCurrentUserInfo { (userInfoModel) in
             self.userInfoModel = userInfoModel
-            self.collectionNode.view.performBatchUpdates({
-                self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexProfileSummary)])
+            self.collectionNode.performBatchUpdates({
+                self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexProfileSummary)])
                 }, completion: nil)
             
             // Fetch Own Journeys 📝 of User
             DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.journeyModels, completionBlock: { (journeyModel) in
                 self.journeyModels.append(journeyModel)
-                self.collectionNode.view.performBatchUpdates({
-                    self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
+                self.collectionNode.performBatchUpdates({
+                    self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
                     }, completion: nil)
             })
             
             // Fetch Plans ✈️ of User
             DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.planModels, completionBlock: { (journeyModel) in
                 self.planModels.append(journeyModel)
-                self.collectionNode.view.performBatchUpdates({
-                    self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexPlans)])
+                self.collectionNode.performBatchUpdates({
+                    self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexPlans)])
                     }, completion: nil)
             })
             
             // Fetch ❤️ of User
             DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.loveModels, completionBlock: { (journeyModel) in
                 self.loveModels.append(journeyModel)
-                self.collectionNode.view.performBatchUpdates({
-                    self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexLoved)])
+                self.collectionNode.performBatchUpdates({
+                    self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexLoved)])
                     }, completion: nil)
             })
             
             // Fetch follows
             DataController.sharedInstance.getUsersWithFIRids(idArray: userInfoModel.following, completionBlock: { (followedUsedModel) in
                 self.followModels.append(followedUsedModel)
-                self.collectionNode.view.performBatchUpdates({
-                    self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexFollowing)])
+                self.collectionNode.performBatchUpdates({
+                    self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexFollowing)])
                     }, completion: nil)
             })
             

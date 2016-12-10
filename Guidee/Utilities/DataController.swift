@@ -153,8 +153,10 @@ class DataController: AnyObject {
         self.journeys.childByAutoId().setValue(mutatedGuide.objectAsDictionary(), withCompletionBlock: {(error, ref) in
             let uniqueKey = ref.key
             // append user journeys 
-            self.users.child("0").child("journeys").childByAutoId().setValue(uniqueKey)
-            completionBlock()
+            if let loggedInUser = FIRAuth.auth()?.currentUser {
+                self.users.child(loggedInUser.uid).child("journeys").childByAutoId().setValue(uniqueKey)
+                completionBlock()
+            }
         })
     }
     
