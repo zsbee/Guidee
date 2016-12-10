@@ -1,6 +1,7 @@
 import UIKit
 import MapKit
 import Firebase
+import FBSDKCoreKit
 
 class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewDelegate, ExploreheaderViewDelegate {
     var mapView: CustomMapView!
@@ -26,9 +27,21 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
         self.view.addSubview(self.headerView)
         
         DataController.sharedInstance.getCurrentUserInfo(completionBlock: { (userModel) in
-            let loginVC = LoginViewController()
-            self.present(loginVC, animated: true, completion: nil)
+            // nothing
         })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if (FBSDKAccessToken.current() == nil) {
+            // User is logged in, do work such as go to next view controller.
+            let loginVC = LoginViewController()
+            self.present(loginVC, animated: false, completion: nil)
+        }
     }
     
     public func selected(sender: UIButton!) {

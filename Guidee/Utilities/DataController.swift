@@ -41,14 +41,16 @@ class DataController: AnyObject {
     }
     
     public func getCurrentUserInfo(completionBlock: @escaping (UserInfoModel) -> ()) {
-        self.users.child("0").observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as! [String: AnyObject]
-            let userInfoModel = UserInfoModel(dictionary: value)
-            self.currentUser = userInfoModel
-            completionBlock(userInfoModel)
-        }) { (error) in
-            print(error.localizedDescription)
+        if let loggedInUser = FIRAuth.auth()?.currentUser {
+            self.users.child(loggedInUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as! [String: AnyObject]
+                let userInfoModel = UserInfoModel(dictionary: value)
+                self.currentUser = userInfoModel
+                completionBlock(userInfoModel)
+            }) { (error) in
+                print(error.localizedDescription)
+            }
         }
     }
     
@@ -154,8 +156,31 @@ class DataController: AnyObject {
             self.users.child("0").child("journeys").childByAutoId().setValue(uniqueKey)
             completionBlock()
         })
+    }
+    
+    public func createUserWithID(firUser: FIRUser) {
+        var defaultUserModel = [String: AnyObject]()
         
+        if let avatarImage = firUser.photoURL?.absoluteString {
+            defaultUserModel["avatarUrl"] = avatarImage as AnyObject
+        } else {
+            defaultUserModel["avatarUrl"] = "https://empty" as AnyObject
+        }
         
+        if let displayName = firUser.displayName {
+            defaultUserModel["name"] = displayName as AnyObject
+        } else {
+            defaultUserModel["name"] = "John Doe" as AnyObject
+        }
+        
+        defaultUserModel["summary"] = "Fill in some introduction about yourself!" as AnyObject
+
+        defaultUserModel["plans"] = ["1"] as AnyObject
+        defaultUserModel["loves"] = ["1","1","0"] as AnyObject
+        defaultUserModel["journeys"] = ["-KY_5ibbvxVhhLUTd5uO","1","0"] as AnyObject
+        defaultUserModel["following"] = ["0"] as AnyObject
+        
+        self.users.child(firUser.uid).setValue(defaultUserModel);
     }
     
     public func getCurrentUserModel() -> UserInfoModel? {

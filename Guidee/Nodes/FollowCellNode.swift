@@ -23,7 +23,7 @@ class FollowCellNode: ASCellNode {
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         self.avatarNode.style.preferredSize = CGSize(width: avatarSize, height: avatarSize)
-        self.avatarNode.style.flexGrow = 1
+        self.avatarNode.style.flexGrow = 0
         
         let verticalStack: ASStackLayoutSpec = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .center, children: [self.avatarNode, self.userNameNode])
         
