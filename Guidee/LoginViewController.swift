@@ -2,16 +2,15 @@ import UIKit
 import FirebaseFacebookAuthUI
 import FBSDKLoginKit
 import Firebase
+import Onboard
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginViewController: OnboardingContentViewController, FBSDKLoginButtonDelegate {
     
     var loginButton: FBSDKLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = UIColor.white
-        
+                
         loginButton = FBSDKLoginButton()
         loginButton.delegate = self
         loginButton.readPermissions = ["email","public_profile","user_photos"]

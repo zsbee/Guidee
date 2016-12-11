@@ -2,6 +2,7 @@ import UIKit
 import MapKit
 import Firebase
 import FBSDKCoreKit
+import Onboard
 
 class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewDelegate, ExploreheaderViewDelegate {
     var mapView: CustomMapView!
@@ -38,9 +39,16 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if (FBSDKAccessToken.current() == nil) {
+            // Video
+            let bundle = Bundle.main
+            let moviePath = bundle.path(forResource: "OnboardingVid", ofType: "mp4")
+            let movieURL = NSURL(fileURLWithPath: moviePath!)
+            
             // User is logged in, do work such as go to next view controller.
             let loginVC = LoginViewController()
-            self.present(loginVC, animated: false, completion: nil)
+            let onboardingVC: OnboardingViewController! = OnboardingViewController(backgroundVideoURL: movieURL as URL!, contents: [loginVC])
+            onboardingVC.shouldBlurBackground = true
+            self.present(onboardingVC, animated: false, completion: nil)
         }
     }
     
@@ -60,15 +68,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
         
         self.mapView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         self.headerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 60)
-
     }
-
-    // navigation
-    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject) {
-        //_detailsViewController = (StoryViewController*)segue.destinationViewController;
-        //[_detailsViewController setViewModel:_selectedStory];
-    }
-    
     
     // MKMapKitDelegate
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
