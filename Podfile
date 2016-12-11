@@ -14,6 +14,7 @@ target 'Guidee' do
     pod 'FirebaseUI/Facebook', '~> 1.0'
     pod 'AsyncDisplayKit'
     pod 'pop'
+    pod 'Onboard'
     pod 'youtube-ios-player-helper'
     pod 'SAMTextView'
 end
