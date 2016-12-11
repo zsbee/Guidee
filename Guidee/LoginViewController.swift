@@ -14,7 +14,16 @@ class LoginViewController: OnboardingContentViewController, FBSDKLoginButtonDele
         loginButton = FBSDKLoginButton()
         loginButton.delegate = self
         loginButton.readPermissions = ["email","public_profile","user_photos"]
+        
+        let constH = NSLayoutConstraint.constraints(withVisualFormat: "H:[loginButton(57)]", options: .alignAllCenterX, metrics: nil, views: ["loginButton": loginButton])
+        let constW = NSLayoutConstraint.constraints(withVisualFormat: "V:[loginButton(281)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["loginButton": loginButton])
+
+        loginButton.addConstraints(constH)
+        loginButton.addConstraints(constW)
+        
         self.view.addSubview(loginButton)
+        
+        self.view.setNeedsLayout()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,8 +55,7 @@ class LoginViewController: OnboardingContentViewController, FBSDKLoginButtonDele
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let buttonWidth:CGFloat = 225
         let buttonHeight:CGFloat = 45
-        loginButton.frame = CGRect(x: self.view.frame.width/2.0 - buttonWidth/2.0, y: self.view.frame.height/2.0 - buttonHeight/2.0, width: buttonWidth, height: buttonHeight)
+        loginButton.frame = CGRect(x: self.view.frame.width/2.0 - loginButton.intrinsicContentSize.width/2.0-10, y: self.view.frame.height - buttonHeight - 100, width: loginButton.intrinsicContentSize.width + 20, height: buttonHeight)
     }
 }
