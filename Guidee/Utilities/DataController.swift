@@ -161,30 +161,39 @@ class DataController: AnyObject {
     }
     
     public func createUserWithID(firUser: FIRUser) {
-        // Todo: do not create new if already exists
-        
-        var defaultUserModel = [String: AnyObject]()
-        
-        if let avatarImage = firUser.photoURL?.absoluteString {
-            defaultUserModel["avatarUrl"] = avatarImage as AnyObject
-        } else {
-            defaultUserModel["avatarUrl"] = "https://empty" as AnyObject
+        // do not create new if already exists
+        self.users.child(firUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() {
+                return
+            } else {
+                var defaultUserModel = [String: AnyObject]()
+                
+                if let avatarImage = firUser.photoURL?.absoluteString {
+                    defaultUserModel["avatarUrl"] = avatarImage as AnyObject
+                } else {
+                    defaultUserModel["avatarUrl"] = "https://empty" as AnyObject
+                }
+                
+                if let displayName = firUser.displayName {
+                    defaultUserModel["name"] = displayName as AnyObject
+                } else {
+                    defaultUserModel["name"] = "John Doe" as AnyObject
+                }
+                
+                defaultUserModel["summary"] = "Fill in some introduction about yourself!" as AnyObject
+                
+                defaultUserModel["plans"] = ["1"] as AnyObject
+                defaultUserModel["loves"] = ["1","1","0"] as AnyObject
+                defaultUserModel["journeys"] = ["-KY_5ibbvxVhhLUTd5uO","1","0"] as AnyObject
+                defaultUserModel["following"] = ["0"] as AnyObject
+                
+                self.users.child(firUser.uid).setValue(defaultUserModel);
+            }
+        }) { (error) in
+            print(error.localizedDescription)
         }
         
-        if let displayName = firUser.displayName {
-            defaultUserModel["name"] = displayName as AnyObject
-        } else {
-            defaultUserModel["name"] = "John Doe" as AnyObject
-        }
-        
-        defaultUserModel["summary"] = "Fill in some introduction about yourself!" as AnyObject
 
-        defaultUserModel["plans"] = ["1"] as AnyObject
-        defaultUserModel["loves"] = ["1","1","0"] as AnyObject
-        defaultUserModel["journeys"] = ["-KY_5ibbvxVhhLUTd5uO","1","0"] as AnyObject
-        defaultUserModel["following"] = ["0"] as AnyObject
-        
-        self.users.child(firUser.uid).setValue(defaultUserModel);
     }
     
     public func getCurrentUserModel() -> UserInfoModel? {
