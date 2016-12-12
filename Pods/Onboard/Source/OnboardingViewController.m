@@ -130,6 +130,8 @@ static NSString * const kSkipButtonText = @"Skip";
     
     // if we have a video URL, start playing
     if (self.videoURL) {
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+        [[AVAudioSession sharedInstance] setActive:NO error:nil];
         [self.player play];
     }
 }
