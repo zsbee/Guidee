@@ -6,11 +6,17 @@ import Onboard
 
 class LoginViewController: OnboardingContentViewController, FBSDKLoginButtonDelegate {
     
+    let discoverLabel: UILabel = UILabel()
     var loginButton: FBSDKLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
+        self.discoverLabel.textColor = UIColor.init(colorLiteralRed: 1, green: 1, blue: 1, alpha: 0.3)
+        self.discoverLabel.font = UIFont.systemFont(ofSize: 52, weight: UIFontWeightHeavy)
+        self.discoverLabel.text = "Login to discover Experiences!"
+        self.discoverLabel.numberOfLines = 0
+        
         loginButton = FBSDKLoginButton()
         loginButton.delegate = self
         loginButton.readPermissions = ["email","public_profile","user_photos"]
@@ -22,15 +28,17 @@ class LoginViewController: OnboardingContentViewController, FBSDKLoginButtonDele
         loginButton.addConstraints(constW)
         
         self.view.addSubview(loginButton)
-        
+        self.view.addSubview(discoverLabel)
         self.view.setNeedsLayout()
+        
+        UIApplication.shared.statusBarStyle = .lightContent
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if let error = error {
             print(error.localizedDescription)
@@ -45,7 +53,9 @@ class LoginViewController: OnboardingContentViewController, FBSDKLoginButtonDele
             if let user = user {
                 DataController.sharedInstance.createUserWithID(firUser: user)
             }
-            self.dismiss(animated: false, completion: nil)
+            
+            UIApplication.shared.statusBarStyle = .default
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -57,5 +67,8 @@ class LoginViewController: OnboardingContentViewController, FBSDKLoginButtonDele
         super.viewDidLayoutSubviews()
         let buttonHeight:CGFloat = 45
         loginButton.frame = CGRect(x: self.view.frame.width/2.0 - loginButton.intrinsicContentSize.width/2.0-10, y: self.view.frame.height - buttonHeight - 100, width: loginButton.intrinsicContentSize.width + 20, height: buttonHeight)
+        
+        discoverLabel.preferredMaxLayoutWidth = self.view.frame.width - 2*16
+        discoverLabel.frame = CGRect(x: 16, y: self.view.frame.height/2 - discoverLabel.intrinsicContentSize.height, width: discoverLabel.intrinsicContentSize.width, height: discoverLabel.intrinsicContentSize.height)
     }
 }

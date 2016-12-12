@@ -161,6 +161,8 @@ class DataController: AnyObject {
     }
     
     public func createUserWithID(firUser: FIRUser) {
+        // Todo: do not create new if already exists
+        
         var defaultUserModel = [String: AnyObject]()
         
         if let avatarImage = firUser.photoURL?.absoluteString {

@@ -1,7 +1,10 @@
 import UIKit
 import AsyncDisplayKit
+import Onboard
+import Firebase
+import FBSDKLoginKit
 
-class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, ActionCellNodeDelegate, JourneyEditorViewControllerDelegate {
+class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, ActionCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate {
     
     let kNewPlanCtaStr: String = "Start a new plan"
     let kNewJourneyCtaStr: String = "Add new journey"
@@ -145,6 +148,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                     let node = ProfileCellNode(name: NSAttributedString(string: userInfoModel.name, attributes: TextStyles.getEventCellHeaderAttributes()),
                                            summary: NSAttributedString(string: userInfoModel.summary, attributes: TextStyles.getEventCellSummaryAttributes()),
                                            avatarUrl: userInfoModel.avatarUrl)
+                    node.delegate = self
                     return node
                 }
                 else {
@@ -232,8 +236,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
             // Fetch Own Journeys 📝 of User
             DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.journeyModels, completionBlock: { (journeyModel) in
                 self.journeyModels.append(journeyModel)
-                self.collectionNode.view.performBatchUpdates({
-                    self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
+                self.collectionNode.performBatchUpdates({
+                    self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
                 }, completion: nil)
             })
         }
@@ -259,6 +263,44 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         default:
             print(string)
         }
+    }
+    
+    func profileCellNode_tapped() {
+        // show actionsheet/alertcontroller
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let changeIntroAction = UIAlertAction(title: "Change introduction", style: .default) { (_) in
+            
+        }
+        let logOutAction = UIAlertAction(title: "Log out", style: .destructive) { (_) in
+            let firebaseAuth = FIRAuth.auth()
+            do {
+                try firebaseAuth?.signOut()
+                
+                FBSDKLoginManager().logOut()
+                
+                // Video
+                let bundle = Bundle.main
+                let moviePath = bundle.path(forResource: "OnboardingVid", ofType: "mp4")
+                let movieURL = NSURL(fileURLWithPath: moviePath!)
+                
+                // User is logged in, do work such as go to next view controller.
+                let loginVC = LoginViewController()
+                let onboardingVC: OnboardingViewController! = OnboardingViewController(backgroundVideoURL: movieURL as URL!, contents: [loginVC])
+                self.present(onboardingVC, animated: false, completion: nil)
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        
+        alertController.addAction(changeIntroAction)
+        alertController.addAction(logOutAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: {
+            //
+        })
     }
     
 }

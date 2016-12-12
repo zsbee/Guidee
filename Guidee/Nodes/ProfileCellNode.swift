@@ -1,6 +1,10 @@
 import UIKit
 import AsyncDisplayKit
 
+protocol ProfileCellNodeDelegate {
+    func profileCellNode_tapped();
+}
+
 class ProfileCellNode: ASCellNode {
     
     let nameNode: ASTextNode = ASTextNode()
@@ -9,6 +13,8 @@ class ProfileCellNode: ASCellNode {
     let avatarUrl: String;
     let avatarSize: CGFloat = 60.0
     let avatarNode: ASNetworkImageNode = ASNetworkImageNode()
+    
+    var delegate: ProfileCellNodeDelegate?
     
     init(name: NSAttributedString, summary: NSAttributedString, avatarUrl: String) {
         self.avatarUrl = avatarUrl
@@ -52,6 +58,13 @@ class ProfileCellNode: ASCellNode {
         self.avatarNode.clipsToBounds = true
         self.avatarNode.layer.borderWidth = 3.0
         self.avatarNode.layer.borderColor = UIColor.white.cgColor
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ProfileCellNode.nodeTapped))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    func nodeTapped() {
+        self.delegate?.profileCellNode_tapped()
     }
 
 }
