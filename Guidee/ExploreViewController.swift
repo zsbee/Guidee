@@ -76,6 +76,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
             var view: CircleAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? CircleAnnotationView {
                 dequeuedView.annotation = annotation
+                dequeuedView.animateIn()
                 view = dequeuedView
             } else {
                 view = CircleAnnotationView(annotation: annotation, reuseIdentifier: identifier)

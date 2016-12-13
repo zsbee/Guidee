@@ -66,6 +66,20 @@ class CircleAnnotationView: MKAnnotationView {
         self.addSubview(self.circleView)
     }
     
+    func animateIn() {
+        let randomDelay = (0.5 - 0) * Double(Double(arc4random()) / Double(UInt32.max)) + 0
+
+        self.circleView.frame = CGRect(x: self.frame.width/2, y: self.frame.height/2, width: 0, height: 0)
+        
+        UIView.animate(withDuration: 0.5, delay: randomDelay, usingSpringWithDamping: 2, initialSpringVelocity: 2, options: .curveEaseInOut, animations: {
+            self.circleView.frame = CGRect(x: self.frame.width/2-self.smallSize/2, y: self.frame.height/2-self.smallSize/2, width: self.smallSize, height: self.smallSize)
+            self.circleView.alpha = 1
+        }, completion: { (finished) in
+            //
+        })
+        
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
     }
