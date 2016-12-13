@@ -27,10 +27,18 @@ class CircleAnnotationView: MKAnnotationView {
     
     
     private func configureView() {
+        
+        let randomDelay = (1.5 - 0) * Double(Double(arc4random()) / Double(UInt32.max)) + 0
+        
+        self.circleView.frame = CGRect(x: self.frame.width/2, y: self.frame.height/2, width: 0, height: 0)
+
+        
         if let imageUrl = (self.annotation as? GuideAnnotation)?.imageUrl {
             let imgURL = NSURL(string: imageUrl)
-            self.circleView.pin_setImage(from: imgURL as? URL)
-            
+            self.circleView.pin_setImage(from: imgURL as? URL, completion: { (result) in
+                //
+            })
+            self.circleView.alpha = 0
             self.circleView.layer.minificationFilter = kCAFilterTrilinear
             self.circleView.layer.cornerRadius = self.smallSize / 2
             self.circleView.clipsToBounds = true
@@ -39,7 +47,14 @@ class CircleAnnotationView: MKAnnotationView {
             self.circleView.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
             self.circleView.layer.shadowOffset = CGSize(width: 0, height: 1)
             self.circleView.layer.shadowRadius = 5;
-            self.circleView.frame = CGRect(x: self.frame.width/2-self.smallSize/2, y: self.frame.height/2-self.smallSize/2, width: self.smallSize, height: self.smallSize)
+            
+            UIView.animate(withDuration: 1, delay: randomDelay, usingSpringWithDamping: 2, initialSpringVelocity: 2, options: .curveEaseInOut, animations: {
+                self.circleView.frame = CGRect(x: self.frame.width/2-self.smallSize/2, y: self.frame.height/2-self.smallSize/2, width: self.smallSize, height: self.smallSize)
+                self.circleView.alpha = 1
+            }, completion: { (finished) in
+                //
+            })
+            
         }
         
         self.calloutView.alpha = 0
