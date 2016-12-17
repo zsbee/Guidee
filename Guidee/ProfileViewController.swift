@@ -54,36 +54,59 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                 }, completion: nil)
             
             // Fetch Own Journeys 📝 of User
-            DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.journeyModels, completionBlock: { (journeyModel) in
-                self.journeyModels.append(journeyModel)
+            if(self.userInfoModel!.hasJourneys) {
+                DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.journeyModels, completionBlock: { (journeyModel) in
+                    self.journeyModels.append(journeyModel)
+                    self.collectionNode.performBatchUpdates({
+                        self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
+                        }, completion: nil)
+                })
+            } else {
+                // load placeholder
                 self.collectionNode.performBatchUpdates({
                     self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
-                    }, completion: nil)
-            })
+                }, completion: nil)
+            }
             
             // Fetch Plans ✈️ of User
-            DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.planModels, completionBlock: { (journeyModel) in
-                self.planModels.append(journeyModel)
+            if(self.userInfoModel!.hasPlans) {
+                DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.planModels, completionBlock: { (journeyModel) in
+                    self.planModels.append(journeyModel)
+                    self.collectionNode.performBatchUpdates({
+                        self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexPlans)])
+                        }, completion: nil)
+                })
+            } else {
+                // load placeholder
                 self.collectionNode.performBatchUpdates({
                     self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexPlans)])
-                    }, completion: nil)
-            })
+                }, completion: nil)
+            }
             
             // Fetch ❤️ of User
-            DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.loveModels, completionBlock: { (journeyModel) in
-                self.loveModels.append(journeyModel)
+            if(self.userInfoModel!.hasLoves) {
+                DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.loveModels, completionBlock: { (journeyModel) in
+                    self.loveModels.append(journeyModel)
+                    self.collectionNode.performBatchUpdates({
+                        self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexLoved)])
+                        }, completion: nil)
+                })
+            } else {
+                // load placeholder
                 self.collectionNode.performBatchUpdates({
                     self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexLoved)])
-                    }, completion: nil)
-            })
+                }, completion: nil)
+            }
             
             // Fetch follows
-            DataController.sharedInstance.getUsersWithFIRids(idArray: userInfoModel.following, completionBlock: { (followedUsedModel) in
-                self.followModels.append(followedUsedModel)
-                self.collectionNode.performBatchUpdates({
-                    self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexFollowing)])
-                    }, completion: nil)
-            })
+            if(self.userInfoModel!.hasFollowing) {
+                DataController.sharedInstance.getUsersWithFIRids(idArray: userInfoModel.following, completionBlock: { (followedUsedModel) in
+                    self.followModels.append(followedUsedModel)
+                    self.collectionNode.performBatchUpdates({
+                        self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexFollowing)])
+                        }, completion: nil)
+                })
+            }
             
         }
         
@@ -166,10 +189,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                         let node = JourneyCellContainerNode(models: self.journeyModels)
                         node.delegate = self
                         return node
-                    } else {
+                    } else if (self.userInfoModel == nil) {
                         let node = LoadingCellNode()
                         node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
                         return node
+                    } else {
+                        return JourneyPlaceholderCellNode(text: "I am sure you have been somewhere. Tell us your story!")
                     }
                 default:
                     let node = ActionCellNode(actionStringNormal: NSAttributedString(string: self.kNewJourneyCtaStr, attributes: TextStyles.getActionNormalStateCellAttributes()),
@@ -189,10 +214,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                         let node = JourneyCellContainerNode(models: self.planModels)
                         node.delegate = self
                         return node
-                    } else {
+                    } else if (self.userInfoModel == nil) {
                         let node = LoadingCellNode()
                         node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
                         return node
+                    } else {
+                        return JourneyPlaceholderCellNode(text: "I am sure you have plans! Tell us what those are!")
                     }
                 default:
                     let node = ActionCellNode(actionStringNormal: NSAttributedString(string: self.kNewPlanCtaStr, attributes: TextStyles.getActionNormalStateCellAttributes()),
@@ -211,12 +238,13 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                     let node = JourneyCellContainerNode(models: self.loveModels)
                     node.delegate = self
                     return node
-                } else {
+                } else if (self.userInfoModel == nil) {
                     let node = LoadingCellNode()
                     node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
                     return node
+                } else {
+                    return JourneyPlaceholderCellNode(text: "Once you like something, you will find it here!")
                 }
-                
             case self.sectionIndexFollowingHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Following", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
@@ -226,10 +254,12 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                     let node = FollowsContainerCell(models: self.followModels)
                     node.delegate = self
                     return node
-                } else {
+                } else if (self.userInfoModel == nil) {
                     let node = LoadingCellNode()
                     node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
                     return node
+                } else {
+                    return JourneyPlaceholderCellNode(text: "I am sure you have been somewhere. Tell us your story!")
                 }
                 
             default:

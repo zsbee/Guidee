@@ -6,6 +6,10 @@ class UserInfoModel: AnyObject {
     public let loveModels: [String]
     public let avatarUrl: String
     public let following: [String]
+    public let hasFollowing: Bool
+    public let hasJourneys: Bool
+    public let hasPlans: Bool
+    public let hasLoves: Bool
     
     public init(dictionary: [String: AnyObject]) {
         self.name = dictionary["name"] as! String
@@ -52,5 +56,10 @@ class UserInfoModel: AnyObject {
             }
         }
         self.following = followersFiltered
+        
+        self.hasLoves = self.loveModels.count > 0
+        self.hasJourneys = self.journeyModels.count > 0
+        self.hasPlans = self.planModels.count > 0
+        self.hasFollowing = self.following.count > 0
     }
 }

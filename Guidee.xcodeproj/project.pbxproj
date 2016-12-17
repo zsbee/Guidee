@@ -24,6 +24,7 @@
 		1B79E11C1DCBCDF500460066 /* JourneyEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */; };
 		1B8996FB1DFDAD7F007DC661 /* OnboardingVid.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1B8996FA1DFDAD7F007DC661 /* OnboardingVid.mp4 */; };
 		1B8A3FFC1E0549840046640C /* LoadingCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A3FFB1E0549840046640C /* LoadingCellNode.swift */; };
+		1B8A3FFE1E055D970046640C /* JourneyPlaceholderCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A3FFD1E055D960046640C /* JourneyPlaceholderCellNode.swift */; };
 		1B9BDA551DD898D50024635B /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BDA541DD898D50024635B /* CommentModel.swift */; };
 		1B9BDA571DD89A880024635B /* CommentCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BDA561DD89A880024635B /* CommentCellNode.swift */; };
 		1B9BDA591DD8AE440024635B /* ActionCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BDA581DD8AE440024635B /* ActionCellNode.swift */; };
@@ -93,6 +94,7 @@
 		1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JourneyEditorViewController.swift; sourceTree = "<group>"; };
 		1B8996FA1DFDAD7F007DC661 /* OnboardingVid.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = OnboardingVid.mp4; sourceTree = "<group>"; };
 		1B8A3FFB1E0549840046640C /* LoadingCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingCellNode.swift; path = Nodes/LoadingCellNode.swift; sourceTree = "<group>"; };
+		1B8A3FFD1E055D960046640C /* JourneyPlaceholderCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JourneyPlaceholderCellNode.swift; path = Nodes/JourneyPlaceholderCellNode.swift; sourceTree = "<group>"; };
 		1B9BDA541DD898D50024635B /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentModel.swift; path = Models/CommentModel.swift; sourceTree = "<group>"; };
 		1B9BDA561DD89A880024635B /* CommentCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentCellNode.swift; path = Nodes/CommentCellNode.swift; sourceTree = "<group>"; };
 		1B9BDA581DD8AE440024635B /* ActionCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionCellNode.swift; path = Nodes/ActionCellNode.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				1B094B051DDBC4E0009E1564 /* PlaceholderNode.swift */,
 				1B5EFB7E1DF42CA100034F57 /* StaticMapCellNode.swift */,
 				1B8A3FFB1E0549840046640C /* LoadingCellNode.swift */,
+				1B8A3FFD1E055D960046640C /* JourneyPlaceholderCellNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				1B6A54CB1DC8F7010072CD83 /* FollowCellNode.swift in Sources */,
 				1BE288161DB5739F005A0C59 /* GuideHeaderView.swift in Sources */,
 				1BDF50CC1DCFCC4B0003D566 /* GuideEventEditorHeaderView.swift in Sources */,
+				1B8A3FFE1E055D970046640C /* JourneyPlaceholderCellNode.swift in Sources */,
 				1BDF50C61DCFB0FA0003D566 /* EditTextSetupViewModel.swift in Sources */,
 				1BE287DB1DB3A84D005A0C59 /* ProfileViewController.swift in Sources */,
 				1BDF50C81DCFCA080003D566 /* GuideEventEditorViewController.swift in Sources */,
