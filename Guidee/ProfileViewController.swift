@@ -162,9 +162,15 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
             case self.sectionIndexJourneys:
                 switch indexPath.row {
                 case 0:
-                    let node = JourneyCellContainerNode(models: self.journeyModels)
-                    node.delegate = self
-                    return node
+                    if(self.journeyModels.count > 0) {
+                        let node = JourneyCellContainerNode(models: self.journeyModels)
+                        node.delegate = self
+                        return node
+                    } else {
+                        let node = LoadingCellNode()
+                        node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
+                        return node
+                    }
                 default:
                     let node = ActionCellNode(actionStringNormal: NSAttributedString(string: self.kNewJourneyCtaStr, attributes: TextStyles.getActionNormalStateCellAttributes()),
                                               actionStringHighlighted: NSAttributedString(string: self.kNewJourneyCtaStr, attributes: TextStyles.getActionHighlightedStateCellAttributes()),
@@ -179,9 +185,15 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
             case self.sectionIndexPlans:
                 switch indexPath.row {
                 case 0:
-                    let node = JourneyCellContainerNode(models: self.planModels)
-                    node.delegate = self
-                    return node
+                    if(self.planModels.count > 0) {
+                        let node = JourneyCellContainerNode(models: self.planModels)
+                        node.delegate = self
+                        return node
+                    } else {
+                        let node = LoadingCellNode()
+                        node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
+                        return node
+                    }
                 default:
                     let node = ActionCellNode(actionStringNormal: NSAttributedString(string: self.kNewPlanCtaStr, attributes: TextStyles.getActionNormalStateCellAttributes()),
                                               actionStringHighlighted: NSAttributedString(string: self.kNewPlanCtaStr, attributes: TextStyles.getActionHighlightedStateCellAttributes()),
@@ -195,18 +207,30 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                 return node
             
             case self.sectionIndexLoved:
-                let node = JourneyCellContainerNode(models: self.loveModels)
-                node.delegate = self
-                return node
+                if(self.loveModels.count > 0) {
+                    let node = JourneyCellContainerNode(models: self.loveModels)
+                    node.delegate = self
+                    return node
+                } else {
+                    let node = LoadingCellNode()
+                    node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
+                    return node
+                }
                 
             case self.sectionIndexFollowingHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Following", attributes: TextStyles.getHeaderFontAttributes()))
                 return node
                 
             case self.sectionIndexFollowing:
-                let node = FollowsContainerCell(models: self.followModels)
-                node.delegate = self
-                return node
+                if(self.followModels.count > 0) {
+                    let node = FollowsContainerCell(models: self.followModels)
+                    node.delegate = self
+                    return node
+                } else {
+                    let node = LoadingCellNode()
+                    node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
+                    return node
+                }
                 
             default:
                 return ASCellNode()

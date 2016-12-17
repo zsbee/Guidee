@@ -23,6 +23,7 @@
 		1B787B631DD12BD700EE7B42 /* MapCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B787B621DD12BD700EE7B42 /* MapCellNode.swift */; };
 		1B79E11C1DCBCDF500460066 /* JourneyEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */; };
 		1B8996FB1DFDAD7F007DC661 /* OnboardingVid.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1B8996FA1DFDAD7F007DC661 /* OnboardingVid.mp4 */; };
+		1B8A3FFC1E0549840046640C /* LoadingCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A3FFB1E0549840046640C /* LoadingCellNode.swift */; };
 		1B9BDA551DD898D50024635B /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BDA541DD898D50024635B /* CommentModel.swift */; };
 		1B9BDA571DD89A880024635B /* CommentCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BDA561DD89A880024635B /* CommentCellNode.swift */; };
 		1B9BDA591DD8AE440024635B /* ActionCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9BDA581DD8AE440024635B /* ActionCellNode.swift */; };
@@ -91,6 +92,7 @@
 		1B787B621DD12BD700EE7B42 /* MapCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapCellNode.swift; path = Nodes/MapCellNode.swift; sourceTree = "<group>"; };
 		1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JourneyEditorViewController.swift; sourceTree = "<group>"; };
 		1B8996FA1DFDAD7F007DC661 /* OnboardingVid.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = OnboardingVid.mp4; sourceTree = "<group>"; };
+		1B8A3FFB1E0549840046640C /* LoadingCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingCellNode.swift; path = Nodes/LoadingCellNode.swift; sourceTree = "<group>"; };
 		1B9BDA541DD898D50024635B /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentModel.swift; path = Models/CommentModel.swift; sourceTree = "<group>"; };
 		1B9BDA561DD89A880024635B /* CommentCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentCellNode.swift; path = Nodes/CommentCellNode.swift; sourceTree = "<group>"; };
 		1B9BDA581DD8AE440024635B /* ActionCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionCellNode.swift; path = Nodes/ActionCellNode.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				1B9BDA581DD8AE440024635B /* ActionCellNode.swift */,
 				1B094B051DDBC4E0009E1564 /* PlaceholderNode.swift */,
 				1B5EFB7E1DF42CA100034F57 /* StaticMapCellNode.swift */,
+				1B8A3FFB1E0549840046640C /* LoadingCellNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				1B23C9971DBA94A6004783A8 /* ExploreHeaderView.swift in Sources */,
 				1BE288141DB570FE005A0C59 /* GuideEventDetailModel.swift in Sources */,
 				1BE287D71DB3A84D005A0C59 /* AppDelegate.swift in Sources */,
+				1B8A3FFC1E0549840046640C /* LoadingCellNode.swift in Sources */,
 				1BDF50C11DCFACD50003D566 /* JourneyEditorHeaderView.swift in Sources */,
 				1B1EF3F91DC4A0B600CF99A4 /* DataController.swift in Sources */,
 				1B094B061DDBC4E0009E1564 /* PlaceholderNode.swift in Sources */,

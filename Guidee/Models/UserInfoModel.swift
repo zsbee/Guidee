@@ -13,7 +13,10 @@ class UserInfoModel: AnyObject {
         self.avatarUrl = dictionary["avatarUrl"] as! String
         
         var journeysFiltered = [String]()
-        
+        var plansFiltered = [String]()
+        var lovesFiltered = [String]()
+        var followersFiltered = [String]()
+
         if let userJourneys = dictionary["journeys"] as? [String: AnyObject] {
             for (_,element) in userJourneys {
                 if let str = element as? String {
@@ -21,10 +24,33 @@ class UserInfoModel: AnyObject {
                 }
             }
         }
-        
         self.journeyModels = journeysFiltered
-        self.planModels = dictionary["plans"] as! [String]
-        self.loveModels = dictionary["loves"] as! [String]
-        self.following = dictionary["following"] as! [String]
+        
+        if let userPlans = dictionary["plans"] as? [String: AnyObject] {
+            for (_,element) in userPlans {
+                if let str = element as? String {
+                    plansFiltered.append(str)
+                }
+            }
+        }
+        self.planModels = plansFiltered
+        
+        if let userLoves = dictionary["loves"] as? [String: AnyObject] {
+            for (_,element) in userLoves {
+                if let str = element as? String {
+                    lovesFiltered.append(str)
+                }
+            }
+        }
+        self.loveModels = lovesFiltered
+        
+        if let following = dictionary["following"] as? [String: AnyObject] {
+            for (_,element) in following {
+                if let str = element as? String {
+                    followersFiltered.append(str)
+                }
+            }
+        }
+        self.following = followersFiltered
     }
 }

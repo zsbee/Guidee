@@ -28,7 +28,7 @@ class JourneyCellContainerNode: ASCellNode, ASCollectionDelegate, ASCollectionDa
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        collectionNode.preferredFrameSize = CGSize(width: constrainedSize.min.width, height: 162)
+        collectionNode.style.preferredSize = CGSize(width: constrainedSize.min.width, height: 162)
         return ASInsetLayoutSpec.init(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: collectionNode)
     }
     
