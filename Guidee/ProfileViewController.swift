@@ -106,6 +106,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                         self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexFollowing)])
                         }, completion: nil)
                 })
+            } else {
+                // load placeholder
+                self.collectionNode.performBatchUpdates({
+                    self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexFollowing)])
+                }, completion: nil)
             }
             
         }
@@ -259,7 +264,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
                     node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
                     return node
                 } else {
-                    return JourneyPlaceholderCellNode(text: "I am sure you have been somewhere. Tell us your story!")
+                    return JourneyPlaceholderCellNode(text: "You do not follow anyone yet!")
                 }
                 
             default:
