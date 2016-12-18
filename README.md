@@ -44,8 +44,8 @@ Journeys can be commented on, made private, one could steal highlights from them
 * Commenting on a Journey is possible
 * Map for the Highlight pages
 * Creating a Journey should put it into the users journeys
+* Creating a Plan
 
 # Next steps:
 * Liking a Journey
-* Creating a Plan
 * Following someone.
