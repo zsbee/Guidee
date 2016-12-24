@@ -1,7 +1,8 @@
 import Foundation
 import AsyncDisplayKit
+import pop
 
-class EventSubCellNode: ASCellNode {
+class EventSubCellNode: ASCellNode, ASNetworkImageNodeDelegate {
     let titleTextNode: ASTextNode = ASTextNode()
     let summaryTextNode: ASTextNode = ASTextNode()
     
@@ -19,7 +20,8 @@ class EventSubCellNode: ASCellNode {
         summaryTextNode.attributedText = attributedSummaryText
         summaryTextNode.maximumNumberOfLines = 2
         summaryTextNode.truncationMode = .byWordWrapping
-        
+		imageNode.delegate = self
+		
         self.addSubnode(titleTextNode)
         self.addSubnode(summaryTextNode)
         self.addSubnode(imageNode)
@@ -59,6 +61,7 @@ class EventSubCellNode: ASCellNode {
         {
             if let imageUrlString = self.model.carouselModels[0].imageURL {
                 if let url3 = NSURL(string: imageUrlString) {
+					
                     self.imageNode.setURL(url3 as URL, resetToDefault: true)
                 }
             }
@@ -70,4 +73,19 @@ class EventSubCellNode: ASCellNode {
         self.imageNode.layer.cornerRadius = 8
         self.imageNode.layer.masksToBounds = true
     }
+	
+	public func imageNode(_ imageNode: ASNetworkImageNode, didLoad image: UIImage)
+	{
+		DispatchQueue.main.async() {
+			let imageView = self.imageNode.view
+			imageView.clipsToBounds = true
+			imageView.layer.masksToBounds = true
+			let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+			alphaAnimation!.fromValue = 0
+			alphaAnimation!.toValue = 1
+		
+			imageView.pop_add(alphaAnimation, forKey: "alpha")
+		}
+	}
+	
 }

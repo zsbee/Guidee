@@ -1,8 +1,9 @@
 import Foundation
 import AsyncDisplayKit
 import youtube_ios_player_helper
+import pop
 
-class ImageItemNode: ASCellNode {
+class ImageItemNode: ASCellNode, ASNetworkImageNodeDelegate {
     let model: CarouselItemModel
     
     let placeholderImages = ["placeholderPastel","placeholderBlue","placeholderYellow","placeholderPink", "placeholderGreen"]
@@ -35,9 +36,10 @@ class ImageItemNode: ASCellNode {
         
         let randomIndex = Int(arc4random_uniform(UInt32(placeholderImages.count)))
         
-        self.mainImage.preferredFrameSize = CGSize(width: 162, height: 162)
+        self.mainImage.style.preferredSize = CGSize(width: 162, height: 162)
+		self.mainImage.delegate = self
         self.mainImage.defaultImage = UIImage(named: self.placeholderImages[randomIndex])
-        self.cornerClipImage.preferredFrameSize = CGSize(width: 162, height: 162)
+        self.cornerClipImage.style.preferredSize = CGSize(width: 162, height: 162)
         
         if self.isVideo {
             self.addSubnode(videoNode)
@@ -75,6 +77,20 @@ class ImageItemNode: ASCellNode {
         self.videoNode.layer.cornerRadius = 10
         self.videoNode.layer.masksToBounds = true
     }
-    
+	
+	public func imageNode(_ imageNode: ASNetworkImageNode, didLoad image: UIImage)
+	{
+		DispatchQueue.main.async() {
+			let imageView = self.mainImage.view
+			imageView.clipsToBounds = true
+			imageView.layer.masksToBounds = true
+			let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+			alphaAnimation!.fromValue = 0
+			alphaAnimation!.toValue = 1
+			alphaAnimation!.duration = 0.8
+			
+			imageView.pop_add(alphaAnimation, forKey: "alpha")
+		}
+	}
 }
     

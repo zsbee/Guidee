@@ -1,8 +1,9 @@
 import Foundation
 import UIKit
 import AsyncDisplayKit
+import pop
 
-class GuideHeaderCellNode: ASCellNode {
+class GuideHeaderCellNode: ASCellNode, ASNetworkImageNodeDelegate {
     
     let titleNode: ASTextNode = ASTextNode()
     let coverImageUrl: String
@@ -19,7 +20,9 @@ class GuideHeaderCellNode: ASCellNode {
         
         titleNode.attributedText = attributedText
         titleNode.maximumNumberOfLines = 2
-                
+		
+		self.coverImageNode.delegate = self
+		
         self.addSubnode(coverImageNode)
         self.addSubnode(avatarNode)
         self.addSubnode(titleNode)
@@ -61,5 +64,21 @@ class GuideHeaderCellNode: ASCellNode {
         self.avatarNode.layer.borderWidth = 3.0
         self.avatarNode.layer.borderColor = UIColor.white.cgColor
     }
-    
+	
+	
+	public func imageNode(_ imageNode: ASNetworkImageNode, didLoad image: UIImage)
+	{
+		DispatchQueue.main.async() {
+			let imageView = self.coverImageNode.view
+			imageView.clipsToBounds = true
+			imageView.layer.masksToBounds = true
+
+			let alphaAnimation = POPBasicAnimation(propertyNamed: kPOPViewAlpha)
+			alphaAnimation!.fromValue = 0
+			alphaAnimation!.toValue = 1
+			alphaAnimation!.duration = 0.8
+			
+			imageView.pop_add(alphaAnimation, forKey: "alpha")
+		}
+	}
 }
