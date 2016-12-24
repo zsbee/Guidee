@@ -14,7 +14,7 @@ class LoginViewController: OnboardingContentViewController, FBSDKLoginButtonDele
         
         self.discoverLabel.textColor = UIColor.init(colorLiteralRed: 1, green: 1, blue: 1, alpha: 0.3)
         self.discoverLabel.font = UIFont.systemFont(ofSize: 52, weight: UIFontWeightHeavy)
-        self.discoverLabel.text = "Login to discover Experiences!"
+        self.discoverLabel.text = "Discover Experiences!"
         self.discoverLabel.numberOfLines = 0
         
         loginButton = FBSDKLoginButton()
