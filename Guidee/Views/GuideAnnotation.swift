@@ -11,9 +11,9 @@ public class GuideAnnotation: NSObject, MKAnnotation {
     
     public var calloutView: PinCalloutView?
     
-    public init(dictionary: NSDictionary) {
+	public init(dictionary: NSDictionary, likes: Int) {
         self.identifier = (dictionary["identifier"] as! NSString) as String
-        self.likes = (dictionary["likes"] as! NSNumber) as Int
+        self.likes = likes
         self.imageUrl = (dictionary["imageURL"] as! NSString) as String
         self.title = (dictionary["title"] as! NSString) as String
         self.subtitle = (dictionary["subtitle"] as! NSString) as String

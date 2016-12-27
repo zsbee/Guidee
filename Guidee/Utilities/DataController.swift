@@ -189,10 +189,40 @@ class DataController: AnyObject {
         }) { (error) in
             print(error.localizedDescription)
         }
-        
-
     }
-    
+	
+	public func likeJourneyWithId(key: String!) {
+		self.journeys.child(key).runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+			if var journey = currentData.value as? [String : AnyObject], let uid = FIRAuth.auth()?.currentUser?.uid {
+				var loved: Dictionary<String, Bool>
+				loved = journey["loved"] as? [String : Bool] ?? [:]
+				var lovedCount = journey["lovedCount"] as? Int ?? 0
+				if let _ = loved[uid] {
+					lovedCount -= 1
+					loved.removeValue(forKey: uid)
+					// Remove from users likes
+					self.users.child(uid).child("loved").child(key).removeValue()
+				} else {
+					lovedCount += 1
+					loved[uid] = true
+					// Set users likes
+					self.users.child(uid).child("loved").child(key).setValue(key)
+				}
+				journey["lovedCount"] = lovedCount as AnyObject?
+				journey["loved"] = loved as AnyObject?
+							
+				// Set value and report transaction success
+				currentData.value = journey
+				
+				return FIRTransactionResult.success(withValue: currentData)
+			}
+			return FIRTransactionResult.success(withValue: currentData)}) { (error, committed, snapshot) in
+				if let error = error {
+					print(error.localizedDescription)
+				}
+			}
+	}
+	
     public func getCurrentUserModel() -> UserInfoModel? {
         return self.currentUser
     }

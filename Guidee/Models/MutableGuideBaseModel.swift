@@ -8,14 +8,14 @@ public class MutableGuideBaseModel: AnyObject {
     public var eventModels: [GuideEventDetailModel]
     public var annotationModel: GuideAnnotation
     public var userAvatarUrl: String
-    
+	
     public init(dictionary: NSDictionary) {
         self.identifier = (dictionary["identifier"] as! NSString) as String
         self.title = (dictionary["title"] as! NSString) as String
         self.summary = (dictionary["summary"] as! NSString) as String
         self.coverImageUrl = (dictionary["coverImageUrl"] as! NSString) as String
         self.userAvatarUrl = (dictionary["userAvatarUrl"] as! NSString) as String
-        
+		
         if let detailModels = dictionary["eventModels"] as? NSArray {
             let models:NSMutableArray = NSMutableArray()
             for detailModel in detailModels {
@@ -28,7 +28,7 @@ public class MutableGuideBaseModel: AnyObject {
             self.eventModels = [GuideEventDetailModel]()
         }
         
-        self.annotationModel = GuideAnnotation(dictionary: dictionary["annotationModel"] as! NSDictionary)
+		self.annotationModel = GuideAnnotation(dictionary: dictionary["annotationModel"] as! NSDictionary, likes: 0)
     }
     
     public init(identifier: String, title: String, summary: String, coverImageUrl: String, userAvatarUrl: String, eventModels: [GuideEventDetailModel], annotationModel: GuideAnnotation) {

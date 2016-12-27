@@ -10,7 +10,9 @@ public class GuideBaseModel: AnyObject {
     public let eventModels: [GuideEventDetailModel]
     public let annotationModel: GuideAnnotation
     public let userAvatarUrl: String
-    
+	public let lovedCount: Int
+	public let loved: [String: AnyObject]
+	
     public init(dictionary: NSDictionary, firID: String) {
         self.firebaseID = firID
         self.identifier = (dictionary["identifier"] as! NSString) as String
@@ -18,7 +20,19 @@ public class GuideBaseModel: AnyObject {
         self.summary = (dictionary["summary"] as! NSString) as String
         self.coverImageUrl = (dictionary["coverImageUrl"] as! NSString) as String
         self.userAvatarUrl = (dictionary["userAvatarUrl"] as! NSString) as String
-        
+		
+		if (dictionary["lovedCount"] != nil) {
+			self.lovedCount = dictionary["lovedCount"] as! Int
+		} else {
+			self.lovedCount = 0
+		}
+		
+		if (dictionary["loved"] != nil) {
+			self.loved = dictionary["loved"] as! [String: AnyObject]
+		} else {
+			self.loved = [String : AnyObject]()
+		}
+		
         if let detailModels = dictionary["eventModels"] as? NSArray {
             let models:NSMutableArray = NSMutableArray()
             for detailModel in detailModels {
@@ -31,7 +45,7 @@ public class GuideBaseModel: AnyObject {
             self.eventModels = [GuideEventDetailModel]()
         }
 
-        self.annotationModel = GuideAnnotation(dictionary: dictionary["annotationModel"] as! NSDictionary)
+		self.annotationModel = GuideAnnotation(dictionary: dictionary["annotationModel"] as! NSDictionary, likes: self.lovedCount)
     }
     
     public init(identifier: String, title: String, summary: String, coverImageUrl: String, userAvatarUrl: String, eventModels: [GuideEventDetailModel], annotationModel: GuideAnnotation) {
@@ -43,6 +57,8 @@ public class GuideBaseModel: AnyObject {
         self.annotationModel = annotationModel
         self.userAvatarUrl = userAvatarUrl
         self.firebaseID = identifier
+		self.lovedCount = 0
+		self.loved = [String:AnyObject]()
     }
     
     public func mutableObject() -> MutableGuideBaseModel {

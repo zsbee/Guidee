@@ -51,7 +51,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
             self.comments = comments
 
             if self.comments.count > 0 {
-                self.collectionNode.view.reloadSections(IndexSet(integer: self.sectionIndexComments))
+                self.collectionNode.reloadSections(IndexSet(integer: self.sectionIndexComments))
             }
         })
     }
@@ -179,7 +179,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     }
     
     func header_heartButtonTapped() {
-        
+        DataController.sharedInstance.likeJourneyWithId(key: self.baseModel.firebaseID)
     }
     
     internal func guideEventTapped(model: GuideEventDetailModel, atIndex: Int) {

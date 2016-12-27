@@ -39,7 +39,7 @@ class UserInfoModel: AnyObject {
         }
         self.planModels = plansFiltered
         
-        if let userLoves = dictionary["loves"] as? [String: AnyObject] {
+        if let userLoves = dictionary["loved"] as? [String: AnyObject] {
             for (_,element) in userLoves {
                 if let str = element as? String {
                     lovesFiltered.append(str)
