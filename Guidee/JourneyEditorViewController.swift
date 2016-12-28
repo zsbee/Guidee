@@ -160,11 +160,15 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
                 self.present(imagePicker, animated: true, completion: nil)
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
-            
+			
             alertController.addAction(editTitleAction)
             alertController.addAction(uploadImageAction)
             alertController.addAction(cancelAction)
-            
+			
+			let headerNode = self.collectionNode.nodeForItem(at: indexPath)
+			alertController.popoverPresentationController?.sourceView = self.view
+			alertController.popoverPresentationController?.sourceRect = headerNode?.view.bounds ?? self.view.bounds
+			
             self.present(alertController, animated: true, completion: { 
                 //
             })

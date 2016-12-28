@@ -363,7 +363,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         alertController.addAction(changeIntroAction)
         alertController.addAction(logOutAction)
         alertController.addAction(cancelAction)
-        
+		
+		let headerNode = self.collectionNode.nodeForItem(at: IndexPath(item: 0, section: self.sectionIndexProfileSummary))
+		alertController.popoverPresentationController?.sourceView = self.view
+		alertController.popoverPresentationController?.sourceRect = headerNode?.view.bounds ?? self.view.bounds
+		
         self.present(alertController, animated: true, completion: {
             //
         })
