@@ -33,7 +33,7 @@ class ProfileCellNode: ASCellNode {
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         self.avatarNode.style.preferredSize = CGSize(width: avatarSize, height: avatarSize)
-        self.avatarNode.style.flexGrow = 1
+        self.avatarNode.style.flexGrow = 0
         
         let rightVerticalStack = ASStackLayoutSpec(direction: .vertical, spacing: 4, justifyContent: .start, alignItems: .stretch, children: [nameNode, summaryTextNode])
         rightVerticalStack.style.flexShrink = 1
