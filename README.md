@@ -1,4 +1,5 @@
 # Guidee, social travel inspiration app
+<img src="./Other/AppIcon.png" height="128">
 
 # What?
 <img src="./Other/IMG_1625.PNG" height="550">
@@ -45,7 +46,7 @@ Journeys can be commented on, made private, one could steal highlights from them
 * Map for the Highlight pages
 * Creating a Journey should put it into the users journeys
 * Creating a Plan
+* Liking a Journey
 
 # Next steps:
-* Liking a Journey
 * Following someone.
