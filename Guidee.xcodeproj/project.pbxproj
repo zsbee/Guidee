@@ -374,7 +374,7 @@
 					1BE287D21DB3A84D005A0C59 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = SR456VS83G;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					1BE287E81DB3A84D005A0C59 = {
 						CreatedOnToolsVersion = 8.0;
@@ -731,8 +731,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zsombor.Fuszenecker.Guidee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "cde8cff2-3158-4018-a33c-63f23f1ed307";
+				PROVISIONING_PROFILE_SPECIFIER = "All my devices";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -749,8 +749,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zsombor.Fuszenecker.Guidee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "cde8cff2-3158-4018-a33c-63f23f1ed307";
+				PROVISIONING_PROFILE_SPECIFIER = "All my devices";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

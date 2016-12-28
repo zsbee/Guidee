@@ -1,6 +1,10 @@
 import UIKit
 import Firebase
 
+protocol DataListener {
+	func dc_loveModelsDidUpdate()
+}
+
 class DataController: AnyObject {
     private let root = FIRDatabase.database().reference()
     
@@ -8,7 +12,7 @@ class DataController: AnyObject {
     private let users: FIRDatabaseReference
     private let editableJourney: FIRDatabaseReference
     private let comments: FIRDatabaseReference
-    
+	private var listeners: [DataListener] = [DataListener]()
     // cache
     private var currentUser: UserInfoModel?
     
@@ -68,9 +72,6 @@ class DataController: AnyObject {
                     
                     completionBlock(commentModels)
                 }
-            }
-            else {
-                print("No comments for this guide")
             }
         }) { (error) in
             print(error.localizedDescription)
@@ -213,12 +214,13 @@ class DataController: AnyObject {
 							
 				// Set value and report transaction success
 				currentData.value = journey
-				
+				self.updateListeners()
 				return FIRTransactionResult.success(withValue: currentData)
 			}
 			return FIRTransactionResult.success(withValue: currentData)}) { (error, committed, snapshot) in
 				if let error = error {
 					print(error.localizedDescription)
+					self.updateListeners()
 				}
 			}
 	}
@@ -226,4 +228,15 @@ class DataController: AnyObject {
     public func getCurrentUserModel() -> UserInfoModel? {
         return self.currentUser
     }
+	
+	public func addListener(listener: DataListener) {
+		self.listeners.append(listener);
+	}
+	
+	private func updateListeners() {
+		// for now, until we do not have other types this is ok. will extend with subscription types later if needed.
+		for listener in self.listeners {
+			listener.dc_loveModelsDidUpdate()
+		}
+	}
 }

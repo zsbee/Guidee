@@ -4,7 +4,7 @@ import Onboard
 import Firebase
 import FBSDKLoginKit
 
-class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, ActionCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate {
+class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, ActionCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate, DataListener {
     
     let kNewPlanCtaStr: String = "Start a new plan"
     let kNewJourneyCtaStr: String = "Add new journey"
@@ -45,82 +45,87 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.collectionNode.backgroundColor = UIColor.clear
         
         self.view.addSubnode(collectionNode)
-        
-        // Fetch user Profile
-        DataController.sharedInstance.getCurrentUserInfo { (userInfoModel) in
-            self.userInfoModel = userInfoModel
-            self.collectionNode.performBatchUpdates({
-                self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexProfileSummary)])
-                }, completion: nil)
-            
-            // Fetch Own Journeys 📝 of User
-            if(self.userInfoModel!.hasJourneys) {
-                DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.journeyModels, completionBlock: { (journeyModel) in
-                    self.journeyModels.append(journeyModel)
-                    self.collectionNode.performBatchUpdates({
-                        self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
-                        }, completion: nil)
-                })
-            } else {
-                // load placeholder
-                self.collectionNode.performBatchUpdates({
-                    self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
-                }, completion: nil)
-            }
-            
-            // Fetch Plans ✈️ of User
-            if(self.userInfoModel!.hasPlans) {
-                DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.planModels, completionBlock: { (journeyModel) in
-                    self.planModels.append(journeyModel)
-                    self.collectionNode.performBatchUpdates({
-                        self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexPlans)])
-                        }, completion: nil)
-                })
-            } else {
-                // load placeholder
-                self.collectionNode.performBatchUpdates({
-                    self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexPlans)])
-                }, completion: nil)
-            }
-            
-            // Fetch ❤️ of User
-            if(self.userInfoModel!.hasLoves) {
-                DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.loveModels, completionBlock: { (journeyModel) in
-                    self.loveModels.append(journeyModel)
-                    self.collectionNode.performBatchUpdates({
-                        self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexLoved)])
-                        }, completion: nil)
-                })
-            } else {
-                // load placeholder
-                self.collectionNode.performBatchUpdates({
-                    self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexLoved)])
-                }, completion: nil)
-            }
-            
-            // Fetch follows
-            if(self.userInfoModel!.hasFollowing) {
-                DataController.sharedInstance.getUsersWithFIRids(idArray: userInfoModel.following, completionBlock: { (followedUsedModel) in
-                    self.followModels.append(followedUsedModel)
-                    self.collectionNode.performBatchUpdates({
-                        self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexFollowing)])
-                        }, completion: nil)
-                })
-            } else {
-                // load placeholder
-                self.collectionNode.performBatchUpdates({
-                    self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexFollowing)])
-                }, completion: nil)
-            }
-            
-        }
-        
-        
+		DataController.sharedInstance.addListener(listener: self)
+		
+		self.fetchUserData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+	func fetchUserData() {
+		// clear all data
+		self.journeyModels = []
+		self.followModels = []
+		self.planModels = []
+		self.loveModels = []
+		
+		// Fetch user Profile
+		DataController.sharedInstance.getCurrentUserInfo { (userInfoModel) in
+			self.userInfoModel = userInfoModel
+			self.collectionNode.performBatchUpdates({
+				self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexProfileSummary)])
+			}, completion: nil)
+			
+			// Fetch Own Journeys 📝 of User
+			if(self.userInfoModel!.hasJourneys) {
+				DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.journeyModels, completionBlock: { (journeyModel) in
+					self.journeyModels.append(journeyModel)
+					self.collectionNode.performBatchUpdates({
+						self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
+					}, completion: nil)
+				})
+			} else {
+				// load placeholder
+				self.collectionNode.performBatchUpdates({
+					self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexJourneys)])
+				}, completion: nil)
+			}
+			
+			// Fetch Plans ✈️ of User
+			if(self.userInfoModel!.hasPlans) {
+				DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.planModels, completionBlock: { (journeyModel) in
+					self.planModels.append(journeyModel)
+					self.collectionNode.performBatchUpdates({
+						self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexPlans)])
+					}, completion: nil)
+				})
+			} else {
+				// load placeholder
+				self.collectionNode.performBatchUpdates({
+					self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexPlans)])
+				}, completion: nil)
+			}
+			
+			// Fetch ❤️ of User
+			if(self.userInfoModel!.hasLoves) {
+				DataController.sharedInstance.getJourneysWithFIRids(idArray: self.userInfoModel!.loveModels, completionBlock: { (journeyModel) in
+					self.loveModels.append(journeyModel)
+					self.collectionNode.performBatchUpdates({
+						self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexLoved)])
+					}, completion: nil)
+				})
+			} else {
+				// load placeholder
+				self.collectionNode.performBatchUpdates({
+					self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexLoved)])
+				}, completion: nil)
+			}
+			
+			// Fetch follows
+			if(self.userInfoModel!.hasFollowing) {
+				DataController.sharedInstance.getUsersWithFIRids(idArray: userInfoModel.following, completionBlock: { (followedUsedModel) in
+					self.followModels.append(followedUsedModel)
+					self.collectionNode.performBatchUpdates({
+						self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexFollowing)])
+					}, completion: nil)
+				})
+			} else {
+				// load placeholder
+				self.collectionNode.performBatchUpdates({
+					self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexFollowing)])
+				}, completion: nil)
+			}
+			
+		}
+	}
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -142,7 +147,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 10
     }
-    
+	
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         switch section {
         case self.sectionIndexProfileSummaryHeader:
@@ -361,6 +366,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
             //
         })
     }
+	
+	func dc_loveModelsDidUpdate() {
+		self.fetchUserData()
+	}
     
 }
 
