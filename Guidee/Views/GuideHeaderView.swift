@@ -29,7 +29,7 @@ class GuideHeaderView: UIView {
         self.heartIconButton.setImage(UIImage(named: "HeartHighlighted"), for: .highlighted)
         self.heartIconButton.addTarget(self, action: #selector(GuideHeaderView.heartTapped), for: .touchUpInside)
         
-        self.closeButton.setImage(UIImage(named: "BackdownArrow"), for: .normal)
+        self.closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
         self.closeButton.addTarget(self, action: #selector(GuideHeaderView.closeTapped), for: .touchUpInside)
         
         
@@ -45,7 +45,7 @@ class GuideHeaderView: UIView {
     override func layoutSubviews() {
         self.blurEffectView.frame = self.frame
         self.heartIconButton.frame = CGRect(x: self.frame.width - 40 - 16, y: 25, width: 40, height: 26)
-        self.closeButton.frame = CGRect(x: 16, y: 25, width: 40, height: 26)
+        self.closeButton.frame = CGRect(x: 16, y: 19, width: 40, height: 40)
     }
     
     func closeTapped() {

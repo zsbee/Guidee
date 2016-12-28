@@ -4,13 +4,15 @@ import Onboard
 import Firebase
 import FBSDKLoginKit
 
-class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, ActionCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate, DataListener {
+class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, ActionCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate, DataListener, UIViewControllerTransitioningDelegate {
     
     let kNewPlanCtaStr: String = "Start a new plan"
     let kNewJourneyCtaStr: String = "Add new journey"
     
     var collectionNode: ASCollectionNode!
-    
+	
+	let transition = PopAnimator()
+	
     // Fetched data
     var userInfoModel:UserInfoModel?
     var journeyModels: [GuideBaseModel] = [GuideBaseModel]()
@@ -310,7 +312,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     func didTapJourney(journeyModel: GuideBaseModel) {
         let vc = GuideHomeViewController()
         vc.baseModel = journeyModel
-        
+        vc.transitioningDelegate = self
         self.present(vc, animated: true, completion:nil)
     }
     
@@ -370,6 +372,16 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
 	func dc_loveModelsDidUpdate() {
 		self.fetchUserData()
 	}
-    
+	
+	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+		transition.presenting = false
+		return transition
+	}
+	
+	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+		transition.presenting = true
+		return transition
+	}
+	
 }
 

@@ -4,10 +4,11 @@ import Firebase
 import FBSDKCoreKit
 import Onboard
 
-class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewDelegate, ExploreheaderViewDelegate {
+class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewDelegate, ExploreheaderViewDelegate, UIViewControllerTransitioningDelegate {
     var mapView: CustomMapView!
     var allGuides: [GuideBaseModel]! = [GuideBaseModel]()
-    
+    let transition = PopAnimator()
+	
     let headerView = ExploreHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
     override func viewDidLoad() {
@@ -98,7 +99,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
             if let baseModel = self.getModelWithId(annotID: annotation.identifier) {
                 let vc = GuideHomeViewController()
                 vc.baseModel = baseModel
-                
+                vc.transitioningDelegate = self
                 self.present(vc, animated: true, completion:nil)
             }
         }
@@ -119,5 +120,15 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
         vc.mapCenter = self.mapView.centerCoordinate
         self.present(vc, animated: true, completion:nil)
     }
+	
+	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+		transition.presenting = false
+		return transition
+	}
+	
+	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+		transition.presenting = true
+		return transition
+	}
 }
 
