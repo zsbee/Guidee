@@ -27,7 +27,7 @@ class MapCellNode: ASCellNode, MKMapViewDelegate {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        self.mapNode.preferredFrameSize = CGSize(width: constrainedSize.max.width, height: 300)
+        self.mapNode.style.preferredSize = CGSize(width: constrainedSize.max.width, height: 300)
         
         let centerLayoutSpec = ASCenterLayoutSpec(centeringOptions: .XY, sizingOptions: ASCenterLayoutSpecSizingOptions.minimumX, child: self.pinNode)
         let overlayLayoutSpec = ASOverlayLayoutSpec(child: self.mapNode, overlay: centerLayoutSpec)

@@ -110,7 +110,7 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
                     let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Map", attributes: TextStyles.getHeaderFontAttributes()))
                     return node
                 case self.sectionIndexMap:
-                    let node = StaticMapCellNode(mapCenterCoordinate: self.model!.coordinates)
+					let node = StaticMapCellNode(mapCenterCoordinate: self.model!.coordinates, annotations: nil)
                     return node
                     
                 case self.sectionIndexAdvert:

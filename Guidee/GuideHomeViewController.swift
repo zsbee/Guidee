@@ -17,8 +17,10 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     private let sectionIndexSummary: Int = 2
     private let sectionIndexDetailsHeader: Int = 3
     private let sectionIndexDetails = 4
-    private let sectionIndexComments: Int = 5
-    private let sectionIndexCommentsAction = 6
+	private let sectionIndexMapHeader: Int = 5
+	private let sectionIndexMap = 6
+    private let sectionIndexComments: Int = 7
+    private let sectionIndexCommentsAction = 8
     
     private var eventNodeSize: CGSize!
     
@@ -80,7 +82,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         }
     }
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 7
+        return 9
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -95,6 +97,10 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
             return UIEdgeInsetsMake(16, 0, 0, 0)
         case self.sectionIndexDetails:
             return UIEdgeInsetsMake(16, 0, 0, 0)
+		case self.sectionIndexMapHeader:
+			return UIEdgeInsetsMake(16, 0, 0, 0)
+		case self.sectionIndexMap:
+			return UIEdgeInsetsMake(16, 0, 0, 0)
         case self.sectionIndexComments:
             return UIEdgeInsetsMake(16, 0, 0, 0)
         case self.sectionIndexCommentsAction:
@@ -123,6 +129,16 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
                 return node
             case self.sectionIndexDetails:
                 return EventCellNode(models: self.baseModel.eventModels,delegate: self, detailCellSize: self.eventNodeSize)
+			case self.sectionIndexMap:
+				let coordinates = self.baseModel.eventModels.map({ (eventModel) -> CLLocationCoordinate2D in
+					return eventModel.coordinates
+				})
+				
+				let node = StaticMapCellNode(mapCenterCoordinate: self.baseModel.annotationModel.coordinate ,annotations: coordinates)
+				return node
+			case self.sectionIndexMapHeader:
+				let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Map", attributes: TextStyles.getHeaderFontAttributes()))
+				return node
             case self.sectionIndexComments:
                 var node: ASCellNode = ASCellNode()
                 if(indexPath.row == 0)
