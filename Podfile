@@ -17,6 +17,7 @@ target 'Guidee' do
     pod 'Onboard'
     pod 'youtube-ios-player-helper'
     pod 'SAMTextView'
+    pod 'MBProgressHUD', '~> 1.0.0'
 end
 
 target 'GuideeTests' do

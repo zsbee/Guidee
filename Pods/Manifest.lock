@@ -83,6 +83,7 @@ PODS:
   - GoogleSymbolUtilities (1.1.2)
   - GoogleUtilities (1.3.2):
     - GoogleSymbolUtilities (~> 1.1)
+  - MBProgressHUD (1.0.0)
   - Onboard (2.3.1)
   - PINCache (3.0.1-beta.2):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.2)
@@ -110,6 +111,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - FirebaseUI/Facebook (~> 1.0)
+  - MBProgressHUD (~> 1.0.0)
   - Onboard
   - pop
   - SAMTextView
@@ -136,6 +138,7 @@ SPEC CHECKSUMS:
   GoogleNetworkingUtilities: 3edd3a8161347494f2da60ea0deddc8a472d94cb
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleUtilities: 8bbc733218aad26306f9d4a253823986110e3358
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Onboard: b6871f25ac753175b2ab9a362fb2feb26a81a311
   PINCache: 6d273a6e0754bd26e3f12a38a90dde73cc6a42b2
   PINRemoteImage: ff63baf185088530db6cfa41cb665e2b5126b5c3
@@ -143,6 +146,6 @@ SPEC CHECKSUMS:
   SAMTextView: 979c43bb1fa5859ddfbfeb35e9c296a2b0ec55fd
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: a0f88c37edf92cb5c066e0a7fcf01050634cad20
+PODFILE CHECKSUM: bdce3ae4cc53ef6b39e639a7186c1c38aecccf8e
 
 COCOAPODS: 1.1.1
