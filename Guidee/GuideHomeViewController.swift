@@ -212,14 +212,14 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
 			self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
 			hud!.mode = .customView
 			hud!.customView = heartIconButton
-			hud!.label.text = "Removed from Likes"
+			hud!.label.text = "Removed from favourites"
 			self.headerView.updateIconIsLoved(isLoved: false)
 		} else {
 			heartIconButton.setImage(UIImage(named: "HeartFill"), for: .normal)
 			self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
 			hud!.mode = .customView
 			hud!.customView = heartIconButton
-			hud!.label.text = "Added to Likes"
+			hud!.label.text = "Added to favourites"
 			self.headerView.updateIconIsLoved(isLoved: true)
 		}
 		
