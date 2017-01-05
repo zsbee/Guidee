@@ -1,7 +1,8 @@
 import UIKit
 import AsyncDisplayKit
+import MBProgressHUD
 
-class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, ActionCellNodeDelegate, EditTextViewControllerDelegate {
+class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, ActionCellNodeDelegate, EditTextViewControllerDelegate, DataListener {
 
 
     var baseModel: GuideBaseModel!
@@ -10,7 +11,9 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     
     let headerView: GuideHeaderView = GuideHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var collectionNode: ASCollectionNode!
-    
+	
+	var hud: MBProgressHUD?
+	
     // Node map
     private let sectionIndexHeader: Int = 0
     private let sectionIndexSummaryHeader: Int = 1
@@ -43,7 +46,11 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         
         DataController.sharedInstance.getCurrentUserInfo(completionBlock: { (userModel) in
             self.currentUser = userModel
+			
+			self.headerView.updateIconIsLoved(isLoved: self.hasUserLikedJourney())
         })
+		
+		DataController.sharedInstance.addListener(listener: self)
         
         self.loadComments()
     }
@@ -195,9 +202,42 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     }
     
     func header_heartButtonTapped() {
-        DataController.sharedInstance.likeJourneyWithId(key: self.baseModel.firebaseID)
+		let isLiked = self.hasUserLikedJourney()
+		DataController.sharedInstance.likeJourneyWithId(key: self.baseModel.firebaseID)
+		
+		let heartIconButton = UIButton(type: .custom)
+		
+		if (isLiked) {
+			heartIconButton.setImage(UIImage(named: "HeartStroke"), for: .normal)
+			self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+			hud!.mode = .customView
+			hud!.customView = heartIconButton
+			hud!.label.text = "Removed from Likes"
+			self.headerView.updateIconIsLoved(isLoved: false)
+		} else {
+			heartIconButton.setImage(UIImage(named: "HeartFill"), for: .normal)
+			self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+			hud!.mode = .customView
+			hud!.customView = heartIconButton
+			hud!.label.text = "Added to Likes"
+			self.headerView.updateIconIsLoved(isLoved: true)
+		}
+		
     }
-    
+	
+	func dc_loveModelsDidUpdate() {
+		DataController.sharedInstance.getCurrentUserInfo(completionBlock: { (userModel) in
+			self.currentUser = userModel
+			self.headerView.updateIconIsLoved(isLoved: self.hasUserLikedJourney())
+			self.hud?.hide(animated: true, afterDelay: 1);
+		})
+	}
+	
+	func hasUserLikedJourney() -> Bool {
+		let liked = self.currentUser?.loveModels.contains(self.baseModel.firebaseID) ?? false
+		return liked
+	}
+	
     internal func guideEventTapped(model: GuideEventDetailModel, atIndex: Int) {
         let vc = GuideEventDetailsViewController()
         vc.model = model

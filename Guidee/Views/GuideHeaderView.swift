@@ -25,10 +25,9 @@ class GuideHeaderView: UIView {
         super.init(frame: frame)
         
         // Configure views
-        self.heartIconButton.setImage(UIImage(named: "Heart"), for: .normal)
-        self.heartIconButton.setImage(UIImage(named: "HeartHighlighted"), for: .highlighted)
+        self.heartIconButton.setImage(UIImage(named: "HeartStroke"), for: .normal)
         self.heartIconButton.addTarget(self, action: #selector(GuideHeaderView.heartTapped), for: .touchUpInside)
-        
+
         self.closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
         self.closeButton.addTarget(self, action: #selector(GuideHeaderView.closeTapped), for: .touchUpInside)
         
@@ -68,5 +67,13 @@ class GuideHeaderView: UIView {
         springAnimation!.springBounciness = 25
         self.heartIconButton.pop_add(springAnimation, forKey: "bounce")
     }
-    
+	
+	public func updateIconIsLoved(isLoved: Bool) {
+		if(isLoved) {
+			self.heartIconButton.setImage(UIImage(named: "HeartFill"), for: .normal)
+		} else {
+			self.heartIconButton.setImage(UIImage(named: "HeartStroke"), for: .normal)
+		}
+	}
+	
 }

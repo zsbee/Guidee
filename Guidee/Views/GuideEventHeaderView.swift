@@ -42,7 +42,7 @@ class GuideEventHeaderView: UIView {
         self.eventName.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightHeavy)
         self.eventName.textAlignment = .center;
 
-        self.addSubview(heartIconButton)
+       // self.addSubview(heartIconButton)
         self.addSubview(heartCounter)
         self.addSubview(eventName)
         self.addSubview(closeButton)
