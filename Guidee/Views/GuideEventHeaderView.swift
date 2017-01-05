@@ -43,7 +43,7 @@ class GuideEventHeaderView: UIView {
         self.eventName.textAlignment = .center;
 
        // self.addSubview(heartIconButton)
-        self.addSubview(heartCounter)
+       // self.addSubview(heartCounter)
         self.addSubview(eventName)
         self.addSubview(closeButton)
     }
