@@ -2,7 +2,7 @@ import UIKit
 import AsyncDisplayKit
 import MBProgressHUD
 
-class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, ActionCellNodeDelegate, EditTextViewControllerDelegate, DataListener {
+class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, ActionCellNodeDelegate, EditTextViewControllerDelegate, DataListener, JourneyEditorViewControllerDelegate {
 
     var baseModel: GuideBaseModel!
     private var comments: [CommentModel]!
@@ -198,9 +198,41 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     }
 	
 	func header_editButtonTapped() {
+		let vc = JourneyEditorViewController()
+		vc.mapCenter = self.baseModel.annotationModel.coordinate
+		vc.delegate = self
+		vc.baseModel = self.getEditableBaseModel()
+		self.present(vc, animated: true, completion:nil)
+	}
+	
+	func getEditableBaseModel() -> GuideBaseModel {
+		let mutableModel = self.baseModel.mutableObject()
+		
+		// append all events with a carousel placeholder image
+		var newEventModels:[GuideEventDetailModel] = [GuideEventDetailModel]()
+		let carouselPlaceholderImage: CarouselItemModel = CarouselItemModel(imageURL: "https://i.imgsafe.org/ba06372e4d.png", videoId: nil)
+		for eventModel in mutableModel.eventModels {
+			let mutableEventModel = eventModel.mutableObject()
+			mutableEventModel.carouselModels.append(carouselPlaceholderImage)
+			newEventModels.append(mutableEventModel.copy())
+		}
+		
+		// append events with 1 more
+		let placeholderEventModel = GuideEventDetailModel(title: "Create new spot",
+		                                                  summary: "➕ Tap to add a spot, select an image, and set a summary",
+		                                                  carouselModels: [carouselPlaceholderImage],
+		                                                  coordinates: mutableModel.annotationModel.coordinate)
+		
+		newEventModels.insert(placeholderEventModel, at: 0)
+		
+		return GuideBaseModel(identifier: self.baseModel.identifier, title: mutableModel.title, summary: mutableModel.summary, coverImageUrl: mutableModel.coverImageUrl, userAvatarUrl: mutableModel.userAvatarUrl, eventModels: newEventModels, annotationModel: mutableModel.annotationModel)
+	}
+	
+	func didFinishUploadingToDatabase()
+	{
 		print("todo")
 	}
-    
+
     func header_heartButtonTapped() {
 		let isLiked = self.hasUserLikedJourney()
 		DataController.sharedInstance.likeJourneyWithId(key: self.baseModel.firebaseID)

@@ -21,11 +21,18 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     
     private var eventNodeSize: CGSize!
     
-    private var baseModel: GuideBaseModel!
+	public var baseModel: GuideBaseModel! {
+		didSet {
+			self.mutatedModel = baseModel.mutableObject()
+			self.view.addSubnode(self.collectionNode)
+			self.view.addSubview(self.headerView)
+		}
+	}
+	
     private var mutatedModel: MutableGuideBaseModel!
     
     public var delegate:JourneyEditorViewControllerDelegate?
-    
+	
     public var mapCenter: CLLocationCoordinate2D!
     
     override func viewDidLoad() {
@@ -40,15 +47,15 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         eventNodeSize = CGSize(width: self.view.frame.width, height: 92)
         
         self.view.backgroundColor = UIColor.white
-        
-        DataController.sharedInstance.getEditableJourneyModel { (baseModel) in
-            self.baseModel = baseModel
-            self.mutatedModel = baseModel.mutableObject()
-            self.view.addSubnode(self.collectionNode)
-            self.view.addSubview(self.headerView)
-        }
+		
+		
+		if (self.baseModel == nil) {
+			DataController.sharedInstance.getEditableJourneyModel { (baseModel) in
+				self.baseModel = baseModel
+			}
+		}
     }
-    
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
