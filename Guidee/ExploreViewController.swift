@@ -24,7 +24,11 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
         
         self.mapView = CustomMapView(customDelegate: self)
         mapView.delegate = self
-        
+		
+		DataController.sharedInstance.getCurrentUserInfo { (userInfoModel) in
+			//
+		}
+		
         self.view.addSubview(self.mapView)
         self.view.addSubview(self.headerView)
     }
@@ -69,7 +73,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
     // MKMapKitDelegate
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? GuideAnnotation {
-            let identifier = annotation.identifier
+            let identifier = annotation.identifier + UUID().uuidString
             var view: CircleAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? CircleAnnotationView {
                 dequeuedView.annotation = annotation
@@ -82,14 +86,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
         }
         return nil
     }
-    
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let vc = GuideHomeViewController()
-        // vc.modalTransitionStyle = .crossDissolve
-        
-        self.present(vc, animated: true, completion:nil)
-    }
-    
+	
     func customMapView_shouldNavigateWithAnnotation(annotation: GuideAnnotation?) {
         if let annotation = annotation {
             if let baseModel = self.getModelWithId(annotID: annotation.identifier) {
@@ -103,7 +100,18 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
     }
 	
 	func reloadJourneyAnnotationForModel(model: GuideBaseModel) {
-		// todo
+		for annotation in self.mapView.annotations {
+			self.mapView.deselectAnnotation(annotation, animated: false)
+		}
+		
+		self.mapView.removeAnnotations(self.mapView.annotations)
+		self.allGuides.removeAll()
+		
+		DataController.sharedInstance.getJourneys { (model) in
+			// This gets called for every Journey
+			self.allGuides.append(model)
+			self.mapView.addAnnotation(model.annotationModel)
+		}
 	}
 	
     private func getModelWithId(annotID: String) -> GuideBaseModel? {
