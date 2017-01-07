@@ -4,15 +4,15 @@ import MBProgressHUD
 
 class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, ActionCellNodeDelegate, EditTextViewControllerDelegate, DataListener {
 
-
     var baseModel: GuideBaseModel!
-    var comments: [CommentModel]!
-    var currentUser: UserInfoModel?
-    
-    let headerView: GuideHeaderView = GuideHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    var collectionNode: ASCollectionNode!
+    private var comments: [CommentModel]!
+    private var currentUser: UserInfoModel?
+	var userOwnsJourney = false;
+
+    private let headerView: GuideHeaderView = GuideHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    private var collectionNode: ASCollectionNode!
 	
-	var hud: MBProgressHUD?
+	private var hud: MBProgressHUD?
 	
     // Node map
     private let sectionIndexHeader: Int = 0
@@ -35,7 +35,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         self.collectionNode.dataSource = self
         
         self.headerView.delegate = self
-        
+        self.headerView.setIsEditEnabled(editingMode: self.userOwnsJourney)
         self.comments = [CommentModel]()
         
         eventNodeSize = CGSize(width: self.view.frame.width, height: 92)
@@ -200,6 +200,10 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     func header_closeButtonTapped() {
         self.dismiss(animated: true, completion: nil)
     }
+	
+	func header_editButtonTapped() {
+		print("todo")
+	}
     
     func header_heartButtonTapped() {
 		let isLiked = self.hasUserLikedJourney()
@@ -212,14 +216,14 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
 			self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
 			hud!.mode = .customView
 			hud!.customView = heartIconButton
-			hud!.label.text = "Removed from favourites"
+			hud!.label.text = "Removed from your favourites"
 			self.headerView.updateIconIsLoved(isLoved: false)
 		} else {
 			heartIconButton.setImage(UIImage(named: "HeartFill"), for: .normal)
 			self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
 			hud!.mode = .customView
 			hud!.customView = heartIconButton
-			hud!.label.text = "Added to favourites"
+			hud!.label.text = "Added to your favourites"
 			self.headerView.updateIconIsLoved(isLoved: true)
 		}
 		

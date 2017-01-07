@@ -100,6 +100,8 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
                 let vc = GuideHomeViewController()
                 vc.baseModel = baseModel
                 vc.transitioningDelegate = self
+				let currentUser = DataController.sharedInstance.getCurrentUserModel()
+				vc.userOwnsJourney = currentUser?.journeyModels.contains(baseModel.firebaseID) ?? false
                 self.present(vc, animated: true, completion:nil)
             }
         }

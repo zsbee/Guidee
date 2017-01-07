@@ -312,10 +312,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     func didTapJourney(journeyModel: GuideBaseModel) {
         let vc = GuideHomeViewController()
         vc.baseModel = journeyModel
+		vc.userOwnsJourney = self.userInfoModel?.journeyModels.contains(journeyModel.firebaseID) ?? false
         vc.transitioningDelegate = self
         self.present(vc, animated: true, completion:nil)
     }
-    
+	
     func didTapUser(userInfoModel: UserInfoModel) {
         print("User Tapped")
     }
