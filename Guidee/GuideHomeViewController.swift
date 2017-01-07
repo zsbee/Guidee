@@ -2,12 +2,18 @@ import UIKit
 import AsyncDisplayKit
 import MBProgressHUD
 
+protocol GuideHomeViewControllerDelegate {
+	func reloadJourneyAnnotationForModel(model: GuideBaseModel)
+}
+
 class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, ActionCellNodeDelegate, EditTextViewControllerDelegate, DataListener, JourneyEditorViewControllerDelegate {
 
     var baseModel: GuideBaseModel!
     private var comments: [CommentModel]!
     private var currentUser: UserInfoModel?
 
+	public var delegate: GuideHomeViewControllerDelegate?
+	
     private let headerView: GuideHeaderView = GuideHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     private var collectionNode: ASCollectionNode!
 	
@@ -225,12 +231,13 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
 		
 		newEventModels.insert(placeholderEventModel, at: 0)
 		
-		return GuideBaseModel(identifier: self.baseModel.identifier, title: mutableModel.title, summary: mutableModel.summary, coverImageUrl: mutableModel.coverImageUrl, userAvatarUrl: mutableModel.userAvatarUrl, eventModels: newEventModels, annotationModel: mutableModel.annotationModel)
+		return GuideBaseModel(identifier: self.baseModel.identifier, firebaseID: self.baseModel.firebaseID, title: mutableModel.title, summary: mutableModel.summary, coverImageUrl: mutableModel.coverImageUrl, userAvatarUrl: mutableModel.userAvatarUrl, eventModels: newEventModels, annotationModel: mutableModel.annotationModel)
 	}
 	
 	func didFinishUploadingToDatabase()
 	{
-		print("todo")
+		self.delegate?.reloadJourneyAnnotationForModel(model: self.baseModel)
+		self.dismiss(animated: true)
 	}
 
     func header_heartButtonTapped() {

@@ -160,7 +160,14 @@ class DataController: AnyObject {
             }
         })
     }
-    
+	
+	
+	public func overrideGuideToFirebase(mutatedGuide: MutableGuideBaseModel, completionBlock: @escaping () -> ()) {
+		self.journeys.child(mutatedGuide.firebaseID).setValue(mutatedGuide.objectAsDictionary(), withCompletionBlock: {(error, ref) in
+			completionBlock()
+		})
+	}
+	
     public func createUserWithID(firUser: FIRUser) {
         // do not create new if already exists
         self.users.child(firUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in

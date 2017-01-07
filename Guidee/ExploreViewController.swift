@@ -4,7 +4,7 @@ import Firebase
 import FBSDKCoreKit
 import Onboard
 
-class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewDelegate, ExploreheaderViewDelegate, UIViewControllerTransitioningDelegate {
+class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewDelegate, ExploreheaderViewDelegate, UIViewControllerTransitioningDelegate, GuideHomeViewControllerDelegate {
     var mapView: CustomMapView!
     var allGuides: [GuideBaseModel]! = [GuideBaseModel]()
     let transition = PopAnimator()
@@ -27,10 +27,6 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
         
         self.view.addSubview(self.mapView)
         self.view.addSubview(self.headerView)
-        
-        DataController.sharedInstance.getCurrentUserInfo(completionBlock: { (userModel) in
-            // nothing
-        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,13 +95,17 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
             if let baseModel = self.getModelWithId(annotID: annotation.identifier) {
                 let vc = GuideHomeViewController()
                 vc.baseModel = baseModel
+				vc.delegate = self
                 vc.transitioningDelegate = self
-				let currentUser = DataController.sharedInstance.getCurrentUserModel()
                 self.present(vc, animated: true, completion:nil)
             }
         }
     }
-    
+	
+	func reloadJourneyAnnotationForModel(model: GuideBaseModel) {
+		// todo
+	}
+	
     private func getModelWithId(annotID: String) -> GuideBaseModel? {
         for model in self.allGuides {
             if (model.identifier == annotID) {

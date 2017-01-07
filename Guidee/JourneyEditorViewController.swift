@@ -20,6 +20,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     private let sectionIndexMap = 6
     
     private var eventNodeSize: CGSize!
+	private var overrideMode = true
     
 	public var baseModel: GuideBaseModel! {
 		didSet {
@@ -52,6 +53,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
 		if (self.baseModel == nil) {
 			DataController.sharedInstance.getEditableJourneyModel { (baseModel) in
 				self.baseModel = baseModel
+				self.overrideMode = false
 			}
 		}
     }
@@ -196,18 +198,22 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     func header_cancelButtonTapped() {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     func header_saveButtonTapped() {
-        let uuid = UUID().uuidString
-        self.mutatedModel.identifier = uuid
-        self.mutatedModel.annotationModel.identifier = uuid
-        
         self.mutatedModel.eventModels = self.filteredEventModels()
-        
-        DataController.sharedInstance.saveGuideToFirebase(mutatedGuide: self.mutatedModel, completionBlock: { () in
-            self.delegate?.didFinishUploadingToDatabase()
-        })
-        
+		if (self.overrideMode) {
+			DataController.sharedInstance.overrideGuideToFirebase(mutatedGuide: self.mutatedModel, completionBlock: { 
+				self.delegate?.didFinishUploadingToDatabase()
+			})
+		} else {
+			let uuid = UUID().uuidString
+			self.mutatedModel.identifier = uuid
+			self.mutatedModel.annotationModel.identifier = uuid
+			DataController.sharedInstance.saveGuideToFirebase(mutatedGuide: self.mutatedModel, completionBlock: { () in
+				self.delegate?.didFinishUploadingToDatabase()
+			})
+		}
+		
         self.dismiss(animated: true, completion: nil)
     }
     

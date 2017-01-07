@@ -48,7 +48,7 @@ public class GuideBaseModel: AnyObject {
 		self.annotationModel = GuideAnnotation(dictionary: dictionary["annotationModel"] as! NSDictionary, likes: self.lovedCount)
     }
     
-    public init(identifier: String, title: String, summary: String, coverImageUrl: String, userAvatarUrl: String, eventModels: [GuideEventDetailModel], annotationModel: GuideAnnotation) {
+	public init(identifier: String, firebaseID: String, title: String, summary: String, coverImageUrl: String, userAvatarUrl: String, eventModels: [GuideEventDetailModel], annotationModel: GuideAnnotation) {
         self.identifier = identifier
         self.title = title
         self.summary = summary
@@ -56,12 +56,12 @@ public class GuideBaseModel: AnyObject {
         self.eventModels = eventModels
         self.annotationModel = annotationModel
         self.userAvatarUrl = userAvatarUrl
-        self.firebaseID = identifier
+        self.firebaseID = firebaseID
 		self.lovedCount = 0
 		self.loved = [String:AnyObject]()
     }
     
     public func mutableObject() -> MutableGuideBaseModel {
-        return MutableGuideBaseModel(identifier: self.identifier, title: self.title, summary: self.summary, coverImageUrl: self.coverImageUrl, userAvatarUrl: self.userAvatarUrl, eventModels: self.eventModels, annotationModel: self.annotationModel)
+		return MutableGuideBaseModel(identifier: self.identifier, firebaseID:self.firebaseID, title: self.title, summary: self.summary, coverImageUrl: self.coverImageUrl, userAvatarUrl: self.userAvatarUrl, eventModels: self.eventModels, annotationModel: self.annotationModel)
     }
 }
