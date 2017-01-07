@@ -7,7 +7,6 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     var baseModel: GuideBaseModel!
     private var comments: [CommentModel]!
     private var currentUser: UserInfoModel?
-	var userOwnsJourney = false;
 
     private let headerView: GuideHeaderView = GuideHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     private var collectionNode: ASCollectionNode!
@@ -29,13 +28,15 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+		self.currentUser = DataController.sharedInstance.getCurrentUserModel()
+
         self.collectionNode = ASCollectionNode(collectionViewLayout: UICollectionViewFlowLayout())
         self.collectionNode.delegate = self
         self.collectionNode.dataSource = self
         
         self.headerView.delegate = self
-        self.headerView.setIsEditEnabled(editingMode: self.userOwnsJourney)
+		
+        self.headerView.setIsEditEnabled(editingMode: self.userOwnsJourney())
         self.comments = [CommentModel]()
         
         eventNodeSize = CGSize(width: self.view.frame.width, height: 92)
@@ -43,13 +44,8 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         self.view.backgroundColor = UIColor.white
         self.view.addSubnode(collectionNode)
         self.view.addSubview(headerView)
-        
-        DataController.sharedInstance.getCurrentUserInfo(completionBlock: { (userModel) in
-            self.currentUser = userModel
-			
-			self.headerView.updateIconIsLoved(isLoved: self.hasUserLikedJourney())
-        })
 		
+		self.headerView.updateIconIsLoved(isLoved: self.hasUserLikedJourney())
 		DataController.sharedInstance.addListener(listener: self)
         
         self.loadComments()
@@ -240,6 +236,11 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
 	func hasUserLikedJourney() -> Bool {
 		let liked = self.currentUser?.loveModels.contains(self.baseModel.firebaseID) ?? false
 		return liked
+	}
+	
+	func userOwnsJourney() -> Bool {
+		let owned = self.currentUser?.journeyModels.contains(self.baseModel.firebaseID) ?? false
+		return owned
 	}
 	
     internal func guideEventTapped(model: GuideEventDetailModel, atIndex: Int) {
