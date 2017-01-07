@@ -146,7 +146,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         
         switch indexPath.section {
         case self.sectionIndexSummary:
-            let textViewText = (self.baseModel.summary != self.mutatedModel.summary) ? self.mutatedModel.summary : ""
+            let textViewText = self.mutatedModel.summary
             vc.viewModel = EditTextSetupViewModel(title: "Edit Summary", sectionIndex: self.sectionIndexSummary, placeHolder: "Edit Summary of Guide", text: textViewText)
             self.present(vc, animated: true, completion:nil)
 
@@ -155,7 +155,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
             let alertController = UIAlertController(title: "Edit header information", message: nil, preferredStyle: .actionSheet)
             
             let editTitleAction = UIAlertAction(title: "Edit title", style: .default) { (_) in
-                let textViewText = (self.baseModel.title != self.mutatedModel.title) ? self.mutatedModel.title : ""
+                let textViewText = self.mutatedModel.title
                 vc.viewModel = EditTextSetupViewModel(title: "Edit title", sectionIndex: self.sectionIndexHeader, placeHolder: "Edit title of journey", text: textViewText)
                 
                 self.present(vc, animated: true, completion:nil)

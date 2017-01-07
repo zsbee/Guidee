@@ -149,11 +149,11 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
         
         switch indexPath.section {
         case self.sectionIndexSummary:
-            let textViewText = (self.baseModel.summary != self.mutatedModel!.summary) ? self.mutatedModel!.summary : ""
+            let textViewText = self.mutatedModel!.summary
             vc.viewModel = EditTextSetupViewModel(title: "Edit Summary", sectionIndex: self.sectionIndexSummary, placeHolder: "Edit Summary of Spot", text: textViewText)
             self.present(vc, animated: true, completion:nil)
         case self.sectionIndexTitle:
-            let textViewText = (self.baseModel.summary != self.mutatedModel!.summary) ? self.mutatedModel!.summary : ""
+            let textViewText = self.mutatedModel!.title
             vc.viewModel = EditTextSetupViewModel(title: "Edit Title", sectionIndex: self.sectionIndexTitle, placeHolder: "Edit Title of Spot", text: textViewText)
             self.present(vc, animated: true, completion:nil)
         case self.sectionIndexCarousel:
