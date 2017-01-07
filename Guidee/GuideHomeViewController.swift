@@ -218,7 +218,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
 		}
 		
 		// append events with 1 more
-		let placeholderEventModel = GuideEventDetailModel(title: "Create new spot",
+		let placeholderEventModel = GuideEventDetailModel(title: "Add new spot",
 		                                                  summary: "➕ Tap to add a spot, select an image, and set a summary",
 		                                                  carouselModels: [carouselPlaceholderImage],
 		                                                  coordinates: mutableModel.annotationModel.coordinate)
