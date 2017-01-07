@@ -1,8 +1,15 @@
 import UIKit
 import Firebase
 
+enum SubscriptionType {
+	case love
+	case plan
+	case journey
+}
+
 protocol DataListener {
 	func dc_loveModelsDidUpdate()
+	func dc_journeyModelsDidUpdate()
 }
 
 class DataController: AnyObject {
@@ -12,8 +19,8 @@ class DataController: AnyObject {
     private let users: FIRDatabaseReference
     private let editableJourney: FIRDatabaseReference
     private let comments: FIRDatabaseReference
-	private var listeners: [DataListener] = [DataListener]()
-    // cache
+	private var listeners: [SubscriptionType:[DataListener]] = [SubscriptionType:[DataListener]]()
+	
     private var currentUser: UserInfoModel?
     
     private init() {
@@ -164,6 +171,7 @@ class DataController: AnyObject {
 	
 	public func overrideGuideToFirebase(mutatedGuide: MutableGuideBaseModel, completionBlock: @escaping () -> ()) {
 		self.journeys.child(mutatedGuide.firebaseID).setValue(mutatedGuide.objectAsDictionary(), withCompletionBlock: {(error, ref) in
+			self.updateJourneyListeners()
 			completionBlock()
 		})
 	}
@@ -221,13 +229,13 @@ class DataController: AnyObject {
 							
 				// Set value and report transaction success
 				currentData.value = journey
-				self.updateListeners()
+				self.updateLoveListeners()
 				return FIRTransactionResult.success(withValue: currentData)
 			}
 			return FIRTransactionResult.success(withValue: currentData)}) { (error, committed, snapshot) in
 				if let error = error {
 					print(error.localizedDescription)
-					self.updateListeners()
+					self.updateLoveListeners()
 				}
 			}
 	}
@@ -236,14 +244,27 @@ class DataController: AnyObject {
         return self.currentUser
     }
 	
-	public func addListener(listener: DataListener) {
-		self.listeners.append(listener);
+	public func addListener(listener: DataListener, type:SubscriptionType) {
+		if (self.listeners[type] != nil) {
+			self.listeners[type]!.append(listener)
+		} else {
+			self.listeners[type] = [listener]
+		}
 	}
 	
-	private func updateListeners() {
-		// for now, until we do not have other types this is ok. will extend with subscription types later if needed.
-		for listener in self.listeners {
-			listener.dc_loveModelsDidUpdate()
+	private func updateJourneyListeners() {
+		if let journeyListeners = self.listeners[.journey] {
+			for listener in journeyListeners {
+				listener.dc_journeyModelsDidUpdate()
+			}
+		}
+	}
+	
+	private func updateLoveListeners() {
+		if let loveListeners = self.listeners[.love] {
+			for listener in loveListeners {
+				listener.dc_loveModelsDidUpdate()
+			}
 		}
 	}
 }

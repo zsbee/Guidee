@@ -52,7 +52,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         self.view.addSubview(headerView)
 		
 		self.headerView.updateIconIsLoved(isLoved: self.hasUserLikedJourney())
-		DataController.sharedInstance.addListener(listener: self)
+		DataController.sharedInstance.addListener(listener: self, type: .love)
         
         self.loadComments()
     }
@@ -263,6 +263,10 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
 		}
 		
     }
+	
+	internal func dc_journeyModelsDidUpdate() {
+		// 
+	}
 	
 	func dc_loveModelsDidUpdate() {
 		DataController.sharedInstance.getCurrentUserInfo(completionBlock: { (userModel) in

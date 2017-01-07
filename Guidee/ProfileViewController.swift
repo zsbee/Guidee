@@ -5,7 +5,8 @@ import Firebase
 import FBSDKLoginKit
 
 class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, ActionCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate, DataListener, UIViewControllerTransitioningDelegate {
-    
+
+	
     let kNewPlanCtaStr: String = "Start a new plan"
     let kNewJourneyCtaStr: String = "Add new journey"
     
@@ -47,8 +48,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.collectionNode.backgroundColor = UIColor.clear
         
         self.view.addSubnode(collectionNode)
-		DataController.sharedInstance.addListener(listener: self)
-		
+		DataController.sharedInstance.addListener(listener: self, type: .love)
+		DataController.sharedInstance.addListener(listener: self, type: .journey)
+
 		self.fetchUserData()
     }
 
@@ -373,10 +375,6 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         })
     }
 	
-	func dc_loveModelsDidUpdate() {
-		self.fetchUserData()
-	}
-	
 	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		transition.presenting = false
 		return transition
@@ -385,6 +383,14 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
 	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		transition.presenting = true
 		return transition
+	}
+
+	internal func dc_journeyModelsDidUpdate() {
+		self.fetchUserData()
+	}
+	
+	internal func dc_loveModelsDidUpdate() {
+		self.fetchUserData()
 	}
 	
 }
