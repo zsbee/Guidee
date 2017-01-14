@@ -319,8 +319,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     }
 	
     func didTapUser(userInfoModel: UserInfoModel) {
-        print("User Tapped")
-    }
+		let profileVC = OtherProfileViewController()
+		profileVC.userId = userInfoModel.identifier
+		self.present(profileVC, animated: true, completion: nil)
+	}
     
     func actionButtonTappedWithString(string: String) {
         switch string {
