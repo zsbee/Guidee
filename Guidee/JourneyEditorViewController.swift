@@ -207,7 +207,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     func header_saveButtonTapped() {
         self.mutatedModel.eventModels = self.filteredEventModels()
 		self.mutatedModel.userID = self.currentUserInfo?.identifier ?? "Anonymous"
-		
+
 		if (self.overrideMode) {
 			DataController.sharedInstance.overrideGuideToFirebase(mutatedGuide: self.mutatedModel, completionBlock: { 
 				self.delegate?.didFinishUploadingToDatabase()
@@ -216,6 +216,11 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
 			let uuid = UUID().uuidString
 			self.mutatedModel.identifier = uuid
 			self.mutatedModel.annotationModel.identifier = uuid
+			
+			if (self.baseModel.userAvatarUrl == self.mutatedModel.userAvatarUrl) {
+				self.mutatedModel.userAvatarUrl = self.currentUserInfo?.avatarUrl ?? self.mutatedModel.userAvatarUrl
+			}
+			
 			DataController.sharedInstance.saveGuideToFirebase(mutatedGuide: self.mutatedModel, completionBlock: { () in
 				self.delegate?.didFinishUploadingToDatabase()
 			})
@@ -267,6 +272,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     internal func guideEventTapped(model: GuideEventDetailModel, atIndex: Int) {
         let vc = GuideEventEditorViewController()
         vc.mutatedModel = model.mutableObject()
+		vc.journeyBaseCoordinates = self.mutatedModel.annotationModel.coordinate
         vc.delegate = self
         vc.spotIndex = atIndex
         
@@ -326,8 +332,8 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
     }
     
     func reloadItemAtIndex(sectionIndex: Int) {
-        self.collectionNode.view.performBatchUpdates({
-            self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: sectionIndex)])
+        self.collectionNode.performBatchUpdates({
+            self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: sectionIndex)])
             }, completion: nil)
     }
     

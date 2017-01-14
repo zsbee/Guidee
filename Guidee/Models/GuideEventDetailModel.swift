@@ -37,7 +37,7 @@ public class GuideEventDetailModel: AnyObject {
             let longitude = (locationDict["longitude"] as! NSNumber) as Double
             self.coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         } else {
-            self.coordinates = CLLocationCoordinate2D(latitude: 43, longitude: 17)
+            self.coordinates = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         }
     }
     

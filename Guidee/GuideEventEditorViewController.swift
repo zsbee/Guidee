@@ -11,7 +11,8 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
     var collectionNode: ASCollectionNode!
     
     var baseModel: GuideEventDetailModel!
-    
+	var journeyBaseCoordinates: CLLocationCoordinate2D!
+	
     public var mutatedModel: MutableGuideEventDetailModel? {
         didSet {
             self.baseModel = mutatedModel!.copy()
@@ -44,7 +45,11 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+		
+		if (self.mutatedModel!.coordinates.latitude == 0 && self.mutatedModel!.coordinates.longitude == 0) {
+			self.mutatedModel?.coordinates = self.journeyBaseCoordinates
+		}
+		
         self.collectionNode = ASCollectionNode(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
         self.collectionNode.delegate = self
         self.collectionNode.dataSource = self
@@ -264,7 +269,7 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
         imagePicker.delegate = self
         self.present(imagePicker, animated: true, completion: nil)
     }
-    
+	
     func mapCenterDidUpdateWithCoordinates(coordinates: CLLocationCoordinate2D) {
         self.mutatedModel!.coordinates = coordinates
     }
