@@ -175,6 +175,8 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 			return UIEdgeInsetsMake(8, 0, 16, 0);
 		case self.sectionIndexPlans:
 			return UIEdgeInsetsMake(8, 0, 16, 0);
+		case self.sectionIndexFollowing:
+			return self.sectionLastCellInset
 		default:
 			return self.sectionContentInset
 		}
