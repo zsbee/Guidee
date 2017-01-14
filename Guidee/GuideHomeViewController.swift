@@ -41,8 +41,8 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         self.collectionNode.dataSource = self
         
         self.headerView.delegate = self
-		
         self.headerView.setIsEditEnabled(editingMode: self.userOwnsJourney())
+		
         self.comments = [CommentModel]()
         
         eventNodeSize = CGSize(width: self.view.frame.width, height: 92)
@@ -270,7 +270,6 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
 			hud!.label.text = "Added to your favourites"
 			self.headerView.updateIconIsLoved(isLoved: true)
 		}
-		
     }
 	
 	internal func dc_journeyModelsDidUpdate() {

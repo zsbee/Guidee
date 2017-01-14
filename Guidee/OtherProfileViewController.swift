@@ -4,7 +4,7 @@ import Onboard
 import Firebase
 import FBSDKLoginKit
 
-class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate, DataListener, UIViewControllerTransitioningDelegate {
+class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, ProfileHeaderViewDelegate , JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate, DataListener, UIViewControllerTransitioningDelegate {
 	
 	var collectionNode: ASCollectionNode!
 	
@@ -36,9 +36,13 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 	private let sectionIndexFollowingHeader: Int = 8
 	private let sectionIndexFollowing: Int = 9
 	
+	private let headerView: ProfileHeaderView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+
+		self.headerView.delegate = self
+
 		self.collectionNode = ASCollectionNode(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
 		self.collectionNode.delegate = self
 		self.collectionNode.dataSource = self
@@ -49,6 +53,9 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 		DataController.sharedInstance.addListener(listener: self, type: .journey)
 		
 		self.view.backgroundColor = UIColor.white
+		
+		self.view.addSubview(headerView)
+		self.headerView.updateIconisFollowed(isFollowed: false); //todo
 		
 		self.fetchUserData()
 	}
@@ -132,7 +139,16 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-		self.collectionNode.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: self.view.frame.height - 49 - 20)
+		self.collectionNode.frame = CGRect(x: 0, y: 28, width: self.view.frame.width, height: self.view.frame.height - 28)
+		self.headerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 60)
+	}
+	
+	func header_followButtonTapped() {
+		print("Follow")
+	}
+	
+	func header_closeButtonTapped() {
+		self.dismiss(animated: true, completion: nil)
 	}
 	
 	//MARK - Collection Node
