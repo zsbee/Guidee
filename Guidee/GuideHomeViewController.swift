@@ -200,7 +200,11 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     }
 	
 	func guideHeader_didTapProfile() {
-		print("na van userunk modelban?")
+		let profileVC = OtherProfileViewController()
+		if(self.baseModel.userID != "Anonymous") {
+			profileVC.userId = self.baseModel.userID
+			self.present(profileVC, animated: true, completion: nil)
+		}
 	}
 	
     // Header

@@ -4,11 +4,7 @@ import Onboard
 import Firebase
 import FBSDKLoginKit
 
-class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, ActionCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate, DataListener, UIViewControllerTransitioningDelegate {
-	
-	
-	let kNewPlanCtaStr: String = "Start a new plan"
-	let kNewJourneyCtaStr: String = "Add new journey"
+class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate, DataListener, UIViewControllerTransitioningDelegate {
 	
 	var collectionNode: ASCollectionNode!
 	
@@ -16,6 +12,7 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 	
 	// Fetched data
 	var userInfoModel:UserInfoModel?
+	public var userId: String!
 	var journeyModels: [GuideBaseModel] = [GuideBaseModel]()
 	var planModels: [GuideBaseModel] = [GuideBaseModel]()
 	var loveModels: [GuideBaseModel] = [GuideBaseModel]()
@@ -51,6 +48,8 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 		DataController.sharedInstance.addListener(listener: self, type: .love)
 		DataController.sharedInstance.addListener(listener: self, type: .journey)
 		
+		self.view.backgroundColor = UIColor.white
+		
 		self.fetchUserData()
 	}
 	
@@ -62,7 +61,7 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 		self.loveModels = []
 		
 		// Fetch user Profile
-		DataController.sharedInstance.getCurrentUserInfo { (userInfoModel) in
+		DataController.sharedInstance.getUsersWithFIRids(idArray: [self.userId]) { (userInfoModel) in
 			self.userInfoModel = userInfoModel
 			self.collectionNode.performBatchUpdates({
 				self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: self.sectionIndexProfileSummary)])
@@ -141,9 +140,9 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		switch section {
 		case self.sectionIndexJourneys:
-			return 2
+			return 1
 		case self.sectionIndexPlans:
-			return 2
+			return 1
 		default:
 			return 1
 		}
@@ -193,58 +192,41 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 				}
 				
 			case self.sectionIndexJourneysHeader:
-				let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My Journeys ✈️", attributes: TextStyles.getHeaderFontAttributes()))
+				let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Journeys ✈️", attributes: TextStyles.getHeaderFontAttributes()))
 				return node
 				
 			case self.sectionIndexJourneys:
-				switch indexPath.row {
-				case 0:
-					if(self.journeyModels.count > 0) {
-						let node = JourneyCellContainerNode(models: self.journeyModels)
-						node.delegate = self
-						return node
-					} else if (self.userInfoModel == nil) {
-						let node = LoadingCellNode()
-						node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
-						return node
-					} else {
-						return JourneyPlaceholderCellNode(text: "I am sure you have been somewhere. Tell us your story!")
-					}
-				default:
-					let node = ActionCellNode(actionStringNormal: NSAttributedString(string: self.kNewJourneyCtaStr, attributes: TextStyles.getActionNormalStateCellAttributes()),
-					                          actionStringHighlighted: NSAttributedString(string: self.kNewJourneyCtaStr, attributes: TextStyles.getActionHighlightedStateCellAttributes()),
-					                          delegate: self)
+				if(self.journeyModels.count > 0) {
+					let node = JourneyCellContainerNode(models: self.journeyModels)
+					node.delegate = self
 					return node
+				} else if (self.userInfoModel == nil) {
+					let node = LoadingCellNode()
+					node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
+					return node
+				} else {
+					return JourneyPlaceholderCellNode(text: "I am sure you have been somewhere. Tell us your story!")
 				}
 				
 			case self.sectionIndexPlansHeader:
-				let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My Plans 📝", attributes: TextStyles.getHeaderFontAttributes()))
+				let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Plans 📝", attributes: TextStyles.getHeaderFontAttributes()))
 				return node
 				
 			case self.sectionIndexPlans:
-				switch indexPath.row {
-				case 0:
-					if(self.planModels.count > 0) {
-						let node = JourneyCellContainerNode(models: self.planModels)
-						node.delegate = self
-						return node
-					} else if (self.userInfoModel == nil) {
-						let node = LoadingCellNode()
-						node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
-						return node
-					} else {
-						return JourneyPlaceholderCellNode(text: "I am sure you have plans! Tell us what those are!")
-					}
-				default:
-					let node = ActionCellNode(actionStringNormal: NSAttributedString(string: self.kNewPlanCtaStr, attributes: TextStyles.getActionNormalStateCellAttributes()),
-					                          actionStringHighlighted: NSAttributedString(string: self.kNewPlanCtaStr, attributes: TextStyles.getActionHighlightedStateCellAttributes()),
-					                          delegate: self)
+				if(self.planModels.count > 0) {
+					let node = JourneyCellContainerNode(models: self.planModels)
+					node.delegate = self
 					return node
+				} else if (self.userInfoModel == nil) {
+					let node = LoadingCellNode()
+					node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
+					return node
+				} else {
+					return JourneyPlaceholderCellNode(text: "I am sure you have plans! Tell us what those are!")
 				}
 				
-				
 			case self.sectionIndexLovedHeader:
-				let node = SectionHeaderNode(attributedText: NSAttributedString(string: "My ❤️", attributes: TextStyles.getHeaderFontAttributes()))
+				let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Loves ❤️", attributes: TextStyles.getHeaderFontAttributes()))
 				return node
 				
 			case self.sectionIndexLoved:
@@ -320,17 +302,6 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 	
 	func didTapUser(userInfoModel: UserInfoModel) {
 		print("User Tapped")
-	}
-	
-	func actionButtonTappedWithString(string: String) {
-		switch string {
-		case self.kNewPlanCtaStr:
-			print("NewPlanCTA Tapped")
-		case self.kNewJourneyCtaStr:
-			openEditor()
-		default:
-			print(string)
-		}
 	}
 	
 	func profileCellNode_tapped() {
