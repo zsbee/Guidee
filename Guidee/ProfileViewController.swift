@@ -51,6 +51,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.view.addSubnode(collectionNode)
 		DataController.sharedInstance.addListener(listener: self, type: .love)
 		DataController.sharedInstance.addListener(listener: self, type: .journey)
+		DataController.sharedInstance.addListener(listener: self, type: .follow)
 
 		self.fetchUserData()
     }
@@ -161,6 +162,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
             return UIEdgeInsetsMake(8, 0, 16, 0);
         case self.sectionIndexPlans:
             return UIEdgeInsetsMake(8, 0, 16, 0);
+		case self.sectionIndexFollowing:
+			return self.sectionLastCellInset
         default:
             return self.sectionContentInset
         }
@@ -396,6 +399,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
 	}
 	
 	internal func dc_loveModelsDidUpdate() {
+		self.fetchUserData()
+	}
+	
+	internal func dc_followModelsDidUpdate() {
 		self.fetchUserData()
 	}
 	

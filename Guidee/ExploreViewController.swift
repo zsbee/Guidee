@@ -48,7 +48,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
             // User is logged in, do work such as go to next view controller.
             let loginVC = LoginViewController()
             let onboardingVC: OnboardingViewController! = OnboardingViewController(backgroundVideoURL: movieURL as URL!, contents: [loginVC])
-            self.present(onboardingVC, animated: false, completion: nil)
+            self.present(loginVC, animated: false, completion: nil)
         }
     }
     

@@ -284,6 +284,10 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
 		})
 	}
 	
+	internal func dc_followModelsDidUpdate() {
+		// 
+	}
+	
 	func hasUserLikedJourney() -> Bool {
 		let liked = self.currentUser?.loveModels.contains(self.baseModel.firebaseID) ?? false
 		return liked

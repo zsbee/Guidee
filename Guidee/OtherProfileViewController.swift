@@ -8,7 +8,7 @@ import MBProgressHUD
 class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, ProfileHeaderViewDelegate , JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate, DataListener, UIViewControllerTransitioningDelegate {
 	
 	var collectionNode: ASCollectionNode!
-	
+	var hud: MBProgressHUD!
 	let transition = PopAnimator()
 	
 	// Fetched data
@@ -50,13 +50,12 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 		self.collectionNode.backgroundColor = UIColor.clear
 		
 		self.view.addSubnode(collectionNode)
-		DataController.sharedInstance.addListener(listener: self, type: .love)
-		DataController.sharedInstance.addListener(listener: self, type: .journey)
+		DataController.sharedInstance.addListener(listener: self, type: .follow)
 		
 		self.view.backgroundColor = UIColor.white
 		
 		self.view.addSubview(headerView)
-		self.headerView.updateIconisFollowed(isFollowed: false); //todo
+		self.headerView.updateIconisFollowed(isFollowed: self.isUserFollowingUser());
 		
 		self.fetchUserData()
 	}
@@ -145,11 +144,22 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 	}
 	
 	func header_followButtonTapped() {
-		let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-		hud.label.text = "Following is not yet possible :("
-		hud.mode = .text
-		hud.hide(animated: true, afterDelay: 1)
-		print("Follow")
+		let isFollowing = self.isUserFollowingUser()
+		DataController.sharedInstance.followUserWithId(userId: self.userId)
+				
+		if (isFollowing) {
+			self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+			hud!.mode = .text
+			hud!.label.text = "Unfollowed user"
+			self.headerView.updateIconisFollowed(isFollowed: false)
+		} else {
+			self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+			hud!.mode = .customView
+			hud!.label.text = "Now following user"
+			self.headerView.updateIconisFollowed(isFollowed: true)
+		}
+		
+		self.hud.hide(animated: true, afterDelay: 1)
 	}
 	
 	func header_closeButtonTapped() {
@@ -381,11 +391,25 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 		return transition
 	}
 	
+	func isUserFollowingUser() -> Bool {
+		let followed = DataController.sharedInstance.getCurrentUserModel()?.following.contains(self.userId) ?? false
+		return followed
+	}
+	
+	
 	internal func dc_journeyModelsDidUpdate() {
-		self.fetchUserData()
+		//
 	}
 	
 	internal func dc_loveModelsDidUpdate() {
+		//
+	}
+	
+	internal func dc_followModelsDidUpdate() {
+		DataController.sharedInstance.getCurrentUserInfo { (userInfo) in
+			self.headerView.updateIconisFollowed(isFollowed: self.isUserFollowingUser())
+		}
+		self.hud?.hide(animated: true, afterDelay: 1);
 		self.fetchUserData()
 	}
 	

@@ -5,11 +5,13 @@ enum SubscriptionType {
 	case love
 	case plan
 	case journey
+	case follow
 }
 
 protocol DataListener {
 	func dc_loveModelsDidUpdate()
 	func dc_journeyModelsDidUpdate()
+	func dc_followModelsDidUpdate()
 }
 
 class DataController: AnyObject {
@@ -197,9 +199,7 @@ class DataController: AnyObject {
                 }
                 
                 defaultUserModel["summary"] = "Tap here to set an introduction about yourself!" as AnyObject
-                
-                defaultUserModel["following"] = ["UQEch8jENJc4SjY6ZuMt7rULGho1"] as AnyObject
-                
+                                
                 self.users.child(firUser.uid).setValue(defaultUserModel);
             }
         }) { (error) in
@@ -240,6 +240,39 @@ class DataController: AnyObject {
 			}
 	}
 	
+	public func followUserWithId(userId: String!) {
+		self.users.child(userId).runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+			if var followedUser = currentData.value as? [String : AnyObject], let uid = FIRAuth.auth()?.currentUser?.uid {
+				var followed: Dictionary<String, Bool>
+				followed = followedUser["followedBy"] as? [String : Bool] ?? [:]
+				var followedCount = followedUser["followedByCount"] as? Int ?? 0
+				if let _ = followed[uid] {
+					followedCount -= 1
+					followed.removeValue(forKey: uid)
+					// Remove from user from my followers
+					self.users.child(uid).child("following").child(userId).removeValue()
+				} else {
+					followedCount += 1
+					followed[uid] = true
+					// Set users likes
+					self.users.child(uid).child("following").child(userId).setValue(userId)
+				}
+				followedUser["followedByCount"] = followedCount as AnyObject?
+				followedUser["followedBy"] = followed as AnyObject?
+				
+				// Set value and report transaction success
+				currentData.value = followedUser
+				self.updateFollowListeners()
+				return FIRTransactionResult.success(withValue: currentData)
+			}
+			return FIRTransactionResult.success(withValue: currentData)}) { (error, committed, snapshot) in
+				if let error = error {
+					print(error.localizedDescription)
+					self.updateFollowListeners()
+				}
+		}
+	}
+	
     public func getCurrentUserModel() -> UserInfoModel? {
         return self.currentUser
     }
@@ -264,6 +297,14 @@ class DataController: AnyObject {
 		if let loveListeners = self.listeners[.love] {
 			for listener in loveListeners {
 				listener.dc_loveModelsDidUpdate()
+			}
+		}
+	}
+	
+	private func updateFollowListeners() {
+		if let followListeners = self.listeners[.follow] {
+			for listener in followListeners {
+				listener.dc_followModelsDidUpdate()
 			}
 		}
 	}

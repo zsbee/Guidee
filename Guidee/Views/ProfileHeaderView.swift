@@ -67,15 +67,16 @@ class ProfileHeaderView: UIView {
 	}
 	
 	public func updateIconisFollowed(isFollowed: Bool) {
-		if(isFollowed) {
+		self.isFollowed = isFollowed
+		
+		if(self.isFollowed) {
 			self.followIconButton.setTitle("Unfollow", for: .normal)
-
-			//self.followIconButton.setImage(UIImage(named: "HeartFill"), for: .normal)
+			self.followIconButton.setTitleColor(UIColor.red, for: .normal)
 		} else {
 			self.followIconButton.setTitle("Follow", for: .normal)
-
-			//self.followIconButton.setImage(UIImage(named: "HeartStroke"), for: .normal)
+			self.followIconButton.setTitleColor(UIColor(red:0.58, green:0.84, blue:0.30, alpha:1.00), for: .normal)
 		}
+		self.setNeedsLayout()
 	}
 	
 }
