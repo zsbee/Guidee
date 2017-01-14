@@ -273,7 +273,7 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 					node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
 					return node
 				} else {
-					return JourneyPlaceholderCellNode(text: "You do not follow anyone yet!")
+					return JourneyPlaceholderCellNode(text: "This user does not follow anyone yet!")
 				}
 				
 			default:
