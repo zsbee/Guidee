@@ -3,6 +3,7 @@ import AsyncDisplayKit
 import Onboard
 import Firebase
 import FBSDKLoginKit
+import MBProgressHUD
 
 class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, ActionCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate, DataListener, UIViewControllerTransitioningDelegate {
 
@@ -285,7 +286,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if(indexPath.section == self.sectionIndexJourneysHeader) {
             openEditor()
-        }
+		}
     }
     
     func openEditor() {
@@ -327,7 +328,10 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     func actionButtonTappedWithString(string: String) {
         switch string {
         case self.kNewPlanCtaStr:
-            print("NewPlanCTA Tapped")
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+			hud.label.text = "This feature is not ready yet :("
+			hud.mode = .text
+			hud.hide(animated: true, afterDelay: 1)
         case self.kNewJourneyCtaStr:
             openEditor()
         default:
