@@ -198,7 +198,7 @@ class DataController: AnyObject {
                 
                 defaultUserModel["summary"] = "Tap here to set an introduction about yourself!" as AnyObject
                 
-                defaultUserModel["following"] = ["0"] as AnyObject
+                defaultUserModel["following"] = ["UQEch8jENJc4SjY6ZuMt7rULGho1"] as AnyObject
                 
                 self.users.child(firUser.uid).setValue(defaultUserModel);
             }

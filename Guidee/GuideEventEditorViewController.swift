@@ -233,8 +233,8 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
     }
     
     func reloadItemAtIndex(sectionIndex: Int) {
-        self.collectionNode.view.performBatchUpdates({
-            self.collectionNode.view.reloadItems(at: [IndexPath.init(row: 0, section: sectionIndex)])
+        self.collectionNode.performBatchUpdates({
+            self.collectionNode.reloadItems(at: [IndexPath.init(row: 0, section: sectionIndex)])
             }, completion: nil)
     }
     
@@ -244,7 +244,7 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
             //
         }
     }
-    
+	
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let imageData = UIImageJPEGRepresentation(originalImage, 0.8)
