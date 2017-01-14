@@ -56,7 +56,7 @@ class DataController: AnyObject {
             self.users.child(loggedInUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 let value = snapshot.value as! [String: AnyObject]
-                let userInfoModel = UserInfoModel(dictionary: value)
+                let userInfoModel = UserInfoModel(dictionary: value, identifier: snapshot.key)
                 self.currentUser = userInfoModel
                 completionBlock(userInfoModel)
             }) { (error) in
@@ -103,7 +103,7 @@ class DataController: AnyObject {
             self.users.child(idString).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 let value = snapshot.value as! [String: AnyObject]
-                let userInfoModel = UserInfoModel(dictionary: value)
+				let userInfoModel = UserInfoModel(dictionary: value, identifier: snapshot.key)
                 completionBlock(userInfoModel)
             }) { (error) in
                 print(error.localizedDescription)

@@ -11,6 +11,7 @@
 		1B094B061DDBC4E0009E1564 /* PlaceholderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B094B051DDBC4E0009E1564 /* PlaceholderNode.swift */; };
 		1B1EF3F91DC4A0B600CF99A4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1EF3F81DC4A0B600CF99A4 /* DataController.swift */; };
 		1B23C9971DBA94A6004783A8 /* ExploreHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */; };
+		1B39E5BC1E2A2846008B0E61 /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39E5BB1E2A2846008B0E61 /* OtherProfileViewController.swift */; };
 		1B462B721DFC2B2900A8370B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B462B711DFC2B2900A8370B /* LoginViewController.swift */; };
 		1B5EFB7F1DF42CA100034F57 /* StaticMapCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5EFB7E1DF42CA100034F57 /* StaticMapCellNode.swift */; };
 		1B6665121DC88A7100C13823 /* ProfileCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6665111DC88A7100C13823 /* ProfileCellNode.swift */; };
@@ -82,6 +83,7 @@
 		1B094B051DDBC4E0009E1564 /* PlaceholderNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaceholderNode.swift; path = Nodes/PlaceholderNode.swift; sourceTree = "<group>"; };
 		1B1EF3F81DC4A0B600CF99A4 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataController.swift; path = Utilities/DataController.swift; sourceTree = "<group>"; };
 		1B23C9961DBA94A6004783A8 /* ExploreHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreHeaderView.swift; path = Views/ExploreHeaderView.swift; sourceTree = "<group>"; };
+		1B39E5BB1E2A2846008B0E61 /* OtherProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileViewController.swift; sourceTree = "<group>"; };
 		1B462B711DFC2B2900A8370B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1B5EFB7E1DF42CA100034F57 /* StaticMapCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StaticMapCellNode.swift; path = Nodes/StaticMapCellNode.swift; sourceTree = "<group>"; };
 		1B6665111DC88A7100C13823 /* ProfileCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileCellNode.swift; path = Nodes/ProfileCellNode.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				1B79E11B1DCBCDF500460066 /* JourneyEditorViewController.swift */,
 				1BDF50BC1DCFA0950003D566 /* EditTextViewController.swift */,
 				1B462B711DFC2B2900A8370B /* LoginViewController.swift */,
+				1B39E5BB1E2A2846008B0E61 /* OtherProfileViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				1BDF50C41DCFAEEB0003D566 /* MutableGuideBaseModel.swift in Sources */,
 				1BE607ED1DB8335C0084CA9C /* CustomMapView.swift in Sources */,
 				1BE2881A1DB5799B005A0C59 /* GuideHeaderCellNode.swift in Sources */,
+				1B39E5BC1E2A2846008B0E61 /* OtherProfileViewController.swift in Sources */,
 				1B6665181DC8A10400C13823 /* UserInfoModel.swift in Sources */,
 				1BE2881C1DB583E0005A0C59 /* EventCellNode.swift in Sources */,
 				1B6A54C91DC8F6F10072CD83 /* FollowsContainerCell.swift in Sources */,

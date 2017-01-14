@@ -9,31 +9,9 @@ public class MutableGuideBaseModel: AnyObject {
     public var eventModels: [GuideEventDetailModel]
     public var annotationModel: GuideAnnotation
     public var userAvatarUrl: String
-	
-    public init(dictionary: NSDictionary) {
-        self.identifier = (dictionary["identifier"] as! NSString) as String
-        self.title = (dictionary["title"] as! NSString) as String
-        self.summary = (dictionary["summary"] as! NSString) as String
-        self.coverImageUrl = (dictionary["coverImageUrl"] as! NSString) as String
-        self.userAvatarUrl = (dictionary["userAvatarUrl"] as! NSString) as String
-		
-        if let detailModels = dictionary["eventModels"] as? NSArray {
-            let models:NSMutableArray = NSMutableArray()
-            for detailModel in detailModels {
-                if let detailDict = detailModel as? NSDictionary {
-                    models.add(GuideEventDetailModel(dictionary: detailDict))
-                }
-            }
-            self.eventModels = models as NSArray as! [GuideEventDetailModel]
-        } else {
-            self.eventModels = [GuideEventDetailModel]()
-        }
-        
-		self.annotationModel = GuideAnnotation(dictionary: dictionary["annotationModel"] as! NSDictionary, likes: 0)
-		self.firebaseID = self.identifier
-    }
+	public var userID: String
     
-	public init(identifier: String, firebaseID: String, title: String, summary: String, coverImageUrl: String, userAvatarUrl: String, eventModels: [GuideEventDetailModel], annotationModel: GuideAnnotation) {
+	public init(identifier: String, firebaseID: String, title: String, summary: String, coverImageUrl: String, userAvatarUrl: String, eventModels: [GuideEventDetailModel], annotationModel: GuideAnnotation, userIdentifier: String) {
         self.identifier = identifier
         self.title = title
         self.summary = summary
@@ -42,6 +20,7 @@ public class MutableGuideBaseModel: AnyObject {
         self.annotationModel = annotationModel
         self.userAvatarUrl = userAvatarUrl
 		self.firebaseID = firebaseID
+		self.userID = userIdentifier
     }
     
     public func objectAsDictionary() -> [String: AnyObject] {
@@ -54,7 +33,8 @@ public class MutableGuideBaseModel: AnyObject {
         dict["userAvatarUrl"] = self.userAvatarUrl as AnyObject?
         dict["eventModels"] = self.eventModelsArray() as AnyObject
         dict["annotationModel"] = self.annotationModel.objectAsDictionary() as AnyObject?
-        
+        dict["userId"] = self.userID as AnyObject?
+		
         return dict;
     }
 

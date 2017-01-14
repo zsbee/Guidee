@@ -200,7 +200,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
     }
 	
 	func guideHeader_didTapProfile() {
-		
+		print("na van userunk modelban?")
 	}
 	
     // Header
@@ -236,7 +236,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
 		
 		newEventModels.insert(placeholderEventModel, at: 0)
 		
-		return GuideBaseModel(identifier: self.baseModel.identifier, firebaseID: self.baseModel.firebaseID, title: mutableModel.title, summary: mutableModel.summary, coverImageUrl: mutableModel.coverImageUrl, userAvatarUrl: mutableModel.userAvatarUrl, eventModels: newEventModels, annotationModel: mutableModel.annotationModel)
+		return GuideBaseModel(identifier: self.baseModel.identifier, firebaseID: self.baseModel.firebaseID, title: mutableModel.title, summary: mutableModel.summary, coverImageUrl: mutableModel.coverImageUrl, userAvatarUrl: mutableModel.userAvatarUrl, eventModels: newEventModels, annotationModel: mutableModel.annotationModel, userIdentifier: self.baseModel.userID)
 	}
 	
 	func didFinishUploadingToDatabase()

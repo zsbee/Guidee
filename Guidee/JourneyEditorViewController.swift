@@ -9,7 +9,8 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
    
     let headerView: JourneyEditorHeaderView = JourneyEditorHeaderView()
     var collectionNode: ASCollectionNode!
-    
+	var currentUserInfo: UserInfoModel?
+	
     // Node map
     private let sectionIndexHeader: Int = 0
     private let sectionIndexSummaryHeader: Int = 1
@@ -51,6 +52,10 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
 		
 		
 		if (self.baseModel == nil) {
+			DataController.sharedInstance.getCurrentUserInfo(completionBlock: { (userInfo) in
+				self.currentUserInfo = userInfo
+			})
+			
 			DataController.sharedInstance.getEditableJourneyModel { (baseModel) in
 				self.baseModel = baseModel
 				self.overrideMode = false
@@ -201,6 +206,8 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
 
     func header_saveButtonTapped() {
         self.mutatedModel.eventModels = self.filteredEventModels()
+		self.mutatedModel.userID = self.currentUserInfo?.identifier ?? "Anonymous"
+		
 		if (self.overrideMode) {
 			DataController.sharedInstance.overrideGuideToFirebase(mutatedGuide: self.mutatedModel, completionBlock: { 
 				self.delegate?.didFinishUploadingToDatabase()

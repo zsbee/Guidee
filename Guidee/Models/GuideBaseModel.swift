@@ -12,6 +12,7 @@ public class GuideBaseModel: AnyObject {
     public let userAvatarUrl: String
 	public let lovedCount: Int
 	public let loved: [String: AnyObject]
+	public let userID: String
 	
     public init(dictionary: NSDictionary, firID: String) {
         self.firebaseID = firID
@@ -20,6 +21,12 @@ public class GuideBaseModel: AnyObject {
         self.summary = (dictionary["summary"] as! NSString) as String
         self.coverImageUrl = (dictionary["coverImageUrl"] as! NSString) as String
         self.userAvatarUrl = (dictionary["userAvatarUrl"] as! NSString) as String
+		
+		if (dictionary["userId"] != nil) {
+			self.userID = dictionary["userId"] as! String
+		} else {
+			self.userID = "Anonymous"
+		}
 		
 		if (dictionary["lovedCount"] != nil) {
 			self.lovedCount = dictionary["lovedCount"] as! Int
@@ -48,7 +55,7 @@ public class GuideBaseModel: AnyObject {
 		self.annotationModel = GuideAnnotation(dictionary: dictionary["annotationModel"] as! NSDictionary, likes: self.lovedCount)
     }
     
-	public init(identifier: String, firebaseID: String, title: String, summary: String, coverImageUrl: String, userAvatarUrl: String, eventModels: [GuideEventDetailModel], annotationModel: GuideAnnotation) {
+	public init(identifier: String, firebaseID: String, title: String, summary: String, coverImageUrl: String, userAvatarUrl: String, eventModels: [GuideEventDetailModel], annotationModel: GuideAnnotation, userIdentifier: String) {
         self.identifier = identifier
         self.title = title
         self.summary = summary
@@ -59,9 +66,10 @@ public class GuideBaseModel: AnyObject {
         self.firebaseID = firebaseID
 		self.lovedCount = 0
 		self.loved = [String:AnyObject]()
+		self.userID = userIdentifier
     }
     
     public func mutableObject() -> MutableGuideBaseModel {
-		return MutableGuideBaseModel(identifier: self.identifier, firebaseID:self.firebaseID, title: self.title, summary: self.summary, coverImageUrl: self.coverImageUrl, userAvatarUrl: self.userAvatarUrl, eventModels: self.eventModels, annotationModel: self.annotationModel)
+		return MutableGuideBaseModel(identifier: self.identifier, firebaseID:self.firebaseID, title: self.title, summary: self.summary, coverImageUrl: self.coverImageUrl, userAvatarUrl: self.userAvatarUrl, eventModels: self.eventModels, annotationModel: self.annotationModel, userIdentifier: self.userID)
     }
 }

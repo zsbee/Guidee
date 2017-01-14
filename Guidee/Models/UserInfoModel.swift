@@ -10,12 +10,14 @@ class UserInfoModel: AnyObject {
     public let hasJourneys: Bool
     public let hasPlans: Bool
     public let hasLoves: Bool
+	public let identifier: String
     
-    public init(dictionary: [String: AnyObject]) {
+	public init(dictionary: [String: AnyObject], identifier: String) {
         self.name = dictionary["name"] as! String
         self.summary = dictionary["summary"] as! String
         self.avatarUrl = dictionary["avatarUrl"] as! String
-        
+        self.identifier = identifier
+		
         var journeysFiltered = [String]()
         var plansFiltered = [String]()
         var lovesFiltered = [String]()
