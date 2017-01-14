@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>457148042769-eahkontv96k939ltuuurq5hkigqk3aq1.apps.googleusercontent.com</string>
+	<string>457148042769-5nie2d4nbj2o7le50g94or3f2ee4prdb.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.457148042769-eahkontv96k939ltuuurq5hkigqk3aq1</string>
+	<string>com.googleusercontent.apps.457148042769-5nie2d4nbj2o7le50g94or3f2ee4prdb</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDsZvTtMp-OYqlaNDrIYG4Omzv9c-H-3xk</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>Zsombor.Fuszenecker.Guidee</string>
+	<string>Zsombor.Fuszenecker.VoyageApp</string>
 	<key>PROJECT_ID</key>
 	<string>guidee-f0453</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:457148042769:ios:09a7283051ddb86f</string>
+	<string>1:457148042769:ios:d628b160c03742d0</string>
 	<key>DATABASE_URL</key>
 	<string>https://guidee-f0453.firebaseio.com</string>
 </dict>

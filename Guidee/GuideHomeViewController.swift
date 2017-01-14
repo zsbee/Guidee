@@ -6,7 +6,7 @@ protocol GuideHomeViewControllerDelegate {
 	func reloadJourneyAnnotationForModel(model: GuideBaseModel)
 }
 
-class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, ActionCellNodeDelegate, EditTextViewControllerDelegate, DataListener, JourneyEditorViewControllerDelegate {
+class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, GuideHeaderViewDelegate, EventCellNodeDelegate, ActionCellNodeDelegate, EditTextViewControllerDelegate, DataListener, JourneyEditorViewControllerDelegate, GuideHeaderCellNodeDelegate {
 
     var baseModel: GuideBaseModel!
     private var comments: [CommentModel]!
@@ -126,6 +126,7 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
             switch indexPath.section {
             case self.sectionIndexHeader:
                 let node = GuideHeaderCellNode(coverImageUrl: self.baseModel.coverImageUrl, attributedText: NSAttributedString(string: self.baseModel.title, attributes: TextStyles.getCenteredTitleAttirbutes()), avatarUrl: self.baseModel.userAvatarUrl)
+				node.delegate = self
                 return node
             case self.sectionIndexSummaryHeader:
                 let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Summary", attributes: TextStyles.getHeaderFontAttributes()))
@@ -197,7 +198,11 @@ class GuideHomeViewController: UIViewController, UICollectionViewDelegateFlowLay
         self.collectionNode.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         
     }
-    
+	
+	func guideHeader_didTapProfile() {
+		
+	}
+	
     // Header
     func header_closeButtonTapped() {
         self.dismiss(animated: true, completion: nil)

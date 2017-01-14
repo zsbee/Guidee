@@ -103,6 +103,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Voyage Final"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

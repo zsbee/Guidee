@@ -3,6 +3,10 @@ import UIKit
 import AsyncDisplayKit
 import pop
 
+protocol GuideHeaderCellNodeDelegate {
+	func guideHeader_didTapProfile();
+}
+
 class GuideHeaderCellNode: ASCellNode, ASNetworkImageNodeDelegate {
     
     let titleNode: ASTextNode = ASTextNode()
@@ -12,7 +16,9 @@ class GuideHeaderCellNode: ASCellNode, ASNetworkImageNodeDelegate {
     let avatarUrl: String;
     let avatarSize: CGFloat = 80.0
     let avatarNode: ASNetworkImageNode = ASNetworkImageNode()
-    
+	
+	public var delegate: GuideHeaderCellNodeDelegate?
+	
     init(coverImageUrl: String, attributedText: NSAttributedString, avatarUrl: String) {
         self.avatarUrl = avatarUrl
         self.coverImageUrl = coverImageUrl
@@ -63,8 +69,16 @@ class GuideHeaderCellNode: ASCellNode, ASNetworkImageNodeDelegate {
         self.avatarNode.clipsToBounds = true
         self.avatarNode.layer.borderWidth = 3.0
         self.avatarNode.layer.borderColor = UIColor.white.cgColor
+		self.avatarNode.view.isUserInteractionEnabled = true
+		
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GuideHeaderCellNode.avatarTapped))
+		self.avatarNode.view.addGestureRecognizer(tapGesture)
     }
 	
+	@objc private func avatarTapped()
+	{
+		self.delegate?.guideHeader_didTapProfile()
+	}
 	
 	public func imageNode(_ imageNode: ASNetworkImageNode, didLoad image: UIImage)
 	{

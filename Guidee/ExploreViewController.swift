@@ -39,17 +39,17 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if (FBSDKAccessToken.current() == nil) {
-            // Video
-            let bundle = Bundle.main
-            let moviePath = bundle.path(forResource: "OnboardingVid", ofType: "mp4")
-            let movieURL = NSURL(fileURLWithPath: moviePath!)
-            
-            // User is logged in, do work such as go to next view controller.
-            let loginVC = LoginViewController()
-            let onboardingVC: OnboardingViewController! = OnboardingViewController(backgroundVideoURL: movieURL as URL!, contents: [loginVC])
-            self.present(onboardingVC, animated: false, completion: nil)
-        }
+//        if (FBSDKAccessToken.current() == nil) {
+//            // Video
+//            let bundle = Bundle.main
+//            let moviePath = bundle.path(forResource: "OnboardingVid", ofType: "mp4")
+//            let movieURL = NSURL(fileURLWithPath: moviePath!)
+//            
+//            // User is logged in, do work such as go to next view controller.
+//            let loginVC = LoginViewController()
+//            let onboardingVC: OnboardingViewController! = OnboardingViewController(backgroundVideoURL: movieURL as URL!, contents: [loginVC])
+//            self.present(onboardingVC, animated: false, completion: nil)
+//        }
     }
     
     public func selected(sender: UIButton!) {
