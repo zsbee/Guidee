@@ -3,6 +3,7 @@ import AsyncDisplayKit
 import Onboard
 import Firebase
 import FBSDKLoginKit
+import MBProgressHUD
 
 class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, ProfileHeaderViewDelegate , JourneyCellContainerNodeDelegate, FollowsContainerCellNodeDelegate, JourneyEditorViewControllerDelegate, ProfileCellNodeDelegate, DataListener, UIViewControllerTransitioningDelegate {
 	
@@ -144,6 +145,10 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 	}
 	
 	func header_followButtonTapped() {
+		let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+		hud.label.text = "Following is not yet possible :("
+		hud.mode = .text
+		hud.hide(animated: true, afterDelay: 1)
 		print("Follow")
 	}
 	
