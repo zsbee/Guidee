@@ -223,7 +223,7 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 					node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
 					return node
 				} else {
-					return JourneyPlaceholderCellNode(text: "I am sure you have been somewhere. Tell us your story!")
+					return JourneyPlaceholderCellNode(text: "This user has no journeys yet.")
 				}
 				
 			case self.sectionIndexPlansHeader:
@@ -240,11 +240,11 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 					node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
 					return node
 				} else {
-					return JourneyPlaceholderCellNode(text: "I am sure you have plans! Tell us what those are!")
+					return JourneyPlaceholderCellNode(text: "This user has no plans yet.")
 				}
 				
 			case self.sectionIndexLovedHeader:
-				let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Loves ❤️", attributes: TextStyles.getHeaderFontAttributes()))
+				let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Favourites ❤️", attributes: TextStyles.getHeaderFontAttributes()))
 				return node
 				
 			case self.sectionIndexLoved:
@@ -257,7 +257,7 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 					node.style.preferredSize = CGSize(width: collectionView.frame.width, height: 162)
 					return node
 				} else {
-					return JourneyPlaceholderCellNode(text: "Once you like something, you will find it here!")
+					return JourneyPlaceholderCellNode(text: "This user did not like anything yet")
 				}
 			case self.sectionIndexFollowingHeader:
 				let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Following", attributes: TextStyles.getHeaderFontAttributes()))
@@ -319,7 +319,9 @@ class OtherProfileViewController: UIViewController, UICollectionViewDelegateFlow
 	}
 	
 	func didTapUser(userInfoModel: UserInfoModel) {
-		print("User Tapped")
+		let profileVC = OtherProfileViewController()
+		profileVC.userId = userInfoModel.identifier
+		self.present(profileVC, animated: true, completion: nil)
 	}
 	
 	func profileCellNode_tapped() {
