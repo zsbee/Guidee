@@ -247,7 +247,7 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
 	
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let imageData = UIImageJPEGRepresentation(originalImage, 0.8)
+            let imageData = UIImageJPEGRepresentation(originalImage, 0.0)
             if let imageData = imageData {
                 DataController.sharedInstance.uploadImageToFirebase(imageData: imageData, completionBlock: { (string) in
                     if let urlString = string {
