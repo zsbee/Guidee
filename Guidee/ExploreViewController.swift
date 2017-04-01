@@ -50,9 +50,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
             let loginVC = LoginViewController()
             let onboardingVC: OnboardingViewController! = OnboardingViewController(backgroundVideoURL: movieURL as URL!, contents: [loginVC])
 			
-			Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (timer) in
-				self.present(onboardingVC, animated: false, completion: nil)
-			})
+			self.present(onboardingVC, animated: false, completion: nil)
 			
         }
     }
