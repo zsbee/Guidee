@@ -43,7 +43,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, CustomMapViewD
         if (FBSDKAccessToken.current() == nil) {
             // Video
             let bundle = Bundle.main
-            let moviePath = bundle.path(forResource: "mallorca", ofType: "mp4")
+            let moviePath = bundle.path(forResource: "OnboardingVid", ofType: "mp4")
             let movieURL = NSURL(fileURLWithPath: moviePath!)
             
             // User is logged in, do work such as go to next view controller.
