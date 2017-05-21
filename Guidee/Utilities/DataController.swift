@@ -178,34 +178,47 @@ class DataController: AnyObject {
 		})
 	}
 	
-    public func createUserWithID(firUser: FIRUser) {
+	public func createUserWithID(firUser: FIRUser, avatarURL: String) {
         // do not create new if already exists
         self.users.child(firUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.exists() {
-                return
+				if (firUser.photoURL != firUser.providerData[0].photoURL) {
+					self.overrideImage(firUser: firUser, snapshot: snapshot, avatarUrl: avatarURL)
+				}
+				return;
             } else {
-                var defaultUserModel = [String: AnyObject]()
-                
-                if let avatarImage = firUser.photoURL?.absoluteString {
-                    defaultUserModel["avatarUrl"] = avatarImage as AnyObject
-                } else {
-                    defaultUserModel["avatarUrl"] = "https://empty" as AnyObject
-                }
-                
-                if let displayName = firUser.displayName {
-                    defaultUserModel["name"] = displayName as AnyObject
-                } else {
-                    defaultUserModel["name"] = "John Doe" as AnyObject
-                }
-                
-                defaultUserModel["summary"] = "Tap here to set an introduction about yourself!" as AnyObject
-                                
-                self.users.child(firUser.uid).setValue(defaultUserModel);
+				self.saveNewProfileData(firUser: firUser, avatarURL: avatarURL);
             }
         }) { (error) in
             print(error.localizedDescription)
         }
     }
+	
+	private func overrideImage(firUser: FIRUser, snapshot: FIRDataSnapshot, avatarUrl: String)
+	{
+		var defaultUserModel = snapshot.value as! [String: AnyObject];
+
+		defaultUserModel["avatarUrl"] = avatarUrl as AnyObject
+		
+		self.users.child(firUser.uid).setValue(defaultUserModel);
+	}
+	
+	private func saveNewProfileData(firUser: FIRUser, avatarURL: String)
+	{
+		var defaultUserModel = [String: AnyObject]()
+		
+		defaultUserModel["avatarUrl"] = avatarURL as AnyObject
+		
+		if let displayName = firUser.displayName {
+			defaultUserModel["name"] = displayName as AnyObject
+		} else {
+			defaultUserModel["name"] = "John Doe" as AnyObject
+		}
+		
+		defaultUserModel["summary"] = "Tap here to set an introduction about yourself!" as AnyObject
+		
+		self.users.child(firUser.uid).setValue(defaultUserModel);
+	}
 	
 	public func likeJourneyWithId(key: String!) {
 		self.journeys.child(key).runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in

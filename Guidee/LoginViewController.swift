@@ -51,7 +51,8 @@ class LoginViewController: OnboardingContentViewController, FBSDKLoginButtonDele
                 return
             }
             if let user = user {
-                DataController.sharedInstance.createUserWithID(firUser: user)
+				let avatarURL: String = "https://graph.facebook.com/" + FBSDKAccessToken.current().userID + "/picture?type=large"
+				DataController.sharedInstance.createUserWithID(firUser: user, avatarURL: avatarURL)
             }
             
             UIApplication.shared.statusBarStyle = .default
