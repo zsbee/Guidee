@@ -4,7 +4,6 @@ import MapKit
 public class GuideAnnotation: NSObject, MKAnnotation {
     public var identifier: String
     public var title: String?
-    public var subtitle: String?
     public var coordinate: CLLocationCoordinate2D
     public let imageUrl: String
     public let likes: Int
@@ -16,8 +15,7 @@ public class GuideAnnotation: NSObject, MKAnnotation {
         self.likes = likes
         self.imageUrl = (dictionary["imageURL"] as! NSString) as String
         self.title = (dictionary["title"] as! NSString) as String
-        self.subtitle = (dictionary["subtitle"] as! NSString) as String
-        
+		
         let locationDict = (dictionary["location"] as! NSDictionary)
         let latitude = (locationDict["latitude"] as! NSNumber) as Double
         let longitude = (locationDict["longitude"] as! NSNumber) as Double
@@ -27,13 +25,9 @@ public class GuideAnnotation: NSObject, MKAnnotation {
         super.init()
     }
     
-    public init(identifier: String, title: String?, subtitle: String?, likes: Int, coordinate: CLLocationCoordinate2D, imageUrl: String) {
+    public init(identifier: String, title: String?, likes: Int, coordinate: CLLocationCoordinate2D, imageUrl: String) {
         if let title = title {
             self.title = title
-        }
-        
-        if let subtitle = subtitle {
-            self.subtitle = subtitle
         }
         
         self.identifier = identifier
@@ -51,7 +45,6 @@ public class GuideAnnotation: NSObject, MKAnnotation {
         dict["imageURL"] = DataController.sharedInstance.getCurrentUserModel()?.avatarUrl as AnyObject?
         dict["likes"] = 0 as AnyObject?
         dict["location"] = self.locationDictionary() as AnyObject?
-        dict["subtitle"] = self.subtitle as AnyObject?
         dict["title"] = self.title as AnyObject?
             
         return dict;
