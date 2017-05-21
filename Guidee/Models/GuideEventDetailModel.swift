@@ -10,10 +10,16 @@ public class GuideEventDetailModel: AnyObject {
     public init(dictionary: NSDictionary) {
         self.title = (dictionary["title"] as! NSString) as String
         self.summary = (dictionary["summary"] as! NSString) as String
-    
-        if let carouselModels = dictionary["carouselModels"] as? NSArray as? [NSDictionary] {
+		if (self.title == "krakow city centre")
+		{
+			NSLog("asd %@", "as");
+		}
+        if let carouselModels = dictionary["carouselModels"] as? NSMutableArray {
             let models:NSMutableArray = NSMutableArray()
-            for carouselModel: NSDictionary in carouselModels {
+			
+			carouselModels.removeObject(identicalTo: NSNull())
+			
+            for carouselModel: NSDictionary in carouselModels as! [NSDictionary] {
                 var image: String?
                 var videoId: String?
                 if (carouselModel["imageURL"] as? NSString != nil) {
@@ -33,8 +39,8 @@ public class GuideEventDetailModel: AnyObject {
         
         if(dictionary["location"] != nil) {
             let locationDict = (dictionary["location"] as! NSDictionary)
-            let latitude = (locationDict["latitude"] as! NSNumber) as Double
-            let longitude = (locationDict["longitude"] as! NSNumber) as Double
+            let latitude = (locationDict["latitude"] as! NSNumber) as! Double
+            let longitude = (locationDict["longitude"] as! NSNumber) as! Double
             self.coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         } else {
             self.coordinates = CLLocationCoordinate2D(latitude: 0, longitude: 0)
