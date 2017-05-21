@@ -42,6 +42,7 @@
 		1BDF50C81DCFCA080003D566 /* GuideEventEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50C71DCFCA080003D566 /* GuideEventEditorViewController.swift */; };
 		1BDF50CA1DCFCAD50003D566 /* MutableGuideEventDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50C91DCFCAD50003D566 /* MutableGuideEventDetailModel.swift */; };
 		1BDF50CC1DCFCC4B0003D566 /* GuideEventEditorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDF50CB1DCFCC4B0003D566 /* GuideEventEditorHeaderView.swift */; };
+		1BE172A31ED1E87500AF8106 /* CarouselPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE172A21ED1E87500AF8106 /* CarouselPhoto.swift */; };
 		1BE287D71DB3A84D005A0C59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */; };
 		1BE287D91DB3A84D005A0C59 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */; };
 		1BE287DB1DB3A84D005A0C59 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE287DA1DB3A84D005A0C59 /* ProfileViewController.swift */; };
@@ -115,6 +116,7 @@
 		1BDF50C71DCFCA080003D566 /* GuideEventEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideEventEditorViewController.swift; sourceTree = "<group>"; };
 		1BDF50C91DCFCAD50003D566 /* MutableGuideEventDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableGuideEventDetailModel.swift; sourceTree = "<group>"; };
 		1BDF50CB1DCFCC4B0003D566 /* GuideEventEditorHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideEventEditorHeaderView.swift; path = Views/GuideEventEditorHeaderView.swift; sourceTree = "<group>"; };
+		1BE172A21ED1E87500AF8106 /* CarouselPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CarouselPhoto.swift; path = Models/CarouselPhoto.swift; sourceTree = "<group>"; };
 		1BE287D31DB3A84D005A0C59 /* Guidee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guidee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE287D61DB3A84D005A0C59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BE287D81DB3A84D005A0C59 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				1B6665171DC8A10400C13823 /* UserInfoModel.swift */,
 				1BDF50C51DCFB0FA0003D566 /* EditTextSetupViewModel.swift */,
 				1B9BDA541DD898D50024635B /* CommentModel.swift */,
+				1BE172A21ED1E87500AF8106 /* CarouselPhoto.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				1BE288181DB57955005A0C59 /* GuideSummaryNode.swift in Sources */,
 				1BE2881E1DB5853A005A0C59 /* EventSubCellNode.swift in Sources */,
 				1B79E11C1DCBCDF500460066 /* JourneyEditorViewController.swift in Sources */,
+				1BE172A31ED1E87500AF8106 /* CarouselPhoto.swift in Sources */,
 				1BBAF9E31DB7FF7D00379004 /* CircleAnnotationView.swift in Sources */,
 				1B6A54CB1DC8F7010072CD83 /* FollowCellNode.swift in Sources */,
 				1BE288161DB5739F005A0C59 /* GuideHeaderView.swift in Sources */,

@@ -1,7 +1,8 @@
 import UIKit
 import AsyncDisplayKit
+import NYTPhotoViewer
 
-class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDelegate, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource {
+class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDelegate, UICollectionViewDelegateFlowLayout, ASCollectionDelegate, ASCollectionDataSource, CarouselCellNodeDelegate {
 
     let headerView: GuideEventHeaderView = GuideEventHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var collectionNode: ASCollectionNode!
@@ -105,6 +106,7 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
                     return node
                 case self.sectionIndexCarousel:
                     let node = CarouselCellNode(models: self.model!.carouselModels)
+					node.delegate = self;
                     return node
                 case self.sectionIndexMapHeader:
                     let node = SectionHeaderNode(attributedText: NSAttributedString(string: "Map", attributes: TextStyles.getHeaderFontAttributes()))
@@ -122,7 +124,24 @@ class GuideEventDetailsViewController: UIViewController, GuideEventHeaderViewDel
             }
         }
     }
-    
+	
+	
+	func carouselCellSelectedWithIndex(index: Int) {
+		
+	}
+		
+	func carouselCellSelectedWithPhoto(selectedIndex: Int, allImages: [ImageItemNode]) {
+		var photos: [CarouselPhoto] = []
+		
+		for imageItemNode in allImages {
+			let t_photo = CarouselPhoto(image: imageItemNode.image, imageData: imageItemNode.imageData, attributedCaptionTitle: nil)
+			photos.append(t_photo)
+		}
+		
+		let photosViewController = NYTPhotosViewController.init(photos: photos, initialPhoto: photos[selectedIndex])
+		self.present(photosViewController, animated: true, completion: nil)
+	}
+	
     // Layout
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

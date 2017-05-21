@@ -18,6 +18,7 @@ target 'Guidee' do
     pod 'youtube-ios-player-helper'
     pod 'SAMTextView'
     pod 'MBProgressHUD', '~> 1.0.0'
+    pod 'NYTPhotoViewer', '~> 1.1.0'
 end
 
 target 'GuideeTests' do

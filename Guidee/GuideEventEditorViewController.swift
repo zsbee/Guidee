@@ -270,6 +270,10 @@ class GuideEventEditorViewController: UIViewController, GuideEventEditorHeaderVi
         self.present(imagePicker, animated: true, completion: nil)
     }
 	
+	func carouselCellSelectedWithPhoto(selectedIndex: Int, allImages: [ImageItemNode]) {
+		//
+	}
+	
     func mapCenterDidUpdateWithCoordinates(coordinates: CLLocationCoordinate2D) {
         self.mutatedModel!.coordinates = coordinates
     }

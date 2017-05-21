@@ -13,6 +13,9 @@ class ImageItemNode: ASCellNode, ASNetworkImageNodeDelegate {
     let mainImage: ASNetworkImageNode = ASNetworkImageNode()
     let videoNode: ASDisplayNode
     let youtubePlayerView = YTPlayerView()
+	
+	var imageData: Data?
+	var image: UIImage?
     
     var isVideo:Bool = false
     
@@ -65,6 +68,7 @@ class ImageItemNode: ASCellNode, ASNetworkImageNodeDelegate {
         if let imageUrlString = self.model.imageURL {
             if let url = NSURL(string: imageUrlString) {
                 self.mainImage.setURL(url as URL, resetToDefault: true)
+				self.mainImage.delegate = self
             }
         }
     }
@@ -80,6 +84,8 @@ class ImageItemNode: ASCellNode, ASNetworkImageNodeDelegate {
 	
 	public func imageNode(_ imageNode: ASNetworkImageNode, didLoad image: UIImage)
 	{
+		self.image = image;
+		self.imageData = UIImagePNGRepresentation(image)
 		DispatchQueue.main.async() {
 			let imageView = self.mainImage.view
 			imageView.clipsToBounds = true

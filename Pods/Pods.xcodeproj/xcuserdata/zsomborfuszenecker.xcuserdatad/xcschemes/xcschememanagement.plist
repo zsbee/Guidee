@@ -24,7 +24,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FLAnimatedImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>NYTPhotoViewer-NYTPhotoViewer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>NYTPhotoViewer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -72,12 +87,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2AA05047675D03EB14BE6BCE5A70548D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>38A8E368CC6BF8E48223A6965694EBEB</key>
+		<key>136F753B52041DB5503C22F2645B695B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,7 +112,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>76F04FDD2CDE9C18B8607B53EF5AF87B</key>
+		<key>81474BE38F013554A74B5B1C2F1BFFA9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>83B5B60C676A8D31829A6AE91CE86A75</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,7 +132,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ACD1466C9F73DE13CB94433C41886FAD</key>
+		<key>B97720AEDDAEC6569BE907F8D81E7EB7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -133,6 +148,21 @@
 			<true/>
 		</dict>
 		<key>C4B6296593E188B756906E1231B69B15</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D2810C294BA214FE28B6E9D11D218AD1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D85C3D5A275CC39B0CEEC53C5FA8F233</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F6B0A1F6ADBC5846A7F04BAA912F38B5</key>
 		<dict>
 			<key>primary</key>
 			<true/>

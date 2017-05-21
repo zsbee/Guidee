@@ -4,6 +4,7 @@ import AsyncDisplayKit
 
 protocol CarouselCellNodeDelegate {
     func carouselCellSelectedWithIndex(index: Int)
+	func carouselCellSelectedWithPhoto(selectedIndex: Int, allImages: [ImageItemNode])
 }
 
 class CarouselCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource, UICollectionViewDelegateFlowLayout {
@@ -56,6 +57,15 @@ class CarouselCellNode: ASCellNode, ASCollectionDelegate, ASCollectionDataSource
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.carouselCellSelectedWithIndex(index: indexPath.row)
+		
+		var allImages: [ImageItemNode] = []
+		for index in 0...self.models.count-1 {
+			let iPath = IndexPath(item: index, section: 0)
+			let t_imageNode: ImageItemNode = self.collectionNode.nodeForItem(at: iPath) as! ImageItemNode;
+			allImages.append(t_imageNode)
+		}
+		
+		self.delegate?.carouselCellSelectedWithPhoto(selectedIndex: indexPath.row, allImages: allImages)
     }
     
     override func didLoad() {
