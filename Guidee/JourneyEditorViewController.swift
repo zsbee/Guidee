@@ -154,7 +154,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
         switch indexPath.section {
         case self.sectionIndexSummary:
             let textViewText = self.mutatedModel.summary
-            vc.viewModel = EditTextSetupViewModel(title: "Edit Summary", sectionIndex: self.sectionIndexSummary, placeHolder: "Edit Summary of Guide", text: textViewText)
+            vc.setViewModel(newModel: EditTextSetupViewModel(title: "Edit Summary", sectionIndex: self.sectionIndexSummary, placeHolder: "Edit Summary of Guide", text: textViewText))
             self.present(vc, animated: true, completion:nil)
 
         case self.sectionIndexHeader:
@@ -163,7 +163,7 @@ class JourneyEditorViewController: UIViewController, UICollectionViewDelegateFlo
             
             let editTitleAction = UIAlertAction(title: "Edit title", style: .default) { (_) in
                 let textViewText = self.mutatedModel.title
-                vc.viewModel = EditTextSetupViewModel(title: "Edit title", sectionIndex: self.sectionIndexHeader, placeHolder: "Edit title of journey", text: textViewText)
+                vc.setViewModel(newModel: EditTextSetupViewModel(title: "Edit title", sectionIndex: self.sectionIndexHeader, placeHolder: "Edit title of journey", text: textViewText))
                 
                 self.present(vc, animated: true, completion:nil)
             }

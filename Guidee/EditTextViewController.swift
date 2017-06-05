@@ -10,8 +10,8 @@ class EditTextViewController: UIViewController, EditTextHeaderViewDelegate, UITe
     let textView = SAMTextView()
     let headerView = EditTextHeaderView()
     public var delegate: EditTextViewControllerDelegate?
-    public var viewModel: EditTextSetupViewModel!
-    
+	public var viewModel: EditTextSetupViewModel!
+	
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -19,14 +19,36 @@ class EditTextViewController: UIViewController, EditTextHeaderViewDelegate, UITe
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+	
+	public func setViewModel(newModel: EditTextSetupViewModel) {
+		let editModel: GuideBaseModel? = DataController.sharedInstance.getCachedEditableJourneyModel()
+		if let editModel = editModel {
+			let eventModel: GuideEventDetailModel? = editModel.eventModels.first
+			
+			if (editModel.summary == newModel.text || editModel.title == newModel.text) {
+				viewModel = EditTextSetupViewModel(title: newModel.title, sectionIndex: newModel.sectionIndex, placeHolder: newModel.placeHolder, text: "")
+			} else if let eventModel = eventModel {
+				if (eventModel.summary == newModel.text || eventModel.title == newModel.text) {
+					viewModel = EditTextSetupViewModel(title: newModel.title, sectionIndex: newModel.sectionIndex, placeHolder: newModel.placeHolder, text: "")
+				} else {
+					viewModel = newModel
+				}
+			}
+			else {
+				viewModel = newModel
+			}
+		} else {
+			viewModel = newModel
+		}
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.headerView.delegate = self
         self.headerView.titleLabel.text = self.viewModel.title
         self.textView.placeholder = self.viewModel.placeHolder
-        self.textView.text = self.viewModel.text
+		self.textView.text = self.viewModel.text
         self.view.addSubview(textView)
         self.view.addSubview(headerView)
         

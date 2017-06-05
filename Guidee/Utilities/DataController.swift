@@ -22,8 +22,8 @@ class DataController: AnyObject {
     private let editableJourney: FIRDatabaseReference
     private let comments: FIRDatabaseReference
 	private var listeners: [SubscriptionType:[DataListener]] = [SubscriptionType:[DataListener]]()
-	
     private var currentUser: UserInfoModel?
+	private var editModel: GuideBaseModel?
     
     private init() {
         self.journeys = root.child("Journeys")
@@ -112,16 +112,25 @@ class DataController: AnyObject {
             }
         }
     }
-    
+	
+	public func getCachedEditableJourneyModel() -> GuideBaseModel? {
+		return self.editModel
+	}
+	
     public func getEditableJourneyModel(completionBlock: @escaping (GuideBaseModel) -> ()) {
-        self.editableJourney.observeSingleEvent(of: .value, with: { (snapshot) in
-            if let modelDict = snapshot.value as? NSDictionary {
-                let model = GuideBaseModel(dictionary: modelDict, firID: snapshot.key)
-                completionBlock(model)
-            }
-        }) { (error) in
-            print(error.localizedDescription)
-        }
+		if let editJourneyModel = editModel {
+			completionBlock(editJourneyModel)
+		} else {
+			self.editableJourney.observeSingleEvent(of: .value, with: { (snapshot) in
+				if let modelDict = snapshot.value as? NSDictionary {
+					let model = GuideBaseModel(dictionary: modelDict, firID: snapshot.key)
+					self.editModel = model
+					completionBlock(model)
+				}
+			}) { (error) in
+				print(error.localizedDescription)
+			}
+		}
     }
     
     public func uploadImageToFirebase(imageData: Data, completionBlock: @escaping (String?) -> ()) {
@@ -134,9 +143,7 @@ class DataController: AnyObject {
         
         storageRef.put(imageData, metadata: uploadMetadata) { (metadata, error) in
             if(error != nil) {
-                print("Uh oh, error while uploading! \(error?.localizedDescription)")
             } else {
-                print("yaya, we have everything \(metadata?.downloadURL())")
                 completionBlock(metadata?.downloadURL()?.absoluteString)
             }
         }

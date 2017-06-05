@@ -40,7 +40,6 @@ class ImageItemNode: ASCellNode, ASNetworkImageNodeDelegate {
         let randomIndex = Int(arc4random_uniform(UInt32(placeholderImages.count)))
         
         self.mainImage.style.preferredSize = CGSize(width: 162, height: 162)
-		self.mainImage.delegate = self
         self.mainImage.defaultImage = UIImage(named: self.placeholderImages[randomIndex])
         self.cornerClipImage.style.preferredSize = CGSize(width: 162, height: 162)
         
