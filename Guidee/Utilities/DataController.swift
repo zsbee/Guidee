@@ -328,4 +328,12 @@ class DataController: AnyObject {
 			}
 		}
 	}
+	
+	class func logEvent(withName: String, parameters:[String: NSObject]?) {
+		#if DEBUG
+			FIRAnalytics.logEvent(withName: "d_\(withName)", parameters: parameters);
+		#else
+			FIRAnalytics.logEvent(withName: withName, parameters: parameters);
+		#endif
+	}
 }

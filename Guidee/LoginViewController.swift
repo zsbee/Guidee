@@ -41,7 +41,9 @@ class LoginViewController: OnboardingContentViewController, FBSDKLoginButtonDele
 
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if let error = error {
-            print(error.localizedDescription)
+			var errorDict = [String: NSObject]()
+			errorDict["errorDescription"] = error.localizedDescription as NSString
+			DataController.logEvent(withName: "DidLogin", parameters: errorDict)
             return
         }
         let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
@@ -54,14 +56,26 @@ class LoginViewController: OnboardingContentViewController, FBSDKLoginButtonDele
 				let avatarURL: String = "https://graph.facebook.com/" + FBSDKAccessToken.current().userID + "/picture?type=large"
 				DataController.sharedInstance.createUserWithID(firUser: user, avatarURL: avatarURL)
             }
-            
+			
+			let userIdentifier: String? = DataController.sharedInstance.getCurrentUserModel()?.identifier
+			var dict = [String: NSObject]()
+			if let uid = userIdentifier {
+				dict["userIdentifier"] = uid as NSString
+			}
+			DataController.logEvent(withName: "DidLogin", parameters: dict)
+			
             UIApplication.shared.statusBarStyle = .default
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
+	
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        print("logged out")
+		let userIdentifier: String? = DataController.sharedInstance.getCurrentUserModel()?.identifier
+		var dict = [String: NSObject]()
+		if let uid = userIdentifier {
+			dict["userIdentifier"] = uid as NSString
+		}
+        DataController.logEvent(withName: "DidLogout", parameters: dict)
     }
     
     override func viewDidLayoutSubviews() {
